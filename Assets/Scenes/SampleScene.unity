@@ -342,13 +342,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 833896ba0142a18478c552a6b789cacd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToAttack: 0
   cooldownAttack: 0
   attackPos: {fileID: 1983102751}
   attackRange: 0.71
+  movementSpeed: 1
+  fleeLimit: 10
+  checkOffset: {x: 0.5, y: -0.85}
+  distance: 0.5
+  isGrounded: 0
   Player:
+    serializedVersion: 2
     m_Bits: 256
-  cState: 0
+  currentTarget: {fileID: 0}
 --- !u!58 &547576937
 CircleCollider2D:
   m_ObjectHideFlags: 0
