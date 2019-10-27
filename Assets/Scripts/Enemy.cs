@@ -17,17 +17,23 @@ public class Enemy : MonoBehaviour
     private bool facingRight = true;
     private float health = 100f;
     public float fleeLimit = 20f;
-
-    // check
-    public Vector2 checkOffset;
     private float direction;
-    public float distance;
 
-    //
-    public bool isGrounded = true;
+    // children for attack, wall and ground
+    public GameObject AttackCheck;
+    public GameObject WallCheck;
+    public GameObject GroundCheck;
+
+    // checks for movement
+    public bool isGrounded = false;
+    public bool isWalled = false;
+    public float wallDistance;
+    public float groundDistance;
+    public float side;
 
     // player 
     public LayerMask Player;
+    public LayerMask Level;
 
     // huidige status
     private State cState;
@@ -52,20 +58,24 @@ public class Enemy : MonoBehaviour
     {
         // initiate rigidbody
         rb = GetComponent<Rigidbody2D>();
+        // face right
+        side = WallCheck.transform.position.x + wallDistance;
         // always start idle
         cState = State.IDLE;
+    }
+
+    private void FixedUpdate()
+    {
+        // flip gameobject to correct side
+        FlipCorrection();
+        // do checks
+        isGrounded = groundCheck();
+        isWalled = wallCheck();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // flip gameobject to correct side
-        FlipCorrection();
-
-        direction = Mathf.Sign(movementSpeed);
-
-        isGrounded = groundCheck();
-
         // check state and handle accordingly
         switch (cState)
         {
@@ -139,7 +149,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            if (isGrounded == false)
+            if (isGrounded == false || isWalled == true)
             {
                 movementSpeed *= -1;
                 facingRight = !facingRight;
@@ -172,11 +182,8 @@ public class Enemy : MonoBehaviour
 
     public bool groundCheck()
     {
-        // bottom check
-        Vector2 checkPosition = new Vector2(transform.position.x + checkOffset.x * direction, transform.position.y + checkOffset.y);
-
         // raycast to ground
-        RaycastHit2D hit = Physics2D.Raycast(checkPosition, Vector2.down, distance);
+        RaycastHit2D hit = Physics2D.Raycast(GroundCheck.transform.position, Vector2.down, groundDistance);
         
         if (hit.collider == true)
         {
@@ -186,6 +193,32 @@ public class Enemy : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public bool wallCheck()
+    {
+        Vector2 sideV;
+
+        if (facingRight == true)
+        {
+            side = WallCheck.transform.position.x + wallDistance;
+            sideV = Vector2.right;
+        }
+        else
+        {
+            side = WallCheck.transform.position.x - wallDistance;
+            sideV = Vector2.left;
+        }
+
+        RaycastHit2D hit = Physics2D.Raycast(GroundCheck.transform.position, sideV, wallDistance, Level);
+        if (hit.collider == true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }   
     }
 
     void CheckDamage()
@@ -217,9 +250,11 @@ public class Enemy : MonoBehaviour
         // attack zone
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos.position, attackRange);
-        // ray cast
-        Vector2 checkPosition = new Vector2(transform.position.x + checkOffset.x, transform.position.y + checkOffset.y);
 
-        Gizmos.DrawLine(checkPosition, new Vector2(checkPosition.x, checkPosition.y - distance));
+        // ground
+        Gizmos.DrawLine(GroundCheck.transform.position, new Vector3(GroundCheck.transform.position.x, GroundCheck.transform.position.y - groundDistance, transform.position.z));
+
+        // wall
+        Gizmos.DrawLine(WallCheck.transform.position, new Vector3(side, WallCheck.transform.position.y, WallCheck.transform.position.z));
     }
 }
