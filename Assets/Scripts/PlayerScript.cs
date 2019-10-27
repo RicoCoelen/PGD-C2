@@ -6,6 +6,7 @@ public class PlayerScript : MonoBehaviour
 {
     public float moveSpeed = 5f;
 
+    public SpriteRenderer render;
 
     Rigidbody2D rb;
 
@@ -23,20 +24,37 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         PlayerMovement();
+        checkFlipToMouse();
     }
 
     public void PlayerMovement()
     {
         Vector3 playerMovement = new Vector3(Input.GetAxis("Horizontal"), 0f);
         transform.position += playerMovement * Time.deltaTime * moveSpeed;
-        
-
-        
     }
 
     void FixedUpdate()
     {
         movementJump();
+    }
+
+    void checkFlipToMouse()
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+
+        float yRotation;
+        if (mousePosition.x > transform.position.x)
+        {
+            yRotation = 0;
+            render.flipX = false;
+        }
+        else
+        {
+            yRotation = 180;
+            render.flipX = true;
+        }
+        transform.localRotation = Quaternion.Euler(0, yRotation, 0);
     }
 
 
@@ -57,7 +75,5 @@ public class PlayerScript : MonoBehaviour
         {
            rb.velocity += Vector2.up * Physics2D.gravity * (gravityMultiplier - 1) * Time.deltaTime;
         }
-
-        
     }
 }
