@@ -157,9 +157,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01f655a13239aec469b4968c4e3b2a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endPoint: {x: 0, y: 0}
-  speed: 1
-  interfal: 2
+  direction: {x: 0, y: 0}
+  speed: 0.5
+  interfal: 0.5
   node: {fileID: 7785497642015086677, guid: d05c2fb295f37f948970ef2c1d68d370, type: 3}
   player: {fileID: 0}
   lastNode: {fileID: 0}

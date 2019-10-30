@@ -22,7 +22,6 @@ public class ChainScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
         player = GameObject.FindGameObjectWithTag("Player");
 
         lastNode = transform.gameObject;

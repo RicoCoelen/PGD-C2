@@ -134,9 +134,10 @@ GameObject:
   - component: {fileID: 138583029}
   - component: {fileID: 138583025}
   - component: {fileID: 138583030}
+  - component: {fileID: 138583031}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -251,11 +252,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b680a769f42b1c1448f985484401e10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 10
   render: {fileID: 1528756728}
   jumpVelocity: 10
   fallMultiplier: 3
   gravityMultiplier: 1.85
+--- !u!114 &138583031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138583024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec4d130b81727b438af8ec5bc845d9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hook: {fileID: 3565510268262720878, guid: 28bc0e12f8c5e6247aee2cdcefee6260, type: 3}
 --- !u!1 &474998506
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,7 +609,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1528756725}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06867c0a5cf645c4c9b9a4eec2260c84, type: 3}
   m_Name: 
@@ -664,6 +678,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GrappleHookBullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 7150316328418696617, guid: 974005267d7212b44a551fa17d508cf7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4120157233206641351, guid: 974005267d7212b44a551fa17d508cf7,
         type: 3}

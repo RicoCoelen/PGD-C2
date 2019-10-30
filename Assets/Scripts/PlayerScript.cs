@@ -24,21 +24,21 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         PlayerMovement();
-        checkFlipToMouse();
+        CheckFlipToMouse();
     }
 
     public void PlayerMovement()
     {
-        Vector3 playerMovement = new Vector3(Input.GetAxis("Horizontal"), 0f);
-        transform.position += playerMovement * Time.deltaTime * moveSpeed;
+        float playerMovement = Input.GetAxis("Horizontal");
+        rb.velocity = new Vector2(playerMovement * Time.deltaTime * moveSpeed + rb.velocity.x, rb.velocity.y);
     }
 
     void FixedUpdate()
     {
-        movementJump();
+        MovementJump();
     }
 
-    void checkFlipToMouse()
+    void CheckFlipToMouse()
     {
         Vector3 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
@@ -58,14 +58,15 @@ public class PlayerScript : MonoBehaviour
     }
 
 
-    void movementJump()
+    void MovementJump()
     {
         // Initial jump
         if (Input.GetButtonDown("Jump"))
         {
-            rb.velocity = Vector2.up * jumpVelocity;
+            rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
         }
 
+        
         // Speed up falling when going down or when releasing the jump button
         if (rb.velocity.y < 0 || (rb.velocity.y > 0 && !Input.GetButton("Jump")))
         {
@@ -75,5 +76,6 @@ public class PlayerScript : MonoBehaviour
         {
            rb.velocity += Vector2.up * Physics2D.gravity * (gravityMultiplier - 1) * Time.deltaTime;
         }
+        
     }
 }
