@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 public class ChainScript : MonoBehaviour
 {
+    // Max chain length
+    public float maxDistance = 5;
+    Vector2 startingPoint;
+
     public Vector2 direction;
 
     public float speed = 1;
@@ -24,16 +28,21 @@ public class ChainScript : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
+        startingPoint = player.transform.position;
+        direction -= (Vector2)player.transform.position;
+        direction.Normalize();
+        direction *= maxDistance;
+        direction += (Vector2)player.transform.position;
+
         lastNode = transform.gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-
         transform.position = Vector2.MoveTowards(transform.position, direction, speed);
 
-        if ((Vector2)transform.position != direction)
+        if (transform.position != (Vector3)direction)
         {
 
             if (Vector2.Distance(player.transform.position, lastNode.transform.position) > interfal)
