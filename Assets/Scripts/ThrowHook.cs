@@ -8,6 +8,8 @@ public class ThrowHook : MonoBehaviour
 
     GameObject curHook;
 
+    bool active = false;
+
     // Use this for initialization
     void Start()
     {
@@ -22,16 +24,23 @@ public class ThrowHook : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            if (!active) {
+                Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                curHook = Instantiate(hook, transform.position, Quaternion.identity);
 
-            curHook = Instantiate(hook, transform.position, Quaternion.identity);
+                curHook.GetComponent<ChainScript>().direction = direction;
 
-            curHook.GetComponent<ChainScript>().direction = direction;
-
+                active = true;
+            }
 
         }
+        if (Input.GetKeyDown("space") && active)
+        {
+            Destroy(curHook);
 
+            active = false;
+        }
 
     }
 }
