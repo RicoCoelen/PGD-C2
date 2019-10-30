@@ -37,8 +37,18 @@ public class PlayerScript : MonoBehaviour
     void FixedUpdate()
     {
         movementJump();
+
     }
 
+    void OnTriggerStay2D(Collider2D collider)
+    {
+        if (collider.gameObject.CompareTag("Finish") && Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            // Insert scene change
+        }
+    
+
+    }
 
     void movementJump()
     {
