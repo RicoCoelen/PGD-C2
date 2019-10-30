@@ -16,6 +16,9 @@ public class PlayerScript : MonoBehaviour
     public float rayLength = 1;
     public LayerMask groundLayer;
 
+    public float maxHealth = 10f;
+    public float health = 10f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,28 @@ public class PlayerScript : MonoBehaviour
     {
         PlayerMovement();
         CheckFlipToMouse();
+        PlayerHealth();
+
+        // debug
+        TestDamage();
+        //Debug.Log(health);
+    }
+
+    public void TestDamage()
+    {
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            health--;
+        }
+    }
+
+    public void PlayerHealth()
+    {
+        if (health <= 0)
+        {
+            Application.Quit();
+            UnityEditor.EditorApplication.isPlaying = false;
+        }
     }
 
     public void PlayerMovement()
