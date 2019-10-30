@@ -6,7 +6,7 @@ public class ThrowHook : MonoBehaviour
 {
     public GameObject hook;
 
-    GameObject curHook;
+    public GameObject curHook;
 
     bool active = false;
 
