@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -37,16 +38,6 @@ public class PlayerScript : MonoBehaviour
     void FixedUpdate()
     {
         movementJump();
-
-    }
-
-    void OnTriggerStay2D(Collider2D collider)
-    {
-        if (collider.gameObject.CompareTag("Finish") && Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            // Insert scene change
-        }
-    
 
     }
 
