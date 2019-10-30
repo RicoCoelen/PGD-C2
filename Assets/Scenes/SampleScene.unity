@@ -155,10 +155,10 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 6
   m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_GravityScale: 3
+  m_Material: {fileID: 6200000, guid: a99f589046b1b2e4eb4c76774d5f783a, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -252,11 +252,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b680a769f42b1c1448f985484401e10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 100
   render: {fileID: 1528756728}
-  jumpVelocity: 10
-  fallMultiplier: 3
+  jumpVelocity: 30
+  fallMultiplier: 5
   gravityMultiplier: 1.85
+  rayLength: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &138583031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -475,7 +479,7 @@ GameObject:
   - component: {fileID: 1005895458}
   - component: {fileID: 1005895457}
   - component: {fileID: 1005895456}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

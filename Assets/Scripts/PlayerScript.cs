@@ -13,6 +13,8 @@ public class PlayerScript : MonoBehaviour
     public float jumpVelocity = 25f;
     public float fallMultiplier = 7.5f;
     public float gravityMultiplier = 0.01f;
+    public float rayLength = 1;
+    public LayerMask groundLayer;
 
     // Start is called before the first frame update
     void Start()
@@ -57,11 +59,24 @@ public class PlayerScript : MonoBehaviour
         transform.localRotation = Quaternion.Euler(0, yRotation, 0);
     }
 
+    bool IsGrounded()
+    {
+        Vector2 position = transform.position;
+        Vector2 direction = Vector2.down;
+
+        RaycastHit2D hit = Physics2D.Raycast(position, direction, rayLength, groundLayer);
+        if (hit.collider != null)
+        {
+            return true;
+        }
+
+        return false;
+    }
 
     void MovementJump()
     {
         // Initial jump
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
         }
