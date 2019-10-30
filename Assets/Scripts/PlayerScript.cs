@@ -6,7 +6,7 @@ public class PlayerScript : MonoBehaviour
 {
     public float moveSpeed = 5f;
 
-    public SpriteRenderer render;
+    //public SpriteRenderer render;
 
     Rigidbody2D rb;
 
@@ -49,12 +49,12 @@ public class PlayerScript : MonoBehaviour
         if (mousePosition.x > transform.position.x)
         {
             yRotation = 0;
-            render.flipX = false;
+            //render.flipX = false;
         }
         else
         {
             yRotation = 180;
-            render.flipX = true;
+            //render.flipX = true;
         }
         transform.localRotation = Quaternion.Euler(0, yRotation, 0);
     }
