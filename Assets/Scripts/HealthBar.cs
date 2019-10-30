@@ -5,21 +5,13 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    GameObject health;
-
-    public GameObject player;
+    [SerializeField] GameObject health;
+    [SerializeField] GameObject player;
     PlayerScript playerScript;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        health = GameObject.Find("Health");
-    }
 
     private void Awake()
     {
         // Get the playerscript
-        player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerScript>();
     }
 

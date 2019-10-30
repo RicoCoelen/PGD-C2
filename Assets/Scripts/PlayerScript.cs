@@ -29,6 +29,7 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         PlayerMovement();
+        MovementJump();
         CheckFlipToMouse();
         PlayerHealth();
 
@@ -37,6 +38,7 @@ public class PlayerScript : MonoBehaviour
         //Debug.Log(health);
     }
 
+    // Debug function
     public void TestDamage()
     {
         if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -60,10 +62,7 @@ public class PlayerScript : MonoBehaviour
         rb.velocity = new Vector2(playerMovement * Time.deltaTime * moveSpeed + rb.velocity.x, rb.velocity.y);
     }
 
-    void FixedUpdate()
-    {
-        MovementJump();
-    }
+
 
     void CheckFlipToMouse()
     {
