@@ -20,10 +20,17 @@ public class PlayerScript : MonoBehaviour
     public float maxHealth = 10f;
     public float health = 10f;
 
+    public Renderer renderer;
+    public float flashTime;
+
+    private Color originalColor;
+
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        originalColor = renderer.GetComponent<MeshRenderer>().material.color;
     }
 
     // Update is called once per frame
@@ -44,7 +51,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            health--;
+            TakeDamage(10);
         }
     }
 
@@ -62,8 +69,6 @@ public class PlayerScript : MonoBehaviour
         float playerMovement = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(playerMovement * Time.deltaTime * moveSpeed + rb.velocity.x, rb.velocity.y);
     }
-
-
 
     void CheckFlipToMouse()
     {
@@ -118,4 +123,22 @@ public class PlayerScript : MonoBehaviour
         }
         
     }
+
+    public void TakeDamage(float amount)
+    {
+        health = Mathf.Clamp(health -= amount, 0, 100f); ;
+        FlashRed(); 
+    }
+
+    void FlashRed()
+    {
+        renderer.GetComponent<MeshRenderer>().material.color = Color.red;
+        Invoke("ResetColor", flashTime);
+    }
+
+    void ResetColor()
+    {
+        renderer.GetComponent<MeshRenderer>().material.color = originalColor;
+    }
+
 }

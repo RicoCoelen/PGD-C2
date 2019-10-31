@@ -36,13 +36,17 @@ public class Enemy : MonoBehaviour
     public LayerMask Level;
 
     // huidige status
-    private State cState;
+    public State cState;
 
     // current enemy target
     public GameObject currentTarget = null;
+    public GameObject PlayerGO;
+    public float DetectionRange;
 
     // enemy rigidbody
     Rigidbody2D rb;
+
+    public float meleeDamage;
 
     // State Types
     public enum State
@@ -71,6 +75,7 @@ public class Enemy : MonoBehaviour
         // do checks
         isGrounded = groundCheck();
         isWalled = wallCheck();
+        checkForPlayer();
     }
 
     // Update is called once per frame
@@ -89,10 +94,6 @@ public class Enemy : MonoBehaviour
 
             case State.CHASING:
                 EnemyChasing();
-                break;
-
-            case State.FLEEING:
-                EnemyFleeing();
                 break;
 
             default:
@@ -118,21 +119,6 @@ public class Enemy : MonoBehaviour
         {
             transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
-    }
-
-    void EnemyFleeing()
-    {
-
-        if (currentTarget == null || fleeLimit > health)
-        {
-            cState = State.PATROLLING;
-        }
-        else
-        {
-            // move current rigidbody to tracked player
-            Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
-            rb.MovePosition(transform.position + -direction * movementSpeed * Time.deltaTime);
-        }        
     }
 
     void EnemyIdle()
@@ -168,15 +154,29 @@ public class Enemy : MonoBehaviour
         {
             // move current rigidbody to tracked player
             Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
-            rb.MovePosition(transform.position + direction * movementSpeed * Time.deltaTime);
+            direction.y = 0;
+
+            if (currentTarget.transform.position.x > transform.position.x)
+            {
+                if (isGrounded == true)
+                {
+                    rb.MovePosition(transform.position + direction * movementSpeed * Time.deltaTime);
+                }
+                facingRight = true;
+                movementSpeed = Mathf.Abs(movementSpeed);
+            }
+            else
+            {
+                if (isGrounded == true)
+                {
+                    rb.MovePosition(transform.position + -direction * movementSpeed * Time.deltaTime);
+                }
+                facingRight = false;
+                movementSpeed = -Mathf.Abs(movementSpeed);
+            }
 
             // check for player to damage
             CheckDamage();
-
-            if (fleeLimit > health)
-            {
-                cState = State.FLEEING;
-            }
         }
     }
 
@@ -232,7 +232,14 @@ public class Enemy : MonoBehaviour
             // if not empty
             if (playerToDamage.Length > 0)
             {
-                // do something with collision like access damage script from here
+                // activate animation
+                for (int i = 0; i < playerToDamage.Length; i++)
+                {
+                    if (playerToDamage[i].gameObject.CompareTag("Player"))
+                    {
+                        playerToDamage[i].GetComponent<PlayerScript>().TakeDamage(meleeDamage);
+                    }
+                }
             }
 
             // reset timer
@@ -245,11 +252,30 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void OnDrawGizmosSelected()
+    private void checkForPlayer()
+    {
+        // get distance
+        float dis = Vector3.Distance(transform.position, PlayerGO.transform.position);
+
+        // check if in range
+        if (dis < DetectionRange)
+        {
+            currentTarget = PlayerGO;
+        }
+        else
+        {
+            currentTarget = null;
+        }
+    }
+
+        void OnDrawGizmosSelected()
     {
         // attack zone
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos.position, attackRange);
+
+        // range check for player
+        Gizmos.DrawWireSphere(transform.position, DetectionRange);
 
         // ground
         Gizmos.DrawLine(GroundCheck.transform.position, new Vector3(GroundCheck.transform.position.x, GroundCheck.transform.position.y - groundDistance, transform.position.z));
