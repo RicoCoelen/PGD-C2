@@ -35,7 +35,7 @@ public class ThrowHook : MonoBehaviour
             }
 
         }
-        if (Input.GetKeyDown("space") && active)
+        if (Input.GetButtonDown("Jump") && active)
         {
             Debug.Log(curHook);
             if(curHook.GetComponent<HookScript>().child != null)

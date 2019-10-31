@@ -31,7 +31,7 @@ public class PlayerScript : MonoBehaviour
     {
         PlayerMovement();
         MovementJump();
-        CheckFlipToMouse();
+       // CheckFlipToMouse();
         PlayerHealth();
 
         // debug

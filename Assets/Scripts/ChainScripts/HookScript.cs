@@ -22,11 +22,15 @@ public class HookScript : MonoBehaviour
     void Update()
     {
 
-        if(child != null)
-            child.position = transform.position;
-
-        if(child != null && Input.GetMouseButtonDown(0))
+        if (child != null)
         {
+           
+            child.position = transform.position;
+        }
+        
+        if (child != null && Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("please help");
             Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             child.parent = null;
             direction -= (Vector2)transform.position;
