@@ -37,6 +37,8 @@ public class ThrowHook : MonoBehaviour
         }
         if (Input.GetKeyDown("space") && active)
         {
+            curHook.GetComponent<HookScript>().child.parent = null;
+
             Destroy(curHook);
 
             active = false;
