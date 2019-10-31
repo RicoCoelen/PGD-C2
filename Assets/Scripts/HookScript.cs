@@ -28,7 +28,7 @@ public class HookScript : MonoBehaviour
         {
             Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             child.parent = null;
-            direction -= (Vector2)hook.transform.position;
+            direction -= (Vector2)transform.position;
             direction.Normalize();
             child.GetComponent<Rigidbody2D>().velocity += direction * throwForce;
 
@@ -43,7 +43,8 @@ public class HookScript : MonoBehaviour
             collision.gameObject.transform.parent = hook.transform;
             child = collision.gameObject.transform;
 
-            child.GetComponent<Collider2D>().enabled = false;
+            Physics2D.IgnoreCollision(child.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            Physics2D.IgnoreCollision(child.GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
         }
     }
 }
