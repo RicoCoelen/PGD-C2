@@ -15,6 +15,7 @@ public class HookScript : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        
     }
 
     // Update is called once per frame
@@ -33,6 +34,8 @@ public class HookScript : MonoBehaviour
             child.GetComponent<Rigidbody2D>().velocity += direction * throwForce;
 
             Destroy(hook);
+
+            player.GetComponent<ThrowHook>().active = false;
         }
     }
 
