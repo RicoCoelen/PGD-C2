@@ -73,15 +73,15 @@ public class PlayerScript : MonoBehaviour
         float yRotation;
         if (mousePosition.x > transform.position.x)
         {
-            yRotation = 0;
+            //yRotation = 0;
             //render.flipX = false;
         }
         else
         {
-            yRotation = 180;
+            //yRotation = 180;
             //render.flipX = true;
         }
-        transform.localRotation = Quaternion.Euler(0, yRotation, 0);
+        //transform.localRotation = Quaternion.Euler(0, yRotation, 0);
     }
 
     bool IsGrounded()
@@ -101,8 +101,8 @@ public class PlayerScript : MonoBehaviour
     void MovementJump()
     {
         // Initial jump
-        if (Input.GetButtonDown("Jump") && (IsGrounded() || 
-            GetComponent<ThrowHook>().curHook.GetComponent<ChainScript>().lastNode.GetComponent<HingeJoint2D>().connectedBody == GetComponent<Rigidbody2D>()))
+        if (Input.GetButtonDown("Jump") && (IsGrounded() || GetComponent<ThrowHook>().active))
+            //GetComponent<ThrowHook>().curHook.GetComponent<ChainScript>().lastNode.GetComponent<HingeJoint2D>().connectedBody == GetComponent<Rigidbody2D>()))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
         }
