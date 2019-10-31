@@ -109,7 +109,7 @@ public class PlayerScript : MonoBehaviour
         
         
         // Speed up falling when going down or when releasing the jump button
-        if (rb.velocity.y < 0 || (rb.velocity.y > 0 && !Input.GetButton("Jump")))
+        if (rb.velocity.y < 0 || (rb.velocity.y > 0 && !Input.GetButtonDown("Jump")))
         {
             rb.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.deltaTime;
         }
