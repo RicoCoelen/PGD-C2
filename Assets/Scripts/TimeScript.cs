@@ -10,10 +10,14 @@ public class TimeScript : MonoBehaviour
     string minutes;
     string seconds;
 
+    [SerializeField] Text parTime;
+    public string currentParTime = "";
+
     // Start is called before the first frame update
     void Start()
     {
         startTime = Time.time;
+        parTime.GetComponent<Text>().text = " Par: " + currentParTime;
     }
 
     // Update is called once per frame
