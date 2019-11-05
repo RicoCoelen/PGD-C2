@@ -51,7 +51,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            TakeDamage(10);
+            TakeDamage(1);
         }
     }
 
