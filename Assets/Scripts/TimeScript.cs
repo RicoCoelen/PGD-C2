@@ -17,6 +17,9 @@ public class TimeScript : MonoBehaviour
     void Start()
     {
         startTime = Time.time;
+
+        // Only show the Par time UI if there is a par time set
+        if (!string.IsNullOrWhiteSpace(currentParTime))
         parTime.GetComponent<Text>().text = " Par: " + currentParTime;
     }
 
