@@ -283,4 +283,12 @@ public class Enemy : MonoBehaviour
         // wall
         Gizmos.DrawLine(WallCheck.transform.position, new Vector3(side, WallCheck.transform.position.y, WallCheck.transform.position.z));
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<PlayerScript>().health -= 1;
+        }
+    }
 }

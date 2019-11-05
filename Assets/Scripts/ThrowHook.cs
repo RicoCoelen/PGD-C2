@@ -6,9 +6,9 @@ public class ThrowHook : MonoBehaviour
 {
     public GameObject hook;
 
-    GameObject curHook;
+    public GameObject curHook;
 
-    bool active = false;
+    public bool active = false;
 
     // Use this for initialization
     void Start()
@@ -35,8 +35,12 @@ public class ThrowHook : MonoBehaviour
             }
 
         }
-        if (Input.GetKeyDown("space") && active)
+        if (Input.GetButtonDown("Jump") && active)
         {
+            Debug.Log(curHook);
+            if(curHook.GetComponent<HookScript>().child != null)
+                curHook.GetComponent<HookScript>().child.parent = null;
+
             Destroy(curHook);
 
             active = false;

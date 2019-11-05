@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7844327487544967909}
   - component: {fileID: 5052778361115036484}
   - component: {fileID: -890561104684341983}
+  - component: {fileID: 1049925879235827440}
   m_Layer: 0
   m_Name: Hook
   m_TagString: Untagged
@@ -167,3 +168,21 @@ MonoBehaviour:
   grabables:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &1049925879235827440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3565510268262720878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0caddd560c641a147b6c95b24292cf60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  child: {fileID: 0}
+  hook: {fileID: 3565510268262720878}
+  grabable:
+    serializedVersion: 2
+    m_Bits: 1024
+  throwForce: 50

@@ -38,7 +38,7 @@ public class PlayerScript : MonoBehaviour
     {
         PlayerMovement();
         MovementJump();
-        CheckFlipToMouse();
+       // CheckFlipToMouse();
         PlayerHealth();
 
         // debug
@@ -78,15 +78,15 @@ public class PlayerScript : MonoBehaviour
         float yRotation;
         if (mousePosition.x > transform.position.x)
         {
-            yRotation = 0;
+            //yRotation = 0;
             //render.flipX = false;
         }
         else
         {
-            yRotation = 180;
+            //yRotation = 180;
             //render.flipX = true;
         }
-        transform.localRotation = Quaternion.Euler(0, yRotation, 0);
+        //transform.localRotation = Quaternion.Euler(0, yRotation, 0);
     }
 
     bool IsGrounded()
@@ -106,14 +106,15 @@ public class PlayerScript : MonoBehaviour
     void MovementJump()
     {
         // Initial jump
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (Input.GetButtonDown("Jump") && (IsGrounded() || GetComponent<ThrowHook>().active))
+            //GetComponent<ThrowHook>().curHook.GetComponent<ChainScript>().lastNode.GetComponent<HingeJoint2D>().connectedBody == GetComponent<Rigidbody2D>()))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
         }
-
+        
         
         // Speed up falling when going down or when releasing the jump button
-        if (rb.velocity.y < 0 || (rb.velocity.y > 0 && !Input.GetButton("Jump")))
+        if (rb.velocity.y < 0 || (rb.velocity.y > 0 && !Input.GetButtonDown("Jump")))
         {
             rb.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.deltaTime;
         }

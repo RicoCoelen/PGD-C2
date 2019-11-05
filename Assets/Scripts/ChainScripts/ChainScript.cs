@@ -55,6 +55,12 @@ public class ChainScript : MonoBehaviour
             else if (done == false)
             {
                 done = true;
+
+                while (Vector2.Distance(player.transform.position, lastNode.transform.position) > interfal)
+                {
+                    CreateNode();
+                }
+
                 lastNode.GetComponent<HingeJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
             }
         }
