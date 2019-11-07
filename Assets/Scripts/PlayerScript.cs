@@ -5,10 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
+    float currentMaxSpeed;
+    float currentAcceleration;
+    float currentReactionMultiplier;
     public float maxSpeed = 80f;
-    public float acceleration = 40f;
+    public float sprintMaxSpeed = 100f;
+    public float maxAcceleration = 40f;
+    public float sprintAcceleration = 80f;
     public float drag = 40f;
     public float reactionMultiplier = 0.5f;
+    public float sprintReactionMultiplier = 0.25f;
     float speed = 0f;
     bool moving = false;
 
@@ -82,6 +88,33 @@ public class PlayerScript : MonoBehaviour
 
     public void PlayerMovement()
     {
+        Debug.Log(speed);
+        // While holding the sprint button the maxSpeed, acceleration and reaction multiplier change
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            currentMaxSpeed = sprintMaxSpeed;
+            currentAcceleration = sprintAcceleration;
+            currentReactionMultiplier = sprintReactionMultiplier;
+        }
+        else
+        {
+            // TODO: Fix this to actually work
+            //if (speed > maxSpeed && currentMaxSpeed > maxSpeed)
+            //{
+            //    currentMaxSpeed -= drag * Time.deltaTime;
+            //} else if (speed < -maxSpeed && currentMaxSpeed < maxSpeed)
+            //{
+            //    currentMaxSpeed += drag * Time.deltaTime;
+            //}
+            //else
+            //{
+                currentMaxSpeed = maxSpeed;
+                currentAcceleration = maxAcceleration;
+                currentReactionMultiplier = reactionMultiplier;
+            //}
+
+
+        }
 
         if (GetComponent<ThrowHook>().active)
         {
@@ -96,28 +129,28 @@ public class PlayerScript : MonoBehaviour
             {
                 if (speed < 0)
                 {
-                    speed += ((acceleration + acceleration * reactionMultiplier) * Time.deltaTime);
+                    speed += ((currentAcceleration + currentAcceleration * currentReactionMultiplier) * Time.deltaTime);
                 }
                 else
                 {
-                    speed += (acceleration * Time.deltaTime);
+                    speed += (currentAcceleration * Time.deltaTime);
                 }
 
-                speed = Mathf.Min(speed, maxSpeed);
+                speed = Mathf.Min(speed, currentMaxSpeed);
                 moving = true;
             }
             else if (Input.GetKey(left) || Input.GetKey(altLeft))
             {
                 if (speed > 0)
                 {
-                    speed -= ((acceleration + acceleration * reactionMultiplier) * Time.deltaTime);
+                    speed -= ((currentAcceleration + currentAcceleration * currentReactionMultiplier) * Time.deltaTime);
                 }
                 else
                 {
-                    speed -= (acceleration * Time.deltaTime);
+                    speed -= (currentAcceleration * Time.deltaTime);
                 }
 
-                speed = Mathf.Max(speed, -maxSpeed);
+                speed = Mathf.Max(speed, -currentMaxSpeed);
                 moving = true;
             }
             else
@@ -142,12 +175,10 @@ public class PlayerScript : MonoBehaviour
             rb.velocity = new Vector2(speed, rb.velocity.y);
         }
 
-        //Debug.Log(speed);
     }
 
     void PlayerTurn()
     {
-        Debug.Log(turned);
         // Turn the player around if they are moving in one direction above a certain speed
         if (rb.velocity.x > 1)
         {
