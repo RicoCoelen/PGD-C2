@@ -13,7 +13,9 @@ public class PlayerScript : MonoBehaviour
     bool moving = false;
 
     public float moveSpeed = 60f;
-    
+
+    bool turned = false;
+
 
     //public SpriteRenderer render;
 
@@ -50,6 +52,7 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         PlayerMovement();
+        PlayerTurn();
         MovementJump();
        // CheckFlipToMouse();
         PlayerHealth();
@@ -126,16 +129,47 @@ public class PlayerScript : MonoBehaviour
             if (!moving && speed > 0)
             {
                 speed -= (drag * Time.deltaTime);
+                if (speed < 0.1)
+                    speed = 0;
             }
             else if (!moving && speed < 0)
             {
                 speed += (drag * Time.deltaTime);
+                if (speed > 0.1)
+                    speed = 0;
             }
 
             rb.velocity = new Vector2(speed, rb.velocity.y);
         }
 
         //Debug.Log(speed);
+    }
+
+    void PlayerTurn()
+    {
+        Debug.Log(turned);
+        // Turn the player around if they are moving in one direction above a certain speed
+        if (rb.velocity.x > 1)
+        {
+            turned = false;
+            
+            //transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().flipX = false;
+        }
+        if (rb.velocity.x < -1)
+        {
+            turned = true;
+            //transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        }
+
+        if (!turned)
+        {
+            this.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else
+        {
+            this.transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+
     }
 
     bool IsGrounded()
@@ -163,13 +197,13 @@ public class PlayerScript : MonoBehaviour
         
         
         // Speed up falling when going down or when releasing the jump button
-        if (rb.velocity.y < 0 || (rb.velocity.y > 0 && !Input.GetButtonDown("Jump")))
+        if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
         {
             rb.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else
+        else if (rb.velocity.y < 0)
         {
-           rb.velocity += Vector2.up * Physics2D.gravity * (gravityMultiplier - 1) * Time.deltaTime;
+            rb.velocity += Vector2.up * Physics2D.gravity * (gravityMultiplier - 1) * Time.deltaTime;
         }
         
     }
