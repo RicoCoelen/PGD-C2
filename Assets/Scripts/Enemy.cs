@@ -4,49 +4,51 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Private Vars")]
+    // enemy rigidbody
+    private Rigidbody2D rb;
     // attack cooldowntimer
     private float timeToAttack;
-    public float cooldownAttack;
+    // direction speed / velocity
+    private bool facingRight = true;
+    private float side;
+    private float direction;
 
+    [Header("Melee Attack")]
+    // cooldown    
+    public float cooldownAttack;
     // attack positon / range
     public Transform attackPos;
     public float attackRange;
+    public float meleeDamage;
 
-    // enemy stats
+    [Header("Enemy Stats")]
+    // enemy statx
+    public float DetectionRange;
     public float movementSpeed = 10;
-    private bool facingRight = true;
-    private float health = 100f;
+    public float health = 100f;
     public float fleeLimit = 20f;
-    private float direction;
 
+    [Header("Behaviour")]
+    // huidige status
+    public State cState;
     // children for attack, wall and ground
     public GameObject AttackCheck;
     public GameObject WallCheck;
     public GameObject GroundCheck;
-
     // checks for movement
     public bool isGrounded = false;
     public bool isWalled = false;
     public float wallDistance;
     public float groundDistance;
-    public float side;
 
+    [Header("Extra vars")]
     // player 
     public LayerMask Player;
     public LayerMask Level;
-
-    // huidige status
-    public State cState;
-
     // current enemy target
     public GameObject currentTarget = null;
     public GameObject PlayerGO;
-    public float DetectionRange;
-
-    // enemy rigidbody
-    Rigidbody2D rb;
-
-    public float meleeDamage;
 
     // State Types
     public enum State
@@ -174,7 +176,6 @@ public class Enemy : MonoBehaviour
                 facingRight = false;
                 movementSpeed = -Mathf.Abs(movementSpeed);
             }
-
             // check for player to damage
             CheckDamage();
         }
@@ -268,7 +269,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-        void OnDrawGizmosSelected()
+    void OnDrawGizmosSelected()
     {
         // attack zone
         Gizmos.color = Color.red;
