@@ -82,8 +82,7 @@ public class PlayerScript : MonoBehaviour
 
         if (GetComponent<ThrowHook>().active)
         {
-            float playerMovement = Input.GetAxisRaw("Horizontal");
-            
+            float playerMovement = Input.GetAxis("Horizontal");
             rb.velocity = new Vector2(playerMovement * Time.deltaTime * moveSpeed + rb.velocity.x, rb.velocity.y);
         }
         else
