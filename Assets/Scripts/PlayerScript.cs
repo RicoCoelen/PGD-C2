@@ -5,7 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float maxSpeed = 80f;
+    public float acceleration = 40f;
+    public float drag = 40f;
+    public float reactionMultiplier = 0.5f;
+    float speed = 0f;
+    bool moving = false;
+
+    public float moveSpeed = 60f;
+    
 
     //public SpriteRenderer render;
 
@@ -24,6 +32,11 @@ public class PlayerScript : MonoBehaviour
     public float flashTime;
 
     private Color originalColor;
+
+    public KeyCode right = KeyCode.RightArrow;
+    public KeyCode left = KeyCode.LeftArrow;
+    public KeyCode altRight = KeyCode.D;
+    public KeyCode altLeft = KeyCode.A;
 
 
     // Start is called before the first frame update
@@ -66,27 +79,64 @@ public class PlayerScript : MonoBehaviour
 
     public void PlayerMovement()
     {
-        float playerMovement = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(playerMovement * Time.deltaTime * moveSpeed + rb.velocity.x, rb.velocity.y);
-    }
 
-    void CheckFlipToMouse()
-    {
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-
-        float yRotation;
-        if (mousePosition.x > transform.position.x)
+        if (GetComponent<ThrowHook>().active)
         {
-            //yRotation = 0;
-            //render.flipX = false;
+            float playerMovement = Input.GetAxisRaw("Horizontal");
+            
+            rb.velocity = new Vector2(playerMovement * Time.deltaTime * moveSpeed + rb.velocity.x, rb.velocity.y);
         }
         else
-        {
-            //yRotation = 180;
-            //render.flipX = true;
+        { 
+
+            // Add acceleration to speed if the keys for going right or left are pressed.
+            if (Input.GetKey(right) || Input.GetKey(altRight))
+            {
+                if (speed < 0)
+                {
+                    speed += ((acceleration + acceleration * reactionMultiplier) * Time.deltaTime);
+                }
+                else
+                {
+                    speed += (acceleration * Time.deltaTime);
+                }
+
+                speed = Mathf.Min(speed, maxSpeed);
+                moving = true;
+            }
+            else if (Input.GetKey(left) || Input.GetKey(altLeft))
+            {
+                if (speed > 0)
+                {
+                    speed -= ((acceleration + acceleration * reactionMultiplier) * Time.deltaTime);
+                }
+                else
+                {
+                    speed -= (acceleration * Time.deltaTime);
+                }
+
+                speed = Mathf.Max(speed, -maxSpeed);
+                moving = true;
+            }
+            else
+            {
+                moving = false;
+            }
+
+            // if no movement keys are pressed lower or increase speed by the drag value until it goes back to 0
+            if (!moving && speed > 0)
+            {
+                speed -= (drag * Time.deltaTime);
+            }
+            else if (!moving && speed < 0)
+            {
+                speed += (drag * Time.deltaTime);
+            }
+
+            rb.velocity = new Vector2(speed, rb.velocity.y);
         }
-        //transform.localRotation = Quaternion.Euler(0, yRotation, 0);
+
+        //Debug.Log(speed);
     }
 
     bool IsGrounded()
@@ -127,7 +177,7 @@ public class PlayerScript : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
-        health = Mathf.Clamp(health -= amount, 0, 100f); ;
+        health = Mathf.Clamp(health -= amount, 0, maxHealth);
         FlashRed(); 
     }
 

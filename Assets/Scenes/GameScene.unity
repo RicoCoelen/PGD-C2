@@ -132,6 +132,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8056905871382295021}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &138583030 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8056905871520868895, guid: d156ac5ccfc0d0f489848362a6382f86,
+    type: 3}
+  m_PrefabInstance: {fileID: 8056905871382295021}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &265236158
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,7 +504,7 @@ MonoBehaviour:
     m_Bits: 512
   cState: 0
   currentTarget: {fileID: 0}
-  PlayerGO: {fileID: 0}
+  PlayerGO: {fileID: 138583024}
   DetectionRange: 0
   meleeDamage: 0
 --- !u!50 &568228176
@@ -2172,5 +2178,45 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: a99f589046b1b2e4eb4c76774d5f783a, type: 2}
+    - target: {fileID: 8056905871520868891, guid: d156ac5ccfc0d0f489848362a6382f86,
+        type: 3}
+      propertyPath: maxHealth
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8056905871520868891, guid: d156ac5ccfc0d0f489848362a6382f86,
+        type: 3}
+      propertyPath: health
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8056905871520868891, guid: d156ac5ccfc0d0f489848362a6382f86,
+        type: 3}
+      propertyPath: flashTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8056905871520868891, guid: d156ac5ccfc0d0f489848362a6382f86,
+        type: 3}
+      propertyPath: renderer
+      value: 
+      objectReference: {fileID: 138583030}
+    - target: {fileID: 8056905871520868891, guid: d156ac5ccfc0d0f489848362a6382f86,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8056905871520868891, guid: d156ac5ccfc0d0f489848362a6382f86,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8056905871520868891, guid: d156ac5ccfc0d0f489848362a6382f86,
+        type: 3}
+      propertyPath: acceleration
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8056905871520868891, guid: d156ac5ccfc0d0f489848362a6382f86,
+        type: 3}
+      propertyPath: drag
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d156ac5ccfc0d0f489848362a6382f86, type: 3}
