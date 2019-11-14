@@ -34,6 +34,7 @@ public class HookScript : MonoBehaviour
             Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             child.parent = null;
             direction -= (Vector2)transform.position;
+            throwForce = Vector3.Magnitude(direction) * 3;
             direction.Normalize();
             child.GetComponent<Rigidbody2D>().velocity += direction * throwForce;
 
