@@ -1592,9 +1592,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1438143525}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -46.51, y: -1.1, z: -12.1015625}
-  m_LocalScale: {x: 109.031425, y: 3.7422, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -40.8, y: -4.5, z: -12.1015625}
+  m_LocalScale: {x: 107.94111, y: 4.752594, z: 1}
   m_Children: []
   m_Father: {fileID: 1183237735}
   m_RootOrder: 0
@@ -2206,7 +2206,7 @@ PrefabInstance:
     - target: {fileID: 8056905871520868891, guid: d156ac5ccfc0d0f489848362a6382f86,
         type: 3}
       propertyPath: maxSpeed
-      value: 10
+      value: 12.5
       objectReference: {fileID: 0}
     - target: {fileID: 8056905871520868891, guid: d156ac5ccfc0d0f489848362a6382f86,
         type: 3}
@@ -2216,12 +2216,12 @@ PrefabInstance:
     - target: {fileID: 8056905871520868891, guid: d156ac5ccfc0d0f489848362a6382f86,
         type: 3}
       propertyPath: drag
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8056905871520868891, guid: d156ac5ccfc0d0f489848362a6382f86,
         type: 3}
       propertyPath: jumpVelocity
-      value: 27.5
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 8056905871520868891, guid: d156ac5ccfc0d0f489848362a6382f86,
         type: 3}
@@ -2231,7 +2231,7 @@ PrefabInstance:
     - target: {fileID: 8056905871520868891, guid: d156ac5ccfc0d0f489848362a6382f86,
         type: 3}
       propertyPath: fallMultiplier
-      value: 7
+      value: 7.25
       objectReference: {fileID: 0}
     - target: {fileID: 8056905871520868891, guid: d156ac5ccfc0d0f489848362a6382f86,
         type: 3}
@@ -2241,12 +2241,17 @@ PrefabInstance:
     - target: {fileID: 8056905871520868891, guid: d156ac5ccfc0d0f489848362a6382f86,
         type: 3}
       propertyPath: sprintMaxSpeed
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8056905871520868891, guid: d156ac5ccfc0d0f489848362a6382f86,
         type: 3}
       propertyPath: sprintReactionMultiplier
-      value: -0.5
+      value: -0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 8056905871520868890, guid: d156ac5ccfc0d0f489848362a6382f86,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 138583024}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d156ac5ccfc0d0f489848362a6382f86, type: 3}

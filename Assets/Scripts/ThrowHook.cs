@@ -10,10 +10,13 @@ public class ThrowHook : MonoBehaviour
 
     public bool active = false;
 
+    [SerializeField] GameObject player;
+    PlayerScript playerScript;
+
     // Use this for initialization
     void Start()
     {
-
+        playerScript = player.GetComponent<PlayerScript>();
     }
 
     // Update is called once per frame
@@ -38,10 +41,15 @@ public class ThrowHook : MonoBehaviour
         if (Input.GetButtonDown("Jump") && active)
         {
             Debug.Log(curHook);
+
+            //Vector2 momentum = playerScript.rb.velocity;
+
             if(curHook.GetComponent<HookScript>().child != null)
                 curHook.GetComponent<HookScript>().child.parent = null;
 
             Destroy(curHook);
+
+            //playerScript.rb.velocity = momentum;
 
             active = false;
         }

@@ -25,7 +25,7 @@ public class PlayerScript : MonoBehaviour
 
     //public SpriteRenderer render;
 
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
 
     public float jumpVelocity = 25f;
     public float fallMultiplier = 7.5f;
@@ -46,6 +46,10 @@ public class PlayerScript : MonoBehaviour
     public KeyCode altRight = KeyCode.D;
     public KeyCode altLeft = KeyCode.A;
 
+    bool sprinting = false;
+
+    public float retainedVelocity;
+
 
     // Start is called before the first frame update
     void Start()
@@ -58,8 +62,8 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         PlayerMovement();
-        PlayerTurn();
         MovementJump();
+        PlayerTurn();
        // CheckFlipToMouse();
         PlayerHealth();
 
@@ -85,41 +89,77 @@ public class PlayerScript : MonoBehaviour
             UnityEditor.EditorApplication.isPlaying = false;
         }
     }
-
+    
+    //function to preserve max speed and slowly decrease it depending on if on ground or not
+    public void Momentum(float maximumSpeed)
+    {
+        // if the player is on the ground
+        if (currentMaxSpeed > maximumSpeed && IsGrounded())
+        {
+            currentMaxSpeed -= (drag * 0.2f) * Time.deltaTime;
+        }
+        else if (currentMaxSpeed > maximumSpeed && !IsGrounded())
+        {
+            currentMaxSpeed -= (drag * 0.05f) * Time.deltaTime;
+        }
+    }
     public void PlayerMovement()
     {
-        Debug.Log(speed);
-        // While holding the sprint button the maxSpeed, acceleration and reaction multiplier change
-        if (Input.GetKey(KeyCode.LeftShift))
+
+        // Leftshift and rightshift don't work in unity like normal keys because ?????
+        if (Input.GetButton("Run"))
         {
-            currentMaxSpeed = sprintMaxSpeed;
-            currentAcceleration = sprintAcceleration;
-            currentReactionMultiplier = sprintReactionMultiplier;
+            sprinting = true;
+        } else
+        {
+            sprinting = false;
+        }
+
+        // While holding the sprint button the maxSpeed, acceleration and reaction multiplier change
+        if (sprinting)
+        {
+            // if the previous max speed is higher than the running high speed, run momentum
+            if (currentMaxSpeed > sprintMaxSpeed)
+            {
+                Momentum(sprintMaxSpeed);
+            }
+            else
+            {
+                currentMaxSpeed = sprintMaxSpeed;
+                currentAcceleration = sprintAcceleration;
+                currentReactionMultiplier = sprintReactionMultiplier;
+            }
+
         }
         else
         {
-            // TODO: Fix this to actually work
-            //if (speed > maxSpeed && currentMaxSpeed > maxSpeed)
-            //{
-            //    currentMaxSpeed -= drag * Time.deltaTime;
-            //} else if (speed < -maxSpeed && currentMaxSpeed < maxSpeed)
-            //{
-            //    currentMaxSpeed += drag * Time.deltaTime;
-            //}
-            //else
-            //{
+            // if the previous max speed is higher than the standard high speed, run momentum
+            if (currentMaxSpeed > maxSpeed)
+            {
+                Momentum(maxSpeed);
+                
+            } 
+            else
+            {
                 currentMaxSpeed = maxSpeed;
                 currentAcceleration = maxAcceleration;
                 currentReactionMultiplier = reactionMultiplier;
-            //}
+            }
 
 
         }
+
 
         if (GetComponent<ThrowHook>().active)
         {
             float playerMovement = Input.GetAxis("Horizontal");
             rb.velocity = new Vector2(playerMovement * Time.deltaTime * moveSpeed + rb.velocity.x, rb.velocity.y);
+            
+            //speed = rb.velocity.x;
+            //if (speed > currentMaxSpeed)
+            //{
+            //    currentMaxSpeed = speed;
+            //}
         }
         else
         { 
