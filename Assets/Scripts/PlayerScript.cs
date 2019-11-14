@@ -105,7 +105,6 @@ public class PlayerScript : MonoBehaviour
     }
     public void PlayerMovement()
     {
-
         // Leftshift and rightshift don't work in unity like normal keys because ?????
         if (Input.GetButton("Run"))
         {
@@ -114,6 +113,8 @@ public class PlayerScript : MonoBehaviour
         {
             sprinting = false;
         }
+
+        Debug.Log(speed);
 
         // While holding the sprint button the maxSpeed, acceleration and reaction multiplier change
         if (sprinting)
@@ -270,11 +271,11 @@ public class PlayerScript : MonoBehaviour
         // Speed up falling when going down or when releasing the jump button
         if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
         {
-            rb.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.deltaTime;
+            rb.velocity += (Vector2.up * Physics2D.gravity * (fallMultiplier - 1)) * Time.deltaTime;
         }
         else if (rb.velocity.y < 0)
         {
-            rb.velocity += Vector2.up * Physics2D.gravity * (gravityMultiplier - 1) * Time.deltaTime;
+            rb.velocity += (Vector2.up * Physics2D.gravity * (gravityMultiplier - 1)) * Time.deltaTime;
         }
         
     }
