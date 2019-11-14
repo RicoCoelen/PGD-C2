@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -46,12 +43,14 @@ public class PlayerScript : MonoBehaviour
     public KeyCode altRight = KeyCode.D;
     public KeyCode altLeft = KeyCode.A;
 
+    GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         originalColor = renderer.GetComponent<MeshRenderer>().material.color;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -60,13 +59,14 @@ public class PlayerScript : MonoBehaviour
         PlayerMovement();
         PlayerTurn();
         MovementJump();
-       // CheckFlipToMouse();
+        // CheckFlipToMouse();
         PlayerHealth();
-
         // debug
         TestDamage();
         //Debug.Log(health);
     }
+
+  
 
     // Debug function
     public void TestDamage()
@@ -108,9 +108,9 @@ public class PlayerScript : MonoBehaviour
             //}
             //else
             //{
-                currentMaxSpeed = maxSpeed;
-                currentAcceleration = maxAcceleration;
-                currentReactionMultiplier = reactionMultiplier;
+            currentMaxSpeed = maxSpeed;
+            currentAcceleration = maxAcceleration;
+            currentReactionMultiplier = reactionMultiplier;
             //}
 
 
@@ -122,7 +122,7 @@ public class PlayerScript : MonoBehaviour
             rb.velocity = new Vector2(playerMovement * Time.deltaTime * moveSpeed + rb.velocity.x, rb.velocity.y);
         }
         else
-        { 
+        {
 
             // Add acceleration to speed if the keys for going right or left are pressed.
             if (Input.GetKey(right) || Input.GetKey(altRight))
@@ -183,7 +183,7 @@ public class PlayerScript : MonoBehaviour
         if (rb.velocity.x > 1)
         {
             turned = false;
-            
+
             //transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
         if (rb.velocity.x < -1)
@@ -221,12 +221,12 @@ public class PlayerScript : MonoBehaviour
     {
         // Initial jump
         if (Input.GetButtonDown("Jump") && (IsGrounded() || GetComponent<ThrowHook>().active))
-            //GetComponent<ThrowHook>().curHook.GetComponent<ChainScript>().lastNode.GetComponent<HingeJoint2D>().connectedBody == GetComponent<Rigidbody2D>()))
+        //GetComponent<ThrowHook>().curHook.GetComponent<ChainScript>().lastNode.GetComponent<HingeJoint2D>().connectedBody == GetComponent<Rigidbody2D>()))
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y/2 + jumpVelocity);
         }
-        
-        
+
+
         // Speed up falling when going down or when releasing the jump button
         if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
         {
@@ -236,13 +236,13 @@ public class PlayerScript : MonoBehaviour
         {
             rb.velocity += Vector2.up * Physics2D.gravity * (gravityMultiplier - 1) * Time.deltaTime;
         }
-        
+
     }
 
     public void TakeDamage(float amount)
     {
         health = Mathf.Clamp(health -= amount, 0, maxHealth);
-        FlashRed(); 
+        FlashRed();
     }
 
     void FlashRed()
