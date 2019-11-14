@@ -41,6 +41,8 @@ public class ThrowHook : MonoBehaviour
             if(curHook.GetComponent<HookScript>().child != null)
                 curHook.GetComponent<HookScript>().child.parent = null;
 
+            GetComponent<PlayerScript>().MovementJump();
+
             Destroy(curHook);
 
             active = false;

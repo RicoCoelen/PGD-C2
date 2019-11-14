@@ -217,7 +217,7 @@ public class PlayerScript : MonoBehaviour
         return false;
     }
 
-    void MovementJump()
+    public void MovementJump()
     {
         // Initial jump
         if (Input.GetButtonDown("Jump") && (IsGrounded() || GetComponent<ThrowHook>().active))
