@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
+
     [Header("MoveSpeed settings")]
     float currentMaxSpeed;
     float currentAcceleration;
