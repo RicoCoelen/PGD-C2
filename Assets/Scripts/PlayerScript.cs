@@ -45,6 +45,8 @@ public class PlayerScript : MonoBehaviour
     private Color originalColor;
 
     bool sprinting = false;
+    bool crouching = false;
+    bool sliding = false;
 
     GameObject player;
 
@@ -61,6 +63,7 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         PlayerMovement();
+        Crouch();
         MovementJump();
         PlayerTurn();
         // CheckFlipToMouse();
@@ -71,6 +74,55 @@ public class PlayerScript : MonoBehaviour
     }
 
   
+    private void Crouch()
+    {
+        //if (crouching)
+        //{
+
+        float hillMultiplier = 2f;
+
+        //TODO: when crouching, slide down hills.
+        Vector2 position = transform.position;
+        Vector2 direction = Vector2.down;
+
+        RaycastHit2D hit = Physics2D.Raycast(position, direction, rayLength, groundLayer);
+        if (hit.collider != null)
+        {
+            Debug.Log(hit.normal.x + "___ _ _ _: " + speed + "__: " + currentMaxSpeed);
+            if (hit.normal.x < 1 && hit.normal.x > -1 && hit.normal.x != 0)
+            {
+                if (hit.normal.x > 0 && rb.velocity.x > 0)
+                { 
+                    sliding = true;
+                    speed += (hit.normal.x * hillMultiplier) * Time.deltaTime;
+                }
+
+                if (hit.normal.x < 0 & rb.velocity.x < 0)
+                {
+                    sliding = true;
+                    speed += (hit.normal.x * hillMultiplier) * Time.deltaTime;
+                }
+
+                if ((speed == currentMaxSpeed || speed == -currentMaxSpeed || currentMaxSpeed == 0) && sliding)
+                {
+                    if (speed > 0)
+                        currentMaxSpeed += (hit.normal.x * hillMultiplier) * Time.deltaTime;
+                    if (speed < 0)
+                        currentMaxSpeed -= (hit.normal.x * hillMultiplier) * Time.deltaTime;
+                }
+            }
+            else
+            {
+                sliding = false;
+            }
+        }
+        else
+        {
+            sliding = false;
+        }
+
+        //}
+    }
 
     // Debug function
     public void TestDamage()
@@ -114,8 +166,6 @@ public class PlayerScript : MonoBehaviour
             sprinting = false;
         }
 
-        Debug.Log(speed);
-
         // While holding the sprint button the maxSpeed, acceleration and reaction multiplier change
         if (sprinting)
         {
@@ -158,6 +208,10 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
+            if (rb.velocity.x == 0)
+                speed = 0;
+            if (rb.velocity.x > speed || rb.velocity.x < -speed)
+                 speed = rb.velocity.x;
 
             // Add acceleration to speed if the keys for going right or left are pressed.
             if (Input.GetButton("Right"))
@@ -193,18 +247,21 @@ public class PlayerScript : MonoBehaviour
                 moving = false;
             }
 
-            // if no movement keys are pressed lower or increase speed by the drag value until it goes back to 0
-            if (!moving && speed > 0)
+            if (!sliding)
             {
-                speed -= (drag * Time.deltaTime);
-                if (speed < 0.1)
-                    speed = 0;
-            }
-            else if (!moving && speed < 0)
-            {
-                speed += (drag * Time.deltaTime);
-                if (speed > 0.1)
-                    speed = 0;
+                // if no movement keys are pressed lower or increase speed by the drag value until it goes back to 0
+                if (!moving && speed > 0)
+                {
+                    speed -= (drag * Time.deltaTime);
+                    if (speed < 0.1)
+                        speed = 0;
+                }
+                else if (!moving && speed < 0)
+                {
+                    speed += (drag * Time.deltaTime);
+                    if (speed > 0.1)
+                        speed = 0;
+                }
             }
 
             rb.velocity = new Vector2(speed, rb.velocity.y);
