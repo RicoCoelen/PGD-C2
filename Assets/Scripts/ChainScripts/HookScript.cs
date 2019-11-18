@@ -46,13 +46,19 @@ public class HookScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 10)
+        if (collision.gameObject.tag == "Grabable")
         {
             collision.gameObject.transform.parent = hook.transform;
             child = collision.gameObject.transform;
 
             Physics2D.IgnoreCollision(child.GetComponent<Collider2D>(), GetComponent<Collider2D>());
             Physics2D.IgnoreCollision(child.GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
+        }else if(collision.gameObject.tag == "Anchored Grabable")
+        {
+            hook.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+            hook.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+            hook.transform.position = collision.gameObject.transform.position;
         }
     }
 }

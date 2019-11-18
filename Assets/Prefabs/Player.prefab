@@ -237,4 +237,3 @@ MonoBehaviour:
   hook: {fileID: 3565510268262720878, guid: 28bc0e12f8c5e6247aee2cdcefee6260, type: 3}
   curHook: {fileID: 0}
   active: 0
-  player: {fileID: 0}
