@@ -7,9 +7,7 @@ public class PlayerScript : MonoBehaviour
 {
 
     [Header("MoveSpeed settings")]
-    float currentMaxSpeed;
-    float currentAcceleration;
-    float currentReactionMultiplier;
+
     public float maxSpeed = 80f;
     public float sprintMaxSpeed = 100f;
     public float maxAcceleration = 40f;
@@ -24,6 +22,9 @@ public class PlayerScript : MonoBehaviour
 
     bool turned = false;
 
+    float currentMaxSpeed;
+    float currentAcceleration;
+    float currentReactionMultiplier;
 
     //public SpriteRenderer render;
 
@@ -50,6 +51,9 @@ public class PlayerScript : MonoBehaviour
 
     GameObject player;
 
+    public Sprite crouchSprite;
+    public Sprite sprite;
+
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +61,15 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         originalColor = renderer.GetComponent<MeshRenderer>().material.color;
         player = GameObject.FindGameObjectWithTag("Player");
+
+        currentMaxSpeed = 15f;
+    }
+
+    private void Awake()
+    {
+        currentMaxSpeed = maxSpeed;
+        currentAcceleration = maxAcceleration;
+        currentReactionMultiplier = reactionMultiplier;
     }
 
     // Update is called once per frame
@@ -71,57 +84,72 @@ public class PlayerScript : MonoBehaviour
         // debug
         TestDamage();
         //Debug.Log(health);
+
+        Debug.Log(speed + "__: " + currentMaxSpeed);
     }
 
   
     private void Crouch()
     {
-        //if (crouching)
-        //{
-
-        float hillMultiplier = 2f;
-
-        //TODO: when crouching, slide down hills.
-        Vector2 position = transform.position;
-        Vector2 direction = Vector2.down;
-
-        RaycastHit2D hit = Physics2D.Raycast(position, direction, rayLength, groundLayer);
-        if (hit.collider != null)
+        if (Input.GetButton("Crouch"))
         {
-            Debug.Log(hit.normal.x + "___ _ _ _: " + speed + "__: " + currentMaxSpeed);
-            if (hit.normal.x < 1 && hit.normal.x > -1 && hit.normal.x != 0)
+            crouching = true;
+        }
+        else
+        {
+            crouching = false;
+        }
+
+
+        if (crouching)
+        {
+
+            GetComponentInChildren<SpriteRenderer>().sprite = crouchSprite;
+
+            float hillMultiplier = 75f;
+
+            //TODO: when crouching, slide down hills.
+            Vector2 position = transform.position;
+            Vector2 direction = Vector2.down;
+
+            RaycastHit2D hit = Physics2D.Raycast(position, direction, rayLength, groundLayer);
+            if (hit.collider != null)
             {
-                if (hit.normal.x > 0 && rb.velocity.x > 0)
-                { 
-                    sliding = true;
-                    speed += (hit.normal.x * hillMultiplier) * Time.deltaTime;
-                }
-
-                if (hit.normal.x < 0 & rb.velocity.x < 0)
+                //Debug.Log(hit.normal.x + "___ _ _ _: " + speed + "__: " + currentMaxSpeed);
+                if (hit.normal.x < 1 && hit.normal.x > -1 && hit.normal.x != 0)
                 {
-                    sliding = true;
-                    speed += (hit.normal.x * hillMultiplier) * Time.deltaTime;
-                }
+                    if (hit.normal.x > 0 && rb.velocity.x > -1)
+                    { 
+                        sliding = true;
+                        speed += (hit.normal.x * hillMultiplier) * Time.deltaTime;
+                        if (speed > currentMaxSpeed)
+                            currentMaxSpeed += (hit.normal.x * hillMultiplier) * Time.deltaTime;
 
-                if ((speed == currentMaxSpeed || speed == -currentMaxSpeed || currentMaxSpeed == 0) && sliding)
+                    }
+
+                    if (hit.normal.x < 0 & rb.velocity.x < 1)
+                    {
+                        sliding = true;
+                        speed -= (hit.normal.x * hillMultiplier) * Time.deltaTime;
+                        if (speed < -currentMaxSpeed)
+                            currentMaxSpeed -= (hit.normal.x * hillMultiplier) * Time.deltaTime;
+                    }
+                }
+                else
                 {
-                    if (speed > 0)
-                        currentMaxSpeed += (hit.normal.x * hillMultiplier) * Time.deltaTime;
-                    if (speed < 0)
-                        currentMaxSpeed -= (hit.normal.x * hillMultiplier) * Time.deltaTime;
+                    sliding = false;
                 }
             }
             else
             {
                 sliding = false;
             }
+
         }
         else
         {
-            sliding = false;
+            GetComponentInChildren<SpriteRenderer>().sprite = sprite;
         }
-
-        //}
     }
 
     // Debug function
@@ -148,7 +176,7 @@ public class PlayerScript : MonoBehaviour
         // if the player is on the ground
         if (currentMaxSpeed > maximumSpeed && IsGrounded())
         {
-            currentMaxSpeed -= (drag * 0.2f) * Time.deltaTime;
+            currentMaxSpeed -= (drag * 0.5f) * Time.deltaTime;
         }
         else if (currentMaxSpeed > maximumSpeed && !IsGrounded())
         {
@@ -157,6 +185,7 @@ public class PlayerScript : MonoBehaviour
     }
     public void PlayerMovement()
     {
+
         // Leftshift and rightshift don't work in unity like normal keys because ?????
         if (Input.GetButton("Run"))
         {
@@ -174,7 +203,7 @@ public class PlayerScript : MonoBehaviour
             {
                 Momentum(sprintMaxSpeed);
             }
-            else
+            else if (currentMaxSpeed < sprintMaxSpeed)
             {
                 currentMaxSpeed = sprintMaxSpeed;
                 currentAcceleration = sprintAcceleration;
@@ -190,15 +219,22 @@ public class PlayerScript : MonoBehaviour
                 Momentum(maxSpeed);
                 
             } 
-            else
+            else if (currentMaxSpeed < maxSpeed)
             {
                 currentMaxSpeed = maxSpeed;
                 currentAcceleration = maxAcceleration;
                 currentReactionMultiplier = reactionMultiplier;
             }
-
-
         }
+
+        if (rb.velocity.x > currentMaxSpeed)
+            currentMaxSpeed = rb.velocity.x;
+
+        if (rb.velocity.x < -currentMaxSpeed)
+            currentMaxSpeed = rb.velocity.x;
+
+        if (rb.velocity.x > -1 && rb.velocity.x < 1)
+            currentMaxSpeed = maxSpeed;
 
 
         if (GetComponent<ThrowHook>().active)
@@ -208,61 +244,77 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            if (rb.velocity.x == 0)
-                speed = 0;
-            if (rb.velocity.x > speed || rb.velocity.x < -speed)
-                 speed = rb.velocity.x;
 
-            // Add acceleration to speed if the keys for going right or left are pressed.
-            if (Input.GetButton("Right"))
+            if (!crouching)
             {
-                if (speed < 0)
+                // Add acceleration to speed if the keys for going right or left are pressed.
+                if (Input.GetButton("Right"))
                 {
-                    speed += ((currentAcceleration + currentAcceleration * currentReactionMultiplier) * Time.deltaTime);
+                    if (speed < 0)
+                    {
+                        speed += ((currentAcceleration + currentAcceleration * currentReactionMultiplier) * Time.deltaTime);
+                    }
+                    else
+                    {
+                        speed += (currentAcceleration * Time.deltaTime);
+                    }
+
+                   
+                    moving = true;
+                }
+                else if (Input.GetButton("Left"))
+                {
+                    if (speed > 0)
+                    {
+                        speed -= ((currentAcceleration + currentAcceleration * currentReactionMultiplier) * Time.deltaTime);
+                    }
+                    else
+                    {
+                        speed -= (currentAcceleration * Time.deltaTime);
+                    }
+
+                    
+                    moving = true;
                 }
                 else
                 {
-                    speed += (currentAcceleration * Time.deltaTime);
+                    moving = false;
                 }
-
-                speed = Mathf.Min(speed, currentMaxSpeed);
-                moving = true;
-            }
-            else if (Input.GetButton("Left"))
-            {
-                if (speed > 0)
-                {
-                    speed -= ((currentAcceleration + currentAcceleration * currentReactionMultiplier) * Time.deltaTime);
-                }
-                else
-                {
-                    speed -= (currentAcceleration * Time.deltaTime);
-                }
-
-                speed = Mathf.Max(speed, -currentMaxSpeed);
-                moving = true;
-            }
-            else
-            {
-                moving = false;
             }
 
             if (!sliding)
             {
+                float finalDrag;
+
+                if (IsGrounded())
+                {
+                    finalDrag = (drag * 1f);
+                }
+                else
+                {
+                    finalDrag = (drag * 0.05f);
+                }
+
                 // if no movement keys are pressed lower or increase speed by the drag value until it goes back to 0
                 if (!moving && speed > 0)
                 {
-                    speed -= (drag * Time.deltaTime);
+                    speed -= finalDrag * Time.deltaTime;
                     if (speed < 0.1)
                         speed = 0;
                 }
                 else if (!moving && speed < 0)
                 {
-                    speed += (drag * Time.deltaTime);
+                    speed += finalDrag * Time.deltaTime;
                     if (speed > 0.1)
                         speed = 0;
                 }
             }
+
+            if (speed > 0)
+                speed = Mathf.Min(speed, currentMaxSpeed);
+
+            if (speed < 0)
+                speed = Mathf.Max(speed, -currentMaxSpeed);
 
             rb.velocity = new Vector2(speed, rb.velocity.y);
         }
