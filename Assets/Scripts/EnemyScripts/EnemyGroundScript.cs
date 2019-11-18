@@ -18,7 +18,7 @@ public class EnemyGroundScript : MonoBehaviour
     void FixedUpdate()
     {
         // raycast to ground
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, Level);
 
         if (hit.collider == true)
         {
