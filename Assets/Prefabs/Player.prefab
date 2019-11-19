@@ -205,11 +205,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 12.5
   sprintMaxSpeed: 20
-  maxAcceleration: 40
-  sprintAcceleration: 80
-  drag: 50
+  maxAcceleration: 80
+  sprintAcceleration: 120
+  drag: 40
   reactionMultiplier: 1.2
-  sprintReactionMultiplier: -0.3
+  sprintReactionMultiplier: -0.8
   moveSpeed: 60
   jumpVelocity: 30
   fallMultiplier: 7.25
@@ -222,6 +222,8 @@ MonoBehaviour:
   health: 10
   renderer: {fileID: 0}
   flashTime: 1
+  crouchSprite: {fileID: 0}
+  sprite: {fileID: 0}
 --- !u!114 &8056905871520868890
 MonoBehaviour:
   m_ObjectHideFlags: 0
