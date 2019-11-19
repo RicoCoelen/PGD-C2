@@ -7,7 +7,6 @@ public class PlayerScript : MonoBehaviour
 {
 
     [Header("MoveSpeed settings")]
-
     public float maxSpeed = 80f;
     public float sprintMaxSpeed = 100f;
     public float maxAcceleration = 40f;
@@ -85,7 +84,7 @@ public class PlayerScript : MonoBehaviour
         TestDamage();
         //Debug.Log(health);
 
-        Debug.Log(speed + "__: " + currentMaxSpeed);
+        Debug.DrawLine((Vector2)transform.position + GetComponent<Collider2D>().bounds.size.magnitude * Vector2.down / 2, ((Vector2)transform.position + GetComponent<Collider2D>().bounds.size.magnitude * Vector2.down / 2) + (Vector2.down * rayLength), Color.green);
     }
 
   
@@ -185,7 +184,6 @@ public class PlayerScript : MonoBehaviour
     }
     public void PlayerMovement()
     {
-
         // Leftshift and rightshift don't work in unity like normal keys because ?????
         if (Input.GetButton("Run"))
         {
@@ -194,6 +192,8 @@ public class PlayerScript : MonoBehaviour
         {
             sprinting = false;
         }
+
+        Debug.Log(speed);
 
         // While holding the sprint button the maxSpeed, acceleration and reaction multiplier change
         if (sprinting)
@@ -349,10 +349,10 @@ public class PlayerScript : MonoBehaviour
 
     bool IsGrounded()
     {
-        Vector2 position = transform.position;
+        Vector2 position = (Vector2)transform.position + GetComponent<Collider2D>().bounds.size.magnitude * Vector2.down;
         Vector2 direction = Vector2.down;
 
-        RaycastHit2D hit = Physics2D.Raycast(position, direction, rayLength, groundLayer);
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + GetComponent<Collider2D>().bounds.size.magnitude * Vector2.down / 2, direction, rayLength);
         if (hit.collider != null)
         {
             return true;

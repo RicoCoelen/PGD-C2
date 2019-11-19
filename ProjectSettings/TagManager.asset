@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Grabable
+  - Anchored Grabable
   layers:
   - Default
   - TransparentFX

@@ -214,7 +214,7 @@ MonoBehaviour:
   jumpVelocity: 30
   fallMultiplier: 7.25
   gravityMultiplier: 6.5
-  rayLength: 1.3
+  rayLength: 0.22
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -237,4 +237,3 @@ MonoBehaviour:
   hook: {fileID: 3565510268262720878, guid: 28bc0e12f8c5e6247aee2cdcefee6260, type: 3}
   curHook: {fileID: 0}
   active: 0
-  player: {fileID: 0}

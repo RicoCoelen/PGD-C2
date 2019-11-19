@@ -10,12 +10,13 @@ public class ThrowHook : MonoBehaviour
 
     public bool active = false;
 
-    [SerializeField] GameObject player;
+    GameObject player;
     PlayerScript playerScript;
 
     // Use this for initialization
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerScript>();
     }
 
@@ -40,9 +41,6 @@ public class ThrowHook : MonoBehaviour
         }
         if (Input.GetButtonDown("Jump") && active)
         {
-            Debug.Log(curHook);
-
-            //Vector2 momentum = playerScript.rb.velocity;
 
             if(curHook.GetComponent<HookScript>().child != null)
                 curHook.GetComponent<HookScript>().child.parent = null;
@@ -50,8 +48,6 @@ public class ThrowHook : MonoBehaviour
             GetComponent<PlayerScript>().MovementJump();
 
             Destroy(curHook);
-
-            //playerScript.rb.velocity = momentum;
 
             active = false;
         }
