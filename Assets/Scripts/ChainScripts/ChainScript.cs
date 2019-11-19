@@ -23,6 +23,10 @@ public class ChainScript : MonoBehaviour
     bool done = false;
     bool stop = false;
 
+    // Line render
+    List<GameObject> Nodes = new List<GameObject>();
+    int vertexCount = 2;
+
     // Use this for initialization
     void Start()
     {
@@ -35,6 +39,7 @@ public class ChainScript : MonoBehaviour
         direction += (Vector2)player.transform.position;
 
         lastNode = transform.gameObject;
+        Nodes.Add(transform.gameObject);
     }
 
     // Update is called once per frame
@@ -100,7 +105,9 @@ public class ChainScript : MonoBehaviour
         lastNode.GetComponent<HingeJoint2D>().connectedBody = go.GetComponent<Rigidbody2D>();
 
         lastNode = go;
-        
+
+        Nodes.Add(lastNode);
+        vertexCount++;
     }
 
 }
