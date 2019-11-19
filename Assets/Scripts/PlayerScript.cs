@@ -68,6 +68,8 @@ public class PlayerScript : MonoBehaviour
         // debug
         TestDamage();
         //Debug.Log(health);
+
+        Debug.DrawLine((Vector2)transform.position + GetComponent<Collider2D>().bounds.size.magnitude * Vector2.down / 2, ((Vector2)transform.position + GetComponent<Collider2D>().bounds.size.magnitude * Vector2.down / 2) + (Vector2.down * rayLength), Color.green);
     }
 
   
@@ -240,10 +242,10 @@ public class PlayerScript : MonoBehaviour
 
     bool IsGrounded()
     {
-        Vector2 position = transform.position;
+        Vector2 position = (Vector2)transform.position + GetComponent<Collider2D>().bounds.size.magnitude * Vector2.down;
         Vector2 direction = Vector2.down;
 
-        RaycastHit2D hit = Physics2D.Raycast(position, direction, rayLength, groundLayer);
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + GetComponent<Collider2D>().bounds.size.magnitude * Vector2.down / 2, direction, rayLength);
         if (hit.collider != null)
         {
             return true;
