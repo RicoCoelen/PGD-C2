@@ -214,7 +214,7 @@ MonoBehaviour:
   jumpVelocity: 30
   fallMultiplier: 7.25
   gravityMultiplier: 6.5
-  rayLength: 0.22
+  rayLength: 1.3
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
