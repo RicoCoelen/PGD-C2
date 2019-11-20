@@ -74,11 +74,7 @@ public class ChainScript : MonoBehaviour
         }
 
         RenderLine();
-
-        if (HitGrabable())
-        {
-
-        }
+        HitGrabable();
     }
 
     void RenderLine()
@@ -96,16 +92,13 @@ public class ChainScript : MonoBehaviour
         lr.SetPosition(i, player.transform.position);
     }
 
-    bool HitGrabable()
+    void HitGrabable()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.zero);
         if (hit.collider != player.GetComponent<Collider2D>() && hit.collider != null)
         {
             stop = true;
-            return true;
         }
-
-        return false;
     }
 
 

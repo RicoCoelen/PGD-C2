@@ -43,12 +43,13 @@ public class ThrowHook : MonoBehaviour
             active = true;
         }else if (Input.GetButtonDown("Jump") && active && curHook.GetComponent<HookScript>().child.tag == "Anchored Grabable")
         {
+            playerScript.MovementJump();
+
 
             if (curHook.GetComponent<HookScript>().child != null)
                 curHook.GetComponent<HookScript>().child.parent = null;
 
 
-            playerScript.MovementJump();
 
             Destroy(curHook);
 

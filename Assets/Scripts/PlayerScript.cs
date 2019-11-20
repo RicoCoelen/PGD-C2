@@ -329,7 +329,7 @@ public class PlayerScript : MonoBehaviour
     public void MovementJump()
     {
         // Initial jump
-        if (Input.GetButtonDown("Jump") && (IsGrounded() || GetComponent<ThrowHook>().active))
+        if (Input.GetButtonDown("Jump") && (IsGrounded() || GetComponent<ThrowHook>().curHook.GetComponent<HookScript>().child.tag == "Anchored Grabable"))
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y/2 + jumpVelocity);
         }
