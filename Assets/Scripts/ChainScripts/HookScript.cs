@@ -30,7 +30,6 @@ public class HookScript : MonoBehaviour
         
         if (child != null && Input.GetMouseButtonDown(0))
         {
-            Debug.Log("please help");
             Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             child.parent = null;
             direction -= (Vector2)transform.position;
@@ -57,6 +56,7 @@ public class HookScript : MonoBehaviour
         {
             hook.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
             hook.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            child = collision.gameObject.transform;
 
             hook.transform.position = collision.gameObject.transform.position;
         }

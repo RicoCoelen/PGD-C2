@@ -23,34 +23,37 @@ public class ThrowHook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (!active) {
-                Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-                curHook = Instantiate(hook, transform.position, Quaternion.identity);
-
-                curHook.GetComponent<ChainScript>().direction = direction;
-
-                active = true;
-            }
-
-        }
-        if (Input.GetButtonDown("Jump") && active)
+        if (Input.GetMouseButtonDown(0) && active)
         {
 
             if(curHook.GetComponent<HookScript>().child != null)
                 curHook.GetComponent<HookScript>().child.parent = null;
 
-            GetComponent<PlayerScript>().MovementJump();
+            Destroy(curHook);
+
+            active = false;
+        }else if (Input.GetMouseButtonDown(0) && !active)
+        {
+            Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            curHook = Instantiate(hook, transform.position, Quaternion.identity);
+
+            curHook.GetComponent<ChainScript>().direction = direction;
+
+            active = true;
+        }else if (Input.GetButtonDown("Jump") && active && curHook.GetComponent<HookScript>().child.tag == "Anchored Grabable")
+        {
+            playerScript.MovementJump();
+
+
+            if (curHook.GetComponent<HookScript>().child != null)
+                curHook.GetComponent<HookScript>().child.parent = null;
+
+
 
             Destroy(curHook);
 
             active = false;
         }
-
     }
 }

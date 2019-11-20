@@ -168,7 +168,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.0039847493}
-  m_Size: {x: 1, y: 1.9920305}
+  m_Size: {x: 1.78, y: 1.9920305}
   m_Direction: 0
 --- !u!50 &8056905871520868892
 Rigidbody2D:
@@ -218,7 +218,7 @@ MonoBehaviour:
   jumpVelocity: 30
   fallMultiplier: 7.25
   gravityMultiplier: 6.5
-  rayLength: 0.2
+  rayLength: 0.3
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
