@@ -78,7 +78,7 @@ public class PlayerScript : MonoBehaviour
         TestDamage();
         Debug.Log(health);
 
-        Debug.DrawLine((Vector2)transform.position + GetComponent<Collider2D>().bounds.size.magnitude * Vector2.down / 2, ((Vector2)transform.position + GetComponent<Collider2D>().bounds.size.magnitude * Vector2.down / 2) + (Vector2.down * rayLength), Color.green);
+        Debug.DrawLine((Vector2)transform.position + GetComponent<Collider2D>().bounds.size.y * Vector2.down / 2 - new Vector2(0, 0.1f), ((Vector2)transform.position + GetComponent<Collider2D>().bounds.size.magnitude * Vector2.down / 2) + (Vector2.down * rayLength), Color.green);
     }
 
     private void Movement()
@@ -111,7 +111,7 @@ public class PlayerScript : MonoBehaviour
         Vector2 position = (Vector2)transform.position + GetComponent<Collider2D>().bounds.size.magnitude * Vector2.down;
         Vector2 direction = Vector2.down;
 
-        RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + GetComponent<Collider2D>().bounds.size.magnitude * Vector2.down / 2, direction, rayLength);
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + GetComponent<Collider2D>().bounds.size.y * Vector2.down / 2 - new Vector2(0, 0.1f), direction, rayLength);
 
         return hit;
     }
