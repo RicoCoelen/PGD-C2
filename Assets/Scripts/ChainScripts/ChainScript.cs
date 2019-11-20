@@ -23,9 +23,16 @@ public class ChainScript : MonoBehaviour
     bool done = false;
     bool stop = false;
 
+    // Line render
+    LineRenderer lr;
+    List<GameObject> Nodes = new List<GameObject>();
+    int vertexCount = 2;
+
     // Use this for initialization
     void Start()
     {
+        lr = GetComponent<LineRenderer>();
+
         player = GameObject.FindGameObjectWithTag("Player");
 
         startingPoint = player.transform.position;
@@ -35,6 +42,7 @@ public class ChainScript : MonoBehaviour
         direction += (Vector2)player.transform.position;
 
         lastNode = transform.gameObject;
+        Nodes.Add(transform.gameObject);
     }
 
     // Update is called once per frame
@@ -65,10 +73,27 @@ public class ChainScript : MonoBehaviour
             }
         }
 
+        RenderLine();
+
         if (HitGrabable())
         {
 
         }
+    }
+
+    void RenderLine()
+    {
+        lr.SetVertexCount(vertexCount);
+
+        int i;
+        for (i = 0; i < Nodes.Count; i++)
+        {
+
+            lr.SetPosition(i, Nodes[i].transform.position);
+
+        }
+
+        lr.SetPosition(i, player.transform.position);
     }
 
     bool HitGrabable()
@@ -100,7 +125,9 @@ public class ChainScript : MonoBehaviour
         lastNode.GetComponent<HingeJoint2D>().connectedBody = go.GetComponent<Rigidbody2D>();
 
         lastNode = go;
-        
+
+        Nodes.Add(lastNode);
+        vertexCount++;
     }
 
 }
