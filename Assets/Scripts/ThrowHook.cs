@@ -26,20 +26,7 @@ public class ThrowHook : MonoBehaviour
 
 
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (!active) {
-                Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-                curHook = Instantiate(hook, transform.position, Quaternion.identity);
-
-                curHook.GetComponent<ChainScript>().direction = direction;
-
-                active = true;
-            }
-
-        }
-        if (Input.GetButtonDown("Jump") && active)
+        if (Input.GetMouseButtonDown(0) && active)
         {
 
             if(curHook.GetComponent<HookScript>().child != null)
@@ -50,6 +37,15 @@ public class ThrowHook : MonoBehaviour
             Destroy(curHook);
 
             active = false;
+        }else if (Input.GetMouseButtonDown(0) && !active)
+        {
+            Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            curHook = Instantiate(hook, transform.position, Quaternion.identity);
+
+            curHook.GetComponent<ChainScript>().direction = direction;
+
+            active = true;
         }
 
     }
