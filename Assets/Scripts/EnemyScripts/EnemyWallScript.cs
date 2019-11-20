@@ -15,7 +15,6 @@ public class EnemyWallScript : MonoBehaviour
 
     void Start()
     {
-        Physics2D.queriesStartInColliders = false;
         side = transform.position.x + wallCheckDistance;
     }
 

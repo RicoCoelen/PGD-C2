@@ -10,11 +10,6 @@ public class EnemyGroundScript : MonoBehaviour
     public bool isGrounded = false;
     public float groundCheckDistance;
 
-    void Start()
-    {
-        Physics2D.queriesStartInColliders = false;
-    }
-
     void FixedUpdate()
     {
         // raycast to ground

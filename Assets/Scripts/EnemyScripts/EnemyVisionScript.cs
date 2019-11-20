@@ -10,11 +10,6 @@ public class EnemyVisionScript : MonoBehaviour
     public float FOV = 90;
     public GameObject PlayerGO;
     public GameObject currentTarget;
- 
-    void Start()
-    {
-        Physics2D.queriesStartInColliders = false;
-    }
 
     void Update()
     {
