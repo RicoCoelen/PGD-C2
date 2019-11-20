@@ -13,7 +13,6 @@ public class BulletScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Physics2D.queriesStartInColliders = false;
         rb.velocity = transform.right * speed;
     }
     private void OnCollisionEnter2D(Collision2D collision)
