@@ -76,7 +76,7 @@ public class PlayerScript : MonoBehaviour
 
         // debug
         TestDamage();
-        //Debug.Log(health);
+        Debug.Log(health);
 
         Debug.DrawLine((Vector2)transform.position + GetComponent<Collider2D>().bounds.size.magnitude * Vector2.down / 2, ((Vector2)transform.position + GetComponent<Collider2D>().bounds.size.magnitude * Vector2.down / 2) + (Vector2.down * rayLength), Color.green);
     }
