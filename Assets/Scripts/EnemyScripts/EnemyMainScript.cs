@@ -11,9 +11,13 @@ public class EnemyMainScript : MonoBehaviour
     public bool isWalled = false;
 
     [Header("Enemy Stats")]
-    public float movementSpeed = 10;
+    public float movementSpeed = 10f;
+    public float chasingSpeed = 10f;
     public float health = 100f;
     public float fleeLimit = 20f;
+    public float knockBackForce = 10f;
+    public float flashTime = 1f;
+    private Color originalColor;
 
     [Header("Behaviour")]
     public State cState;
@@ -39,17 +43,13 @@ public class EnemyMainScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         // always start idle
         cState = State.IDLE;
+        originalColor = Color.white;
     }
 
     private void FixedUpdate()
     {
-        // flip gameobject to correct side
         FlipCorrection();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
         // check state and handle accordingly
         switch (cState)
         {
@@ -127,30 +127,56 @@ public class EnemyMainScript : MonoBehaviour
 
             if (currentTarget.transform.position.x > transform.position.x)
             {
+                facingRight = true;
+                
                 if (isGrounded == true)
                 {
-                    rb.MovePosition(transform.position + direction * movementSpeed * Time.deltaTime);
+                    chasingSpeed = Mathf.Abs(chasingSpeed);
+                    rb.MovePosition(transform.position + direction * chasingSpeed * Time.deltaTime);
                 }
-                facingRight = true;
-                movementSpeed = Mathf.Abs(movementSpeed);
             }
             else
             {
+                facingRight = false;
+                
                 if (isGrounded == true)
                 {
-                    rb.MovePosition(transform.position + -direction * movementSpeed * Time.deltaTime);
+                    chasingSpeed = -Mathf.Abs(chasingSpeed);
+                    rb.MovePosition(transform.position + -direction * chasingSpeed * Time.deltaTime);
                 }
-                facingRight = false;
-                movementSpeed = -Mathf.Abs(movementSpeed);
             }
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void TakeDamage(float amount)
     {
-        if (collision.gameObject.tag == "Player")
+        // add knockback
+        Vector3 moveDirection = transform.position - PlayerGO.transform.position;
+        moveDirection.y = 0;
+        rb.AddForce(moveDirection.normalized * knockBackForce);
+
+        // remove health
+        health -= amount;
+
+        // flash red
+        FlashRed();
+
+        // if no health die
+        if (health <= 0f)
         {
-            collision.gameObject.GetComponent<PlayerScript>().TakeDamage(1);
+            Destroy(gameObject);
         }
     }
+
+    private void FlashRed()
+    {
+        GetComponent<SpriteRenderer>().color = Color.red;
+        Invoke("ResetColor", flashTime);
+    }
+
+    private void ResetColor()
+    {
+        GetComponent<SpriteRenderer>().color = originalColor;
+    }
+
 }

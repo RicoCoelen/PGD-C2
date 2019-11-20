@@ -14,9 +14,60 @@ public class EnemyAttackScript : MonoBehaviour
 
     [Header("Ranged Attack")]
     public bool isShooting = false;
+    public GameObject bulletPrefab;
+    public float cooldownShoot;
+    public float shootRange;
+    public GameObject muzzleFlash;
+    private float timeToShoot;
+    private Vector2 direction;
+
 
     // Update is called once per frame
     void Update()
+    {
+        TryMelee();
+        TryShoot();
+
+        // check if player is left or right in sights
+        if (GetComponentInParent<EnemyMainScript>().facingRight == true)
+        {
+            direction = Vector2.right;
+        }
+        else
+        {
+            direction = Vector2.left;
+        }
+    }
+
+    private void TryShoot()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, shootRange, Player);
+
+        if (hit.collider == true)
+        {
+            // melee attack
+            if (timeToShoot <= 0)
+            {
+                isShooting = true;
+                if (muzzleFlash != null)
+                {
+                    Instantiate(muzzleFlash, transform.position, transform.rotation);
+                }
+                GameObject temp = Instantiate(bulletPrefab, transform.position, transform.rotation);
+
+                // reset timer
+                timeToShoot = cooldownShoot;
+            }
+            else
+            {
+                isShooting = false;
+                // reset timer
+                timeToShoot -= Time.deltaTime;
+            }
+        }
+    }
+
+    private void TryMelee()
     {
         // melee attack
         if (timeToAttack <= 0)
@@ -58,5 +109,8 @@ public class EnemyAttackScript : MonoBehaviour
         // attack zone
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+
+        // shoot raycast
+        Gizmos.DrawLine(transform.position, transform.position + new Vector3(direction.x * shootRange, 0, 0));
     }
 }
