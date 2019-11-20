@@ -18,7 +18,13 @@ public class PlayerScript : MonoBehaviour
     public float moveSpeed = 60f;
     float currentMaxSpeed;
 
+    public float hillMultiplier = 300f;
+
     bool turned = false;
+
+    public float dragMultiplier = 0.5f;
+    public float slideDragMultiplier = 0.2f;
+    public float airDragMultiplier = 0.05f;
 
     Rigidbody2D rb;
 
@@ -67,6 +73,7 @@ public class PlayerScript : MonoBehaviour
         MovementJump();
         PlayerTurn();
         PlayerHealth();
+
         // debug
         TestDamage();
         //Debug.Log(health);
@@ -87,17 +94,16 @@ public class PlayerScript : MonoBehaviour
             if (!Crouch())
             {
                 if (Sprint())
-                    RevisedPlayerMovement(sprintAcceleration, sprintReactionMultiplier, sprintMaxSpeed);
+                    RevisedPlayerMovement(sprintAcceleration, sprintReactionMultiplier, sprintMaxSpeed, dragMultiplier);
                 else
-                    RevisedPlayerMovement(maxAcceleration, reactionMultiplier, maxSpeed);
+                    RevisedPlayerMovement(maxAcceleration, reactionMultiplier, maxSpeed, dragMultiplier);
             } 
             else
             {
-                PlayerSlide();
+                PlayerSlide(slideDragMultiplier);
             }
         }
 
-        Debug.Log(rb.velocity.x + "___: " + currentMaxSpeed);
     }
 
     private RaycastHit2D GroundrayCast()
@@ -126,10 +132,9 @@ public class PlayerScript : MonoBehaviour
         return false;
     }
 
-    private void PlayerSlide()
+    private void PlayerSlide(float dragMultiplier)
     {
         float speed = rb.velocity.x;
-        float hillMultiplier = 200f;
         GetComponentInChildren<SpriteRenderer>().sprite = crouchSprite;
 
         RaycastHit2D hit = GroundrayCast();
@@ -154,6 +159,29 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
+        // lower movement speed
+        float[] newValues = Momentum(speed, currentMaxSpeed, maxSpeed, dragMultiplier);
+
+        speed = newValues[0];
+        currentMaxSpeed = newValues[1];
+
+        // catch up maxspeed drag when sliding TODO: find a better way of doing this or disable default rb.velocity.x drag
+        if (speed > 0)
+        {
+            if (currentMaxSpeed - speed > 10)
+            {
+                currentMaxSpeed = speed;
+            }
+        }
+        else if (speed < 0)
+        {    
+            if (currentMaxSpeed - speed < -10)
+            {
+                currentMaxSpeed = -speed;
+            }
+
+        }
+
         rb.velocity = new Vector2(speed, rb.velocity.y);
     }
 
@@ -176,18 +204,18 @@ public class PlayerScript : MonoBehaviour
     }
     
     //function to preserve max speed and slowly decrease it depending on if on ground or not
-    private float[] Momentum(float speed, float maximumSpeed, float goalMaximumSpeed)
+    private float[] Momentum(float speed, float maximumSpeed, float goalMaximumSpeed, float dragMultiplier)
     {
         float finalDrag;
 
         // Change the rate at which speed is lost based on if the player is on the ground or not
         if (IsGrounded())
         {
-            finalDrag = (drag * 0.5f);
+            finalDrag = (drag * dragMultiplier);
         }
         else
         {
-            finalDrag = (drag * 0.05f);
+            finalDrag = (drag * airDragMultiplier);
         }
 
         // if no movement keys are pressed lower or increase speed by the drag value until it goes back to 0
@@ -213,7 +241,7 @@ public class PlayerScript : MonoBehaviour
         return newValues;
     }
 
-    public void RevisedPlayerMovement(float currentAcceleration, float currentReactionMultiplier, float goalMaxSpeed)
+    public void RevisedPlayerMovement(float currentAcceleration, float currentReactionMultiplier, float goalMaxSpeed, float dragMultiplier)
     {
         // Allow changing of the current x velocity.
         float speed = rb.velocity.x;
@@ -247,8 +275,8 @@ public class PlayerScript : MonoBehaviour
 
         }
 
-        // lower movement speed when no longer moving
-        float[] newValues = Momentum(speed, currentMaxSpeed, goalMaxSpeed);
+        // lower movement speed
+        float[] newValues = Momentum(speed, currentMaxSpeed, goalMaxSpeed, dragMultiplier);
 
         speed = newValues[0];
         currentMaxSpeed = newValues[1];
@@ -263,145 +291,6 @@ public class PlayerScript : MonoBehaviour
         rb.velocity = new Vector2(speed, rb.velocity.y);
     }
 
-    //public void PlayerMovement()
-    //{
-    //    // Leftshift and rightshift don't work in unity like normal keys because ?????
-    //    if (Input.GetButton("Run"))
-    //    {
-    //        sprinting = true;
-    //    } else
-    //    {
-    //        sprinting = false;
-    //    }
-
-    //    Debug.Log(speed);
-
-    //    // While holding the sprint button the maxSpeed, acceleration and reaction multiplier change
-    //    if (sprinting)
-    //    {
-    //        // if the previous max speed is higher than the running high speed, run momentum
-    //        if (currentMaxSpeed > sprintMaxSpeed)
-    //        {
-    //            Momentum(sprintMaxSpeed);
-    //        }
-    //        else if (currentMaxSpeed < sprintMaxSpeed)
-    //        {
-    //            currentMaxSpeed = sprintMaxSpeed;
-    //            currentAcceleration = sprintAcceleration;
-    //            currentReactionMultiplier = sprintReactionMultiplier;
-    //        }
-
-    //    }
-    //    else
-    //    {
-    //        // if the previous max speed is higher than the standard high speed, run momentum
-    //        if (currentMaxSpeed > maxSpeed)
-    //        {
-    //            Momentum(maxSpeed);
-                
-    //        } 
-    //        else if (currentMaxSpeed < maxSpeed)
-    //        {
-    //            currentMaxSpeed = maxSpeed;
-    //            currentAcceleration = maxAcceleration;
-    //            currentReactionMultiplier = reactionMultiplier;
-    //        }
-    //    }
-
-    //    if (rb.velocity.x > currentMaxSpeed)
-    //        currentMaxSpeed = rb.velocity.x;
-
-    //    if (rb.velocity.x < -currentMaxSpeed)
-    //        currentMaxSpeed = rb.velocity.x;
-
-    //    if (rb.velocity.x > -1 && rb.velocity.x < 1)
-    //        currentMaxSpeed = maxSpeed;
-
-
-    //    if (GetComponent<ThrowHook>().active)
-    //    {
-    //        float playerMovement = Input.GetAxis("Horizontal");
-    //        rb.velocity = new Vector2(playerMovement * Time.deltaTime * moveSpeed + rb.velocity.x, rb.velocity.y);
-    //    }
-    //    else
-    //    {
-
-    //        if (!crouching)
-    //        {
-    //            // Add acceleration to speed if the keys for going right or left are pressed.
-    //            if (Input.GetButton("Right"))
-    //            {
-    //                if (speed < 0)
-    //                {
-    //                    speed += ((currentAcceleration + currentAcceleration * currentReactionMultiplier) * Time.deltaTime);
-    //                }
-    //                else
-    //                {
-    //                    speed += (currentAcceleration * Time.deltaTime);
-    //                }
-
-                   
-    //                moving = true;
-    //            }
-    //            else if (Input.GetButton("Left"))
-    //            {
-    //                if (speed > 0)
-    //                {
-    //                    speed -= ((currentAcceleration + currentAcceleration * currentReactionMultiplier) * Time.deltaTime);
-    //                }
-    //                else
-    //                {
-    //                    speed -= (currentAcceleration * Time.deltaTime);
-    //                }
-
-                    
-    //                moving = true;
-    //            }
-    //            else
-    //            {
-    //                moving = false;
-    //            }
-    //        }
-
-    //        if (!sliding)
-    //        {
-    //            float finalDrag;
-
-    //            if (IsGrounded())
-    //            {
-    //                finalDrag = (drag * 1f);
-    //            }
-    //            else
-    //            {
-    //                finalDrag = (drag * 0.05f);
-    //            }
-
-    //            // if no movement keys are pressed lower or increase speed by the drag value until it goes back to 0
-    //            if (!moving && speed > 0)
-    //            {
-    //                speed -= finalDrag * Time.deltaTime;
-    //                Debug.Log(finalDrag * Time.deltaTime);
-    //                if (speed < 0.1)
-    //                    speed = 0;
-    //            }
-    //            else if (!moving && speed < 0)
-    //            {
-    //                speed += finalDrag * Time.deltaTime;
-    //                if (speed > -0.1)
-    //                    speed = 0;
-    //            }
-    //        }
-
-    //        if (speed > 0)
-    //            speed = Mathf.Min(speed, currentMaxSpeed);
-
-    //        if (speed < 0)
-    //            speed = Mathf.Max(speed, -currentMaxSpeed);
-
-    //        rb.velocity = new Vector2(speed, rb.velocity.y);
-    //    }
-
-    //}
 
     void PlayerTurn()
     {
@@ -441,11 +330,9 @@ public class PlayerScript : MonoBehaviour
     {
         // Initial jump
         if (Input.GetButtonDown("Jump") && (IsGrounded() || GetComponent<ThrowHook>().active))
-        //GetComponent<ThrowHook>().curHook.GetComponent<ChainScript>().lastNode.GetComponent<HingeJoint2D>().connectedBody == GetComponent<Rigidbody2D>()))
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y/2 + jumpVelocity);
         }
-
 
         // Speed up falling when going down or when releasing the jump button
         if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
