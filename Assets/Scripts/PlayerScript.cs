@@ -57,7 +57,7 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        originalColor = renderer.GetComponent<MeshRenderer>().material.color;
+        originalColor = renderer.GetComponent<SpriteRenderer>().color;
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -354,13 +354,13 @@ public class PlayerScript : MonoBehaviour
 
     void FlashRed()
     {
-        renderer.GetComponent<MeshRenderer>().material.color = Color.red;
+        renderer.GetComponent<SpriteRenderer>().color = Color.red;
         Invoke("ResetColor", flashTime);
     }
 
     void ResetColor()
     {
-        renderer.GetComponent<MeshRenderer>().material.color = originalColor;
+        renderer.GetComponent<SpriteRenderer>().color = originalColor;
     }
 
 }
