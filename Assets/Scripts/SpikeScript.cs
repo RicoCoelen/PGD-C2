@@ -24,7 +24,7 @@ public class SpikeScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             player.GetComponent<PlayerScript>().TakeDamage(spikeDamage);
-            Debug.Log("collision");
+            //Debug.Log("collision");
         }
     }
 }

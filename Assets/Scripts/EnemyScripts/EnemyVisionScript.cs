@@ -33,7 +33,7 @@ public class EnemyVisionScript : MonoBehaviour
            
                     if (angle < FOV / 2)
                     {
-                        Debug.DrawLine(transform.position, hit.point);
+                        //Debug.DrawLine(transform.position, hit.point);
                         GetComponentInParent<EnemyMainScript>().currentTarget = PlayerGO;
                         currentTarget = PlayerGO;
                         lastDetectionTime = Time.time;
