@@ -48,7 +48,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   isGrounded: 0
-  groundCheckDistance: 2
+  groundCheckDistance: 0.2
 --- !u!1 &3790710828637393831
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +199,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   currentTarget: {fileID: 0}
-  PlayerGO: {fileID: 0}
+  PlayerGO: {fileID: 8056905871520868893, guid: d156ac5ccfc0d0f489848362a6382f86,
+    type: 3}
 --- !u!1 &3790710829709959288
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +282,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6031546187804549035}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.786, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3790710829339899794}

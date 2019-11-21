@@ -10,6 +10,8 @@ public class HookScript : MonoBehaviour
     public LayerMask grabable;
     public float throwForce;
 
+    public float minDamage;
+    public float maxDamage;
 
     // Start is called before the first frame update
     void Start()
@@ -45,20 +47,27 @@ public class HookScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Grabable")
+        switch(collision.gameObject.tag)
         {
-            collision.gameObject.transform.parent = hook.transform;
-            child = collision.gameObject.transform;
+            case "Grabable":
+                collision.gameObject.transform.parent = hook.transform;
+                child = collision.gameObject.transform;
+                Physics2D.IgnoreCollision(child.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+                Physics2D.IgnoreCollision(child.GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
+                break;
 
-            Physics2D.IgnoreCollision(child.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-            Physics2D.IgnoreCollision(child.GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
-        }else if(collision.gameObject.tag == "Anchored Grabable")
-        {
-            hook.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-            hook.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            child = collision.gameObject.transform;
+            case "Anchored Grabable":
+                hook.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                hook.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                child = collision.gameObject.transform;
+                hook.transform.position = collision.gameObject.transform.position;
+                break;
 
-            hook.transform.position = collision.gameObject.transform.position;
+            case "Enemy":
+                collision.gameObject.GetComponent<EnemyMainScript>().TakeDamage(Random.Range(minDamage, maxDamage));
+                Destroy(hook);
+                player.GetComponent<ThrowHook>().active = false;
+                break;
         }
     }
 }

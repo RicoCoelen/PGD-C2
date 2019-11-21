@@ -187,6 +187,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   throwForce: 50.05
+  minDamage: 15
+  maxDamage: 50
 --- !u!120 &6385452311929255331
 LineRenderer:
   m_ObjectHideFlags: 0

@@ -8,8 +8,13 @@ public class EnemyVisionScript : MonoBehaviour
     public float DetectionRange;
     public float lastDetectionTime;
     public float FOV = 90;
-    public GameObject PlayerGO;
+    private GameObject PlayerGO;
     public GameObject currentTarget;
+
+    private void Start()
+    {
+        PlayerGO = GameObject.FindGameObjectWithTag("Player");
+    }
 
     void Update()
     {
