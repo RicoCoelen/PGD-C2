@@ -303,7 +303,8 @@ MonoBehaviour:
   DetectionRange: 13.06
   lastDetectionTime: 0
   FOV: 90
-  PlayerGO: {fileID: 0}
+  PlayerGO: {fileID: 8056905871520868893, guid: d156ac5ccfc0d0f489848362a6382f86,
+    type: 3}
   currentTarget: {fileID: 0}
 --- !u!1 &6031546188730919205
 GameObject:
