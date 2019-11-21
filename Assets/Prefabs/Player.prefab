@@ -224,7 +224,7 @@ MonoBehaviour:
     m_Bits: 512
   maxHealth: 10
   health: 10
-  renderer: {fileID: 0}
+  renderer: {fileID: 424893105346346067}
   flashTime: 1
   crouchSprite: {fileID: 21300000, guid: 13ffcb33d80c201468414dad0a71fdf6, type: 3}
   sprite: {fileID: 21300000, guid: 4d98756ca6f27f642b02fd9b59db5d8e, type: 3}

@@ -170,13 +170,13 @@ public class EnemyMainScript : MonoBehaviour
 
     private void FlashRed()
     {
-        GetComponent<SpriteRenderer>().color = Color.red;
+        GetComponentInChildren<SpriteRenderer>().color = Color.red;
         Invoke("ResetColor", flashTime);
     }
 
     private void ResetColor()
     {
-        GetComponent<SpriteRenderer>().color = originalColor;
+        GetComponentInChildren<SpriteRenderer>().color = originalColor;
     }
 
 }
