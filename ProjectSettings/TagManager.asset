@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Grabable
+  - Anchored Grabable
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Grabable
   - Enemy
   - Bullet
-  - 
+  - Node
   - 
   - 
   - 
