@@ -183,8 +183,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 2
-  m_AngularDrag: 0.05
+  m_LinearDrag: 0
+  m_AngularDrag: 0
   m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -207,18 +207,18 @@ MonoBehaviour:
   sprintMaxSpeed: 20
   maxAcceleration: 80
   sprintAcceleration: 120
-  drag: 40
-  reactionMultiplier: 1.2
-  sprintReactionMultiplier: -0.8
+  drag: 80
+  reactionMultiplier: 1
+  sprintReactionMultiplier: -0.4
   moveSpeed: 60
   hillMultiplier: 300
   dragMultiplier: 0.5
   slideDragMultiplier: 0.2
-  airDragMultiplier: 0.05
-  jumpVelocity: 30
-  fallMultiplier: 7.25
-  gravityMultiplier: 6.5
-  rayLength: 0.3
+  airDragMultiplier: 0.15
+  jumpVelocity: 25
+  fallMultiplier: 7.5
+  gravityMultiplier: 2.75
+  rayLength: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 512

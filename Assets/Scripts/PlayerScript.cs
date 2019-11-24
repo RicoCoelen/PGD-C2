@@ -241,6 +241,8 @@ public class PlayerScript : MonoBehaviour
         // Allow changing of the current x velocity.
         float speed = rb.velocity.x;
 
+        Debug.Log(speed);
+
         if (currentMaxSpeed < goalMaxSpeed)
             currentMaxSpeed = goalMaxSpeed;
 
@@ -326,19 +328,17 @@ public class PlayerScript : MonoBehaviour
         // Initial jump
         if (Input.GetButtonDown("Jump") && (IsGrounded() || GetComponent<ThrowHook>().curHook.GetComponent<HookScript>().child.tag == "Anchored Grabable"))
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y/2 + jumpVelocity);
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + jumpVelocity);
         }
 
-        // Speed up falling when going down or when releasing the jump button
+        // gravity
+        rb.velocity += (Vector2.up * Physics2D.gravity * (gravityMultiplier - 1)) * Time.deltaTime;
+
+        // Speed up falling when releasing the jump button
         if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
         {
             rb.velocity += (Vector2.up * Physics2D.gravity * (fallMultiplier - 1)) * Time.deltaTime;
         }
-        else if (rb.velocity.y < 0)
-        {
-            rb.velocity += (Vector2.up * Physics2D.gravity * (gravityMultiplier - 1)) * Time.deltaTime;
-        }
-
     }
 
     public void TakeDamage(float amount)
