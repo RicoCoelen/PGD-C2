@@ -29,7 +29,7 @@ public class HookScript : MonoBehaviour
            
             child.position = transform.position;
         }
-        
+
         if (child != null && Input.GetMouseButtonDown(0))
         {
             Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);

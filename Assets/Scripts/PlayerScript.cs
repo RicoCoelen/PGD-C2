@@ -111,9 +111,10 @@ public class PlayerScript : MonoBehaviour
         return hit;
     }
 
+    // Give faster speed while attached to the chain
     private bool Sprint()
     {
-        if (Input.GetButton("Run"))
+        if (GetComponent<newChainScript>().chainAttached == true)
             return true;
         return false;
     }
@@ -241,8 +242,6 @@ public class PlayerScript : MonoBehaviour
         // Allow changing of the current x velocity.
         float speed = rb.velocity.x;
 
-        Debug.Log(speed);
-
         if (currentMaxSpeed < goalMaxSpeed)
             currentMaxSpeed = goalMaxSpeed;
 
@@ -326,9 +325,14 @@ public class PlayerScript : MonoBehaviour
     public void MovementJump()
     {
         // Initial jump
-        if (Input.GetButtonDown("Jump") && (IsGrounded() || GetComponent<ThrowHook>().curHook.GetComponent<HookScript>().child.tag == "Anchored Grabable"))
+        if (Input.GetButtonDown("Jump") && (IsGrounded()))
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + jumpVelocity);
+        }
+
+        if (Input.GetButtonDown("Jump") && GetComponent<newChainScript>().chainAttached == true)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + jumpVelocity / 2);
         }
 
         // gravity
