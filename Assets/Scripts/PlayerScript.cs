@@ -52,6 +52,10 @@ public class PlayerScript : MonoBehaviour
     public Sprite crouchSprite;
     public Sprite sprite;
 
+    bool chainGravity = false;
+
+    public float defaultTime = 15f;
+    float timeLeft;
 
     // Start is called before the first frame update
     void Start()
@@ -73,7 +77,6 @@ public class PlayerScript : MonoBehaviour
         MovementJump();
         PlayerTurn();
         PlayerHealth();
-
     }
 
     private void Movement()
@@ -291,11 +294,11 @@ public class PlayerScript : MonoBehaviour
     void PlayerTurn()
     {
         // Turn the player around if they are moving in one direction above a certain speed
-        if (rb.velocity.x > 1)
+        if (rb.velocity.x > 5)
         {
             turned = false;
         }
-        if (rb.velocity.x < -1)
+        if (rb.velocity.x < -5)
         {
             turned = true;
         }
@@ -330,20 +333,52 @@ public class PlayerScript : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + jumpVelocity);
         }
 
-        if (Input.GetButtonDown("Jump") && GetComponent<newChainScript>().chainAttached == true)
+        // Jumping during the swing at certain speeds allows a boost of speed 
+        if (Input.GetButtonDown("Jump") && GetComponent<newChainScript>().chainAttached == true && (rb.velocity.y > 7.5f || rb.velocity.y < -7.5f))
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + jumpVelocity / 2);
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + jumpVelocity / 5);
         }
 
-        // gravity
-        rb.velocity += (Vector2.up * Physics2D.gravity * (gravityMultiplier - 1)) * Time.deltaTime;
-
-        // Speed up falling when releasing the jump button
-        if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
+        // Jumping while the chain is out and the player is on the ground causes the player to dash towards the chain
+        if (Input.GetButtonDown("Jump") && GetComponent<newChainScript>().chainAttached == true && IsGrounded())
         {
-            rb.velocity += (Vector2.up * Physics2D.gravity * (fallMultiplier - 1)) * Time.deltaTime;
+            GetComponent<newChainScript>().ResetChain();
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + jumpVelocity / 50);
+        }
+
+        // disable gravity for a small amount of time after releasing the chain
+        if (chainGravity)
+        {
+            timeLeft -= 60 * Time.deltaTime;
+            if (timeLeft < 0)
+            {             
+                chainGravity = false;
+                timeLeft = defaultTime;
+            }
+        }
+        else
+        {
+            //gravity
+            rb.velocity += (Vector2.up * Physics2D.gravity * (gravityMultiplier - 1)) * Time.deltaTime;
+
+            // Speed up falling when releasing the jump button
+            if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
+            {
+                rb.velocity += (Vector2.up * Physics2D.gravity * (fallMultiplier - 1)) * Time.deltaTime;
+            }
         }
     }
+
+    public void chainJump()
+    {
+        if (rb.velocity.y > 7.5f || rb.velocity.y < -7.5f)
+        {
+            timeLeft = defaultTime;
+            chainGravity = true;
+        }
+    }
+    
+
 
     public void TakeDamage(float amount)
     {

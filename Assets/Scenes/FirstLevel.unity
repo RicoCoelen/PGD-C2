@@ -11547,18 +11547,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8056905871520868891, guid: d156ac5ccfc0d0f489848362a6382f86,
         type: 3}
-      propertyPath: rayLength
-      value: 0.3
+      propertyPath: defaultTime
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 407046054267573782, guid: d156ac5ccfc0d0f489848362a6382f86,
         type: 3}
       propertyPath: m_Distance
       value: 0.005
-      objectReference: {fileID: 0}
-    - target: {fileID: 6830113051333173346, guid: d156ac5ccfc0d0f489848362a6382f86,
-        type: 3}
-      propertyPath: chainMaxCastDistance
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d156ac5ccfc0d0f489848362a6382f86, type: 3}

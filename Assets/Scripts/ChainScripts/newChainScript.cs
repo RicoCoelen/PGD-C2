@@ -9,12 +9,11 @@ public class newChainScript : MonoBehaviour
     // Instance the properties of ChainAnchor
     public GameObject chainAnchor;
     public DistanceJoint2D chainJoint;
-    //public Transform crosshair;
-    //public SpriteRenderer;
     public PlayerScript playerScript;
     public LineRenderer chainRenderer;
     public LayerMask chainLayerMask;
     public float chainMaxCastDistance = 20f;
+    public float climbSpeed = 20f;
 
     public bool chainAttached;
     Vector2 playerPosition;
@@ -22,6 +21,7 @@ public class newChainScript : MonoBehaviour
     SpriteRenderer chainAnchorSprite;
     List<Vector2> chainPositions = new List<Vector2>();
     bool distanceSet;
+    bool isColliding;
 
     private void Awake()
     {
@@ -52,7 +52,10 @@ public class newChainScript : MonoBehaviour
         HandleInput(aimDirection);
 
         if (chainAttached)
+        {
             UpdateRopePositions();
+            HandleChainLength();
+        }
     }
 
     void HandleInput(Vector2 aimDirection)
@@ -61,7 +64,6 @@ public class newChainScript : MonoBehaviour
         if (Input.GetButtonDown("chainThrow") && !chainAttached)
         {
             RaycastHit2D hit = Physics2D.Raycast(playerPosition, aimDirection, chainMaxCastDistance, chainLayerMask);
-            Debug.DrawRay(playerPosition, aimDirection * chainMaxCastDistance, Color.green, 5);
 
             if (hit.collider != null)
             {
@@ -89,12 +91,13 @@ public class newChainScript : MonoBehaviour
         // retract the chain
         if (chainAttached && Input.GetButtonUp("chainThrow"))
         {
+            playerScript.chainJump();
             ResetChain();
         }
 
     }
 
-    void ResetChain()
+    public void ResetChain()
     {
         chainJoint.enabled = false;
         chainAttached = false;
@@ -163,5 +166,18 @@ public class newChainScript : MonoBehaviour
             }
         }
     }
+
+    private void HandleChainLength()
+    {
+        if (Input.GetButton("up"))
+        {
+            chainJoint.distance -= Time.deltaTime * climbSpeed;
+        }
+        else if (Input.GetButton("down") && chainJoint.distance < chainMaxCastDistance)
+        {
+            chainJoint.distance += Time.deltaTime * climbSpeed;
+        }
+    }
+
 
 }
