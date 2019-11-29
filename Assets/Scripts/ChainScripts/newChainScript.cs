@@ -75,8 +75,9 @@ public class newChainScript : MonoBehaviour
                     chainPositions.Add(hit.point);
                     chainJoint.distance = Vector2.Distance(playerPosition, hit.point);
                     chainJoint.enabled = true;
-                    chainAnchorSprite.enabled = true;
+                    //chainAnchorSprite.enabled = true;
                     chainRenderer.enabled = true;
+
                 }
             }
             else

@@ -208,9 +208,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 12.5
-  sprintMaxSpeed: 27.5
+  sprintMaxSpeed: 30
   maxAcceleration: 80
-  sprintAcceleration: 60
+  sprintAcceleration: 50
   drag: 80
   reactionMultiplier: 1
   sprintReactionMultiplier: -0.4
@@ -232,7 +232,9 @@ MonoBehaviour:
   flashTime: 1
   crouchSprite: {fileID: 21300000, guid: 13ffcb33d80c201468414dad0a71fdf6, type: 3}
   sprite: {fileID: 21300000, guid: 4d98756ca6f27f642b02fd9b59db5d8e, type: 3}
-  defaultTime: 10
+  defaultTime: 20
+  chainHook: {x: 0, y: 0}
+  swingForce: 0
 --- !u!114 &8056905871520868890
 MonoBehaviour:
   m_ObjectHideFlags: 0

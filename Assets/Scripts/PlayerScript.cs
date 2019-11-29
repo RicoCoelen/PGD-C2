@@ -77,6 +77,8 @@ public class PlayerScript : MonoBehaviour
         MovementJump();
         PlayerTurn();
         PlayerHealth();
+
+        Debug.Log(rb.velocity.x + "__:" + rb.velocity.y);
     }
 
     private void Movement()
@@ -91,7 +93,7 @@ public class PlayerScript : MonoBehaviour
             // Don't use the normal movement when crouching
             if (!Crouch())
             {
-                if (Sprint())
+                if (Sprint()) // TODO: rename sprint to isSwinging or similar
                     RevisedPlayerMovement(sprintAcceleration, sprintReactionMultiplier, sprintMaxSpeed, dragMultiplier);
                 else
                     RevisedPlayerMovement(maxAcceleration, reactionMultiplier, maxSpeed, dragMultiplier);
@@ -274,6 +276,8 @@ public class PlayerScript : MonoBehaviour
 
         }
 
+        
+
         // lower movement speed
         float[] newValues = Momentum(speed, currentMaxSpeed, goalMaxSpeed, dragMultiplier);
 
@@ -346,14 +350,17 @@ public class PlayerScript : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + jumpVelocity / 50);
         }
 
-        // disable gravity for a small amount of time after releasing the chain
-        if (chainGravity)
+        // disable gravity while swinging, and also for a small amount of time after releasing the chain to maintain momentum
+        if (chainGravity || (Sprint() && (Input.GetButton("Right") || Input.GetButton("Left"))))
         {
-            timeLeft -= 60 * Time.deltaTime;
-            if (timeLeft < 0)
-            {             
-                chainGravity = false;
-                timeLeft = defaultTime;
+            if (chainGravity)
+            {
+                timeLeft -= 60 * Time.deltaTime;
+                if (timeLeft < 0)
+                {
+                    chainGravity = false;
+                    timeLeft = defaultTime;
+                }
             }
         }
         else
@@ -373,6 +380,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (rb.velocity.y > 7.5f || rb.velocity.y < -7.5f)
         {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
             timeLeft = defaultTime;
             chainGravity = true;
         }
