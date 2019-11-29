@@ -61,7 +61,7 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        originalColor = renderer.GetComponent<SpriteRenderer>().color;
+        //originalColor = renderer.GetComponent<SpriteRenderer>().color;
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -73,12 +73,16 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+    }
+
+    private void FixedUpdate()
+    {
         Movement();
         MovementJump();
-        PlayerTurn();
+        PlayerTurn(); 
         PlayerHealth();
-
-        Debug.Log(rb.velocity.x + "__:" + rb.velocity.y);
     }
 
     private void Movement()
@@ -391,7 +395,7 @@ public class PlayerScript : MonoBehaviour
     public void TakeDamage(float amount)
     {
         health = Mathf.Clamp(health -= amount, 0, maxHealth);
-        FlashRed();
+        //FlashRed();
     }
 
     void FlashRed()

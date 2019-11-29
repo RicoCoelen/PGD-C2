@@ -33,7 +33,7 @@ public class newChainScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // Get the mouse position and use it to determine the angle of the chain throw
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
