@@ -61,7 +61,7 @@ public class newChainScript : MonoBehaviour
     void HandleInput(Vector2 aimDirection)
     {
         // Throw the chain
-        if (Input.GetButtonDown("chainThrow") && !chainAttached)
+        if (Input.GetButton("chainThrow") && !chainAttached)
         {
             RaycastHit2D hit = Physics2D.Raycast(playerPosition, aimDirection, chainMaxCastDistance, chainLayerMask);
 
@@ -90,7 +90,7 @@ public class newChainScript : MonoBehaviour
         }
 
         // retract the chain
-        if (chainAttached && Input.GetButtonUp("chainThrow"))
+        if (chainAttached && !Input.GetButton("chainThrow"))
         {
             playerScript.chainJump();
             ResetChain();

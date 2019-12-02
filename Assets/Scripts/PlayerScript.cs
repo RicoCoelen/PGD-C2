@@ -73,16 +73,16 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
+        MovementJump();
+        PlayerTurn();
     }
 
-    private void FixedUpdate()
+    // Update is called once per frame
+    void FixedUpdate()
     {
         Movement();
-        MovementJump();
-        PlayerTurn(); 
         PlayerHealth();
+
     }
 
     private void Movement()
