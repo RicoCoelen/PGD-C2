@@ -10,7 +10,7 @@ public class GateScript : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collider)
     {
-        if (collider.gameObject.CompareTag("Player") && Input.GetKeyDown(KeyCode.UpArrow))
+        if (collider.gameObject.CompareTag("Player") && Input.GetKeyDown(KeyCode.W))
         {
             SceneManager.LoadScene(nextLevel);
         }
