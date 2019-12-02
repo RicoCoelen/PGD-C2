@@ -9,6 +9,12 @@ public class GameManager : MonoBehaviour
     // canvas or screen to hide and show buttons
     public GameObject deathPanel = null;
 
+    // start
+    public void Start()
+    {
+        deathPanel.SetActive(false);
+    }
+
     // function to load next scene
     public void PlayNext()
     {
