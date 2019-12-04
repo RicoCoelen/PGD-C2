@@ -8,6 +8,7 @@ public class ChainScript : MonoBehaviour
     // Max chain length
     public float maxDistance = 5;
     Vector2 startingPoint;
+    public bool isFlexible;
 
     public Vector2 direction;
 
@@ -16,6 +17,7 @@ public class ChainScript : MonoBehaviour
 
     public GameObject node;
     public GameObject player;
+    public GameObject chainEnd;
     public GameObject lastNode;
     
     public LayerMask grabables;
@@ -73,23 +75,7 @@ public class ChainScript : MonoBehaviour
             }
         }
 
-        RenderLine();
         HitGrabable();
-    }
-
-    void RenderLine()
-    {
-        lr.SetVertexCount(vertexCount);
-
-        int i;
-        for (i = 0; i < Nodes.Count; i++)
-        {
-
-            lr.SetPosition(i, Nodes[i].transform.position);
-
-        }
-
-        lr.SetPosition(i, player.transform.position);
     }
 
     void HitGrabable()
@@ -97,6 +83,14 @@ public class ChainScript : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.zero);
         if (hit.collider != player.GetComponent<Collider2D>() && hit.collider != null)
         {
+            RaycastHit2D hit2 = Physics2D.Raycast((Vector2)transform.position + Vector2.up, Vector2.up, 0.1f);
+            if (hit2.collider != player.GetComponent<Collider2D>() && hit2.collider != null)
+            {
+                GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                isFlexible = true;
+            }else
+                isFlexible = false;
             stop = true;
         }
     }
