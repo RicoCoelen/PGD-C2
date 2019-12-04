@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     // start
     public void Start()
     {
+        Time.timeScale = 1;
         deathPanel.SetActive(false);
         Player = GameObject.FindWithTag("Player");
     }
