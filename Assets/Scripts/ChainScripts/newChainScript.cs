@@ -32,6 +32,11 @@ public class newChainScript : MonoBehaviour
         chainAnchorSprite = chainAnchor.GetComponent<SpriteRenderer>();
     }
 
+    private void Start()
+    {
+        chainJoint = GetComponent<DistanceJoint2D>();
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -46,7 +51,7 @@ public class newChainScript : MonoBehaviour
                 //HandleChainLength();
             }
 
-            if (GetComponent<ThrowHook>().active)
+            if (!GetComponent<ThrowHook>().active)
             {
                 ResetChain();
             }
