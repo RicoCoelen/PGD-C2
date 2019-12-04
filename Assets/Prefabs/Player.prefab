@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 8056905871520868892}
   - component: {fileID: 8056905871520868891}
   - component: {fileID: 8056905871520868890}
-  - component: {fileID: 407046054267573782}
   - component: {fileID: 6830113051333173346}
   - component: {fileID: 4427746168945051446}
   m_Layer: 8
@@ -249,25 +248,6 @@ MonoBehaviour:
   hook: {fileID: 3565510268262720878, guid: 28bc0e12f8c5e6247aee2cdcefee6260, type: 3}
   curHook: {fileID: 0}
   active: 0
---- !u!232 &407046054267573782
-DistanceJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8056905871520868893}
-  m_Enabled: 0
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0}
-  m_AutoConfigureDistance: 1
-  m_Distance: 0.005
-  m_MaxDistanceOnly: 0
 --- !u!114 &6830113051333173346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,7 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chainAnchor: {fileID: 3565510268262720878, guid: 28bc0e12f8c5e6247aee2cdcefee6260,
     type: 3}
-  chainJoint: {fileID: 407046054267573782}
+  chainJoint: {fileID: 0}
   playerScript: {fileID: 8056905871520868891}
   chainRenderer: {fileID: 4427746168945051446}
   chainLayerMask:

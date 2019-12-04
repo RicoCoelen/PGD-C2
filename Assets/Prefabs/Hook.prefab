@@ -180,17 +180,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 10
-  isFlexible: 0
-  direction: {x: 0, y: 0}
-  speed: 1
-  interfal: 0.2
-  node: {fileID: 7785497642015086677, guid: d05c2fb295f37f948970ef2c1d68d370, type: 3}
-  player: {fileID: 0}
-  chainEnd: {fileID: 386801302535219616, guid: 046c63753d7b2d34b842484aec8a96fa, type: 3}
-  lastNode: {fileID: 0}
-  grabables:
+  chainJoint: {fileID: 0}
+  layer:
     serializedVersion: 2
     m_Bits: 0
+  isFlexible: 0
+  direction: {x: 0, y: 0}
+  speed: 1.5
+  interfal: 0.4
+  node: {fileID: 7785497642015086677, guid: d05c2fb295f37f948970ef2c1d68d370, type: 3}
+  player: {fileID: 0}
+  lastNode: {fileID: 0}
 --- !u!114 &1049925879235827440
 MonoBehaviour:
   m_ObjectHideFlags: 0

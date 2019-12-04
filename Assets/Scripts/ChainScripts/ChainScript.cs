@@ -90,7 +90,7 @@ public class ChainScript : MonoBehaviour
                 {
                     done = true;
 
-                    while (Vector2.Distance(player.transform.position, lastNode.transform.position) > interfal)
+                    while (Vector2.Distance(player.transform.position, lastNode.transform.position) > interfal + interfal / 2)
                     {
                         CreateNode();
                     }
