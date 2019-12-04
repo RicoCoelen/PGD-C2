@@ -8,11 +8,24 @@ public class GameManager : MonoBehaviour
 {
     // canvas or screen to hide and show buttons
     public GameObject deathPanel = null;
+    public GameObject Player;
 
     // start
     public void Start()
     {
         deathPanel.SetActive(false);
+        Player = GameObject.FindWithTag("Player");
+    }
+
+    void Update()
+    {
+        if (Player != null)
+        {
+            if (Player.GetComponent<PlayerScript>().health <= 0)
+            {
+                GameOver();
+            }
+        }
     }
 
     // function to load next scene
@@ -54,6 +67,7 @@ public class GameManager : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+        UnityEditor.EditorApplication.isPlaying = false;
     }
 
     // function to stop game and show death panel
