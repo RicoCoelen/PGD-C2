@@ -82,7 +82,7 @@ public class PlayerScript : MonoBehaviour
         Movement();
         MovementJump();
         PlayerTurn(); 
-        PlayerHealth();
+        //PlayerHealth();
 
     }
 
@@ -135,6 +135,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    /*
     public void PlayerHealth()
     {
         if (health <= 0)
@@ -143,6 +144,7 @@ public class PlayerScript : MonoBehaviour
             UnityEditor.EditorApplication.isPlaying = false;
         }
     }
+    */
     
     //function to preserve max speed and slowly decrease it depending on if on ground or not
     private float[] Momentum(float speed, float maximumSpeed, float goalMaximumSpeed, float dragMultiplier)
