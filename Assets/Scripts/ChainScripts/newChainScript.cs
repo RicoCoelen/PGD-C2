@@ -42,7 +42,6 @@ public class newChainScript : MonoBehaviour
     {
         if (chainAnchor.GetComponent<ChainScript>().isFlexible)
         {
-            Debug.Log("isFlexible");
             HandleInput();
 
             if (chainAttached)

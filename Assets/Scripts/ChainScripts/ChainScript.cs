@@ -61,9 +61,10 @@ public class ChainScript : MonoBehaviour
         {
             transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 2f), ForceMode2D.Impulse);
             chainJoint.distance = Vector2.Distance(player.transform.position, GetComponent<Rigidbody2D>().position);
-            Debug.DrawLine(player.transform.position, GetComponent<Rigidbody2D>().position, Color.green);
             chainJoint.connectedBody = player.GetComponent<Rigidbody2D>();
             chainJoint.enabled = true;
+
+            Debug.DrawLine(player.transform.position, GetComponent<Rigidbody2D>().position, Color.green);
         }
 
 
