@@ -39,7 +39,6 @@ public class ThrowHook : MonoBehaviour
             Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             curHook = Instantiate(hook, transform.position, Quaternion.identity);
-            GetComponent<newChainScript>().chainAnchor = curHook;
 
             curHook.GetComponent<ChainScript>().direction = direction;
 
