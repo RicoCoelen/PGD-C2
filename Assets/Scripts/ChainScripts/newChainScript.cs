@@ -32,65 +32,52 @@ public class newChainScript : MonoBehaviour
         chainAnchorSprite = chainAnchor.GetComponent<SpriteRenderer>();
     }
 
+    private void Start()
+    {
+        chainJoint = GetComponent<DistanceJoint2D>();
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        // Get the mouse position and use it to determine the angle of the chain throw
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 facingDirection = mousePosition - new Vector2(transform.position.x, transform.position.y);
-        float aimAngle = Mathf.Atan2(facingDirection.y, facingDirection.x);
-
-        // keep the aimAngle positive by using Pi * 2
-        if (aimAngle < 0f)
+        if (chainAnchor.GetComponent<ChainScript>().isFlexible)
         {
-            aimAngle = Mathf.PI * 2 + aimAngle;
-        }
+            HandleInput();
 
-        Vector2 aimDirection = Quaternion.Euler(0,0, aimAngle * Mathf.Rad2Deg) * Vector2.right;
-        playerPosition = transform.position;
+            if (chainAttached)
+            {
+                UpdateRopePositions();
+                //HandleChainLength();
+            }
 
-        HandleInput(aimDirection);
-
-        if (chainAttached)
-        {
-            UpdateRopePositions();
-            HandleChainLength();
+            if (!GetComponent<ThrowHook>().active)
+            {
+                ResetChain();
+            }
         }
     }
 
-    void HandleInput(Vector2 aimDirection)
+    void HandleInput()
     {
-        // Throw the chain
-        if (Input.GetButton("chainThrow") && !chainAttached)
-        {
-            RaycastHit2D hit = Physics2D.Raycast(playerPosition, aimDirection, chainMaxCastDistance, chainLayerMask);
-
-            if (hit.collider != null)
-            {
-                chainAttached = true;
-                if (!chainPositions.Contains(hit.point))
-                {
-                    // Jump slightly to distance the player a little from the ground after grappling to something.
-                    transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 2f), ForceMode2D.Impulse);
-                    chainPositions.Add(hit.point);
-                    chainJoint.distance = Vector2.Distance(playerPosition, hit.point);
-                    chainJoint.enabled = true;
-                    //chainAnchorSprite.enabled = true;
-                    chainRenderer.enabled = true;
-
-                }
-            }
-            else
-            {
-                chainRenderer.enabled = false;
-                chainAttached = false;
-                chainJoint.enabled = false;
-            }
-
+        if (chainAnchor.GetComponent<ChainScript>().isFlexible)
+        {   // Jump slightly to distance the player a little from the ground after grappling to something.
+            transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 2f), ForceMode2D.Impulse);
+            chainPositions.Add(chainAnchor.transform.position);
+            chainJoint.distance = Vector2.Distance(playerPosition, chainAnchor.GetComponent<Rigidbody2D>().position);
+            chainJoint.enabled = true;
+            //chainAnchorSprite.enabled = true;
+            chainRenderer.enabled = true;
         }
+        else
+        {
+            chainRenderer.enabled = false;
+            chainAttached = false;
+            chainJoint.enabled = false;
+        }
+        
 
         // retract the chain
-        if (chainAttached && !Input.GetButton("chainThrow"))
+        if (chainAttached && Input.GetButtonUp("chainThrow"))
         {
             playerScript.chainJump();
             ResetChain();

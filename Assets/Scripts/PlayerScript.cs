@@ -38,7 +38,7 @@ public class PlayerScript : MonoBehaviour
     public float maxHealth = 10f;
     public float health = 10f;
 
-    public Renderer renderer;
+    //public Renderer renderer;
     public float flashTime;
 
     private Color originalColor;
@@ -73,40 +73,35 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MovementJump();
-        PlayerTurn();
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         Movement();
+        MovementJump();
+        PlayerTurn(); 
         PlayerHealth();
 
     }
 
     private void Movement()
     {
-        if (GetComponent<ThrowHook>().active && !IsGrounded())
-        {
-            float playerMovement = Input.GetAxis("Horizontal");
-            rb.velocity = new Vector2(playerMovement * Time.deltaTime * moveSpeed + rb.velocity.x, rb.velocity.y);
-        }
-        else
-        {
-            // Don't use the normal movement when crouching
-            if (!Crouch())
+        //if (GetComponent<ThrowHook>().active && !IsGrounded())
+        //{
+        //    float playerMovement = Input.GetAxis("Horizontal");
+        //    rb.velocity = new Vector2(playerMovement * Time.deltaTime * moveSpeed + rb.velocity.x, rb.velocity.y);
+        //}
+        //else
+        //{
+            if (isSwinging()) // TODO: rename sprint to isSwinging or similar   
             {
-                if (Sprint()) // TODO: rename sprint to isSwinging or similar
-                    RevisedPlayerMovement(sprintAcceleration, sprintReactionMultiplier, sprintMaxSpeed, dragMultiplier);
-                else
-                    RevisedPlayerMovement(maxAcceleration, reactionMultiplier, maxSpeed, dragMultiplier);
-            } 
-            else
-            {
-                PlayerSlide(slideDragMultiplier);
+                RevisedPlayerMovement(sprintAcceleration, sprintReactionMultiplier, sprintMaxSpeed, dragMultiplier);
             }
-        }
+            else
+                RevisedPlayerMovement(maxAcceleration, reactionMultiplier, maxSpeed, dragMultiplier);
+        //}
 
     }
 
@@ -121,73 +116,14 @@ public class PlayerScript : MonoBehaviour
     }
 
     // Give faster speed while attached to the chain
-    private bool Sprint()
+    private bool isSwinging()
     {
-        if (GetComponent<newChainScript>().chainAttached == true)
-            return true;
+        if (GetComponent<ThrowHook>().active) {
+            if (GetComponent<ThrowHook>().curHook.GetComponent<ChainScript>().isFlexible) {
+                return true;
+            }
+        }
         return false;
-    }
-
-    private bool Crouch()
-    {
-        if (Input.GetButton("Crouch") && IsGrounded())
-            return true;
-
-        GetComponentInChildren<SpriteRenderer>().sprite = sprite;
-        return false;
-    }
-
-    private void PlayerSlide(float dragMultiplier)
-    {
-        float speed = rb.velocity.x;
-        GetComponentInChildren<SpriteRenderer>().sprite = crouchSprite;
-
-        RaycastHit2D hit = GroundrayCast();
-        if (hit.collider != null)
-        {
-            if (hit.normal.x < 1 && hit.normal.x > -1 && hit.normal.x != 0)
-            {
-                if (hit.normal.x > 0 && speed > -1)
-                {
-                    speed += (hit.normal.x * hillMultiplier) * Time.deltaTime;
-                    if (speed > currentMaxSpeed)
-                        currentMaxSpeed += (hit.normal.x * hillMultiplier) * Time.deltaTime;
-                }
-
-                if (hit.normal.x < 0 & speed < 1)
-                {
-                    speed += (hit.normal.x * hillMultiplier) * Time.deltaTime;
-                    if (speed < -currentMaxSpeed)
-                        currentMaxSpeed += (hit.normal.x * hillMultiplier) * Time.deltaTime;
-                }
-            }
-        }
-
-        // lower movement speed
-        float[] newValues = Momentum(speed, currentMaxSpeed, maxSpeed, dragMultiplier);
-
-        speed = newValues[0];
-        currentMaxSpeed = newValues[1];
-
-        // catch up maxspeed drag when sliding TODO: find a better way of doing this or disable default rb.velocity.x drag
-        if (speed > 0)
-        {
-            if (currentMaxSpeed - speed > 10)
-            {
-                currentMaxSpeed = speed;
-            }
-        }
-        else if (speed < 0)
-        {
-            //This one isn't actually tested so see if it works :D
-            if (currentMaxSpeed - speed > -10)
-            {
-                currentMaxSpeed = -speed;
-            }
-
-        }
-
-        rb.velocity = new Vector2(speed, rb.velocity.y);
     }
 
     // Debug function
@@ -237,6 +173,7 @@ public class PlayerScript : MonoBehaviour
                 speed = 0;
         }
 
+        
         // lower the maxspeed at the same rate as speed
         if (maximumSpeed > goalMaximumSpeed)
             maximumSpeed -= finalDrag * Time.deltaTime;
@@ -251,6 +188,7 @@ public class PlayerScript : MonoBehaviour
         // Allow changing of the current x velocity.
         float speed = rb.velocity.x;
 
+        
         if (currentMaxSpeed < goalMaxSpeed)
             currentMaxSpeed = goalMaxSpeed;
 
@@ -335,27 +273,15 @@ public class PlayerScript : MonoBehaviour
 
     public void MovementJump()
     {
+        
         // Initial jump
         if (Input.GetButtonDown("Jump") && (IsGrounded()))
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + jumpVelocity);
         }
 
-        // Jumping during the swing at certain speeds allows a boost of speed 
-        if (Input.GetButtonDown("Jump") && GetComponent<newChainScript>().chainAttached == true && (rb.velocity.y > 7.5f || rb.velocity.y < -7.5f))
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + jumpVelocity / 5);
-        }
-
-        // Jumping while the chain is out and the player is on the ground causes the player to dash towards the chain
-        if (Input.GetButtonDown("Jump") && GetComponent<newChainScript>().chainAttached == true && IsGrounded())
-        {
-            GetComponent<newChainScript>().ResetChain();
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + jumpVelocity / 50);
-        }
-
         // disable gravity while swinging, and also for a small amount of time after releasing the chain to maintain momentum
-        if (chainGravity || (Sprint() && (Input.GetButton("Right") || Input.GetButton("Left"))))
+        if (chainGravity || (isSwinging() && (Input.GetButton("Right") || Input.GetButton("Left"))))
         {
             if (chainGravity)
             {
@@ -400,13 +326,13 @@ public class PlayerScript : MonoBehaviour
 
     void FlashRed()
     {
-        renderer.GetComponent<SpriteRenderer>().color = Color.red;
+        //renderer.GetComponent<SpriteRenderer>().color = Color.red;
         Invoke("ResetColor", flashTime);
     }
 
     void ResetColor()
     {
-        renderer.GetComponent<SpriteRenderer>().color = originalColor;
+        //renderer.GetComponent<SpriteRenderer>().color = originalColor;
     }
 
 }

@@ -29,6 +29,8 @@ public class ThrowHook : MonoBehaviour
             if(curHook.GetComponent<HookScript>().child != null)
                 curHook.GetComponent<HookScript>().child.parent = null;
 
+            player.GetComponent<PlayerScript>().chainJump();
+
             Destroy(curHook);
 
             active = false;
@@ -37,23 +39,11 @@ public class ThrowHook : MonoBehaviour
             Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             curHook = Instantiate(hook, transform.position, Quaternion.identity);
+            GetComponent<newChainScript>().chainAnchor = curHook;
 
             curHook.GetComponent<ChainScript>().direction = direction;
 
             active = true;
-        }else if (Input.GetButtonDown("Jump") && active && curHook.GetComponent<HookScript>().child.tag == "Anchored Grabable")
-        {
-            playerScript.MovementJump();
-
-
-            if (curHook.GetComponent<HookScript>().child != null)
-                curHook.GetComponent<HookScript>().child.parent = null;
-
-
-
-            Destroy(curHook);
-
-            active = false;
         }
     }
 }
