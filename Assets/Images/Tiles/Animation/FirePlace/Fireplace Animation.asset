@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71d1fa72b497a6a44afc0b22f8a874fc, type: 3}
-  m_Name: Torch Animation
+  m_Name: Fireplace Animation
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: -9034126682784216062, guid: 4fb04c996c5fd26409745824201461a2, type: 3}
-  - {fileID: 2652299111340853424, guid: 4fb04c996c5fd26409745824201461a2, type: 3}
-  - {fileID: 3012022839504718586, guid: 4fb04c996c5fd26409745824201461a2, type: 3}
-  - {fileID: 1790882133243449769, guid: 4fb04c996c5fd26409745824201461a2, type: 3}
-  - {fileID: 7926827821874708208, guid: 4fb04c996c5fd26409745824201461a2, type: 3}
-  - {fileID: 197002663652443948, guid: 4fb04c996c5fd26409745824201461a2, type: 3}
+  - {fileID: 52050984004870969, guid: 9488b330f8d2abf4aafa9fe7099d9f38, type: 3}
+  - {fileID: 8733748358098847774, guid: 9488b330f8d2abf4aafa9fe7099d9f38, type: 3}
+  - {fileID: 8666373882908240376, guid: 9488b330f8d2abf4aafa9fe7099d9f38, type: 3}
+  - {fileID: -7103930707854007428, guid: 9488b330f8d2abf4aafa9fe7099d9f38, type: 3}
+  - {fileID: 903485339384155243, guid: 9488b330f8d2abf4aafa9fe7099d9f38, type: 3}
+  - {fileID: -7318307355113216577, guid: 9488b330f8d2abf4aafa9fe7099d9f38, type: 3}
   m_MinSpeed: 8
   m_MaxSpeed: 8
   m_AnimationStartTime: 0

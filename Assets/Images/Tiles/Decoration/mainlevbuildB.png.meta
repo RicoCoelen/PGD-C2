@@ -1,0 +1,1511 @@
+fileFormatVersion: 2
+guid: 51dd77481b72b184c96fdea10b1cef66
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8843438944966987817
+    second: mainlevbuildB_0
+  - first:
+      213: -483805530799023885
+    second: mainlevbuildB_1
+  - first:
+      213: -6770355575810689945
+    second: mainlevbuildB_2
+  - first:
+      213: -3883829999164869723
+    second: mainlevbuildB_3
+  - first:
+      213: -1777661216936036411
+    second: mainlevbuildB_4
+  - first:
+      213: 2580617818661954163
+    second: mainlevbuildB_5
+  - first:
+      213: -4762732769125054067
+    second: mainlevbuildB_6
+  - first:
+      213: -6795974972385369379
+    second: mainlevbuildB_7
+  - first:
+      213: -7328555024306896497
+    second: mainlevbuildB_8
+  - first:
+      213: 6040644136639431997
+    second: mainlevbuildB_9
+  - first:
+      213: 5904267786133749602
+    second: mainlevbuildB_10
+  - first:
+      213: 6017251201139225823
+    second: mainlevbuildB_11
+  - first:
+      213: 2412582888940229142
+    second: mainlevbuildB_12
+  - first:
+      213: -4316689921136614849
+    second: mainlevbuildB_13
+  - first:
+      213: -7168090157361326237
+    second: mainlevbuildB_14
+  - first:
+      213: -317143773592160226
+    second: mainlevbuildB_15
+  - first:
+      213: 1509065057949207943
+    second: mainlevbuildB_16
+  - first:
+      213: -3893440116857418151
+    second: mainlevbuildB_17
+  - first:
+      213: 6063216274156256401
+    second: mainlevbuildB_18
+  - first:
+      213: -2474525954358123401
+    second: mainlevbuildB_19
+  - first:
+      213: 8340114210484638706
+    second: mainlevbuildB_20
+  - first:
+      213: 2866288525349614126
+    second: mainlevbuildB_21
+  - first:
+      213: -1492207256496002674
+    second: mainlevbuildB_22
+  - first:
+      213: 5172333754041833999
+    second: mainlevbuildB_23
+  - first:
+      213: 8483370585699788590
+    second: mainlevbuildB_24
+  - first:
+      213: -617703005736529837
+    second: mainlevbuildB_25
+  - first:
+      213: 6441773800913481078
+    second: mainlevbuildB_26
+  - first:
+      213: -4632235568267527045
+    second: mainlevbuildB_27
+  - first:
+      213: 7893099717921796052
+    second: mainlevbuildB_28
+  - first:
+      213: -9102412497858372738
+    second: mainlevbuildB_29
+  - first:
+      213: -8644739657376057242
+    second: mainlevbuildB_30
+  - first:
+      213: 4700031957981658475
+    second: mainlevbuildB_31
+  - first:
+      213: -6851582195299106706
+    second: mainlevbuildB_32
+  - first:
+      213: 8383031118224011424
+    second: mainlevbuildB_33
+  - first:
+      213: 3312531256333791137
+    second: mainlevbuildB_34
+  - first:
+      213: 9162195964562959593
+    second: mainlevbuildB_35
+  - first:
+      213: 6985126673647442995
+    second: mainlevbuildB_36
+  - first:
+      213: -7340378352168360728
+    second: mainlevbuildB_37
+  - first:
+      213: 8895694703305544941
+    second: mainlevbuildB_38
+  - first:
+      213: 3139511684117837348
+    second: mainlevbuildB_39
+  - first:
+      213: 1771810092550897457
+    second: mainlevbuildB_40
+  - first:
+      213: -7131464855441647899
+    second: mainlevbuildB_41
+  - first:
+      213: 8685196041595787790
+    second: mainlevbuildB_42
+  - first:
+      213: -1794241627365762038
+    second: mainlevbuildB_43
+  - first:
+      213: -3662568225375159437
+    second: mainlevbuildB_44
+  - first:
+      213: -1811102320702213124
+    second: mainlevbuildB_45
+  - first:
+      213: -6594228126990269934
+    second: mainlevbuildB_46
+  - first:
+      213: -6774624364970538275
+    second: mainlevbuildB_47
+  - first:
+      213: 8208450511196179528
+    second: mainlevbuildB_48
+  - first:
+      213: 936405522988824471
+    second: mainlevbuildB_49
+  - first:
+      213: 6193743747780760128
+    second: mainlevbuildB_50
+  - first:
+      213: 2457849053783475923
+    second: mainlevbuildB_51
+  - first:
+      213: -3911113008544997576
+    second: mainlevbuildB_52
+  - first:
+      213: 657025067791207468
+    second: mainlevbuildB_53
+  - first:
+      213: -220124999374842248
+    second: mainlevbuildB_54
+  - first:
+      213: -9139930131865898705
+    second: mainlevbuildB_55
+  - first:
+      213: 602094698929345489
+    second: mainlevbuildB_56
+  - first:
+      213: -7661770901765963730
+    second: mainlevbuildB_57
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: mainlevbuildB_0
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 960
+        width: 41
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f1d62641565c1d49815b985a2214295
+      internalID: 8843438944966987817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_1
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 976
+        width: 11
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47048c6038a4fdb4783e67200e772739
+      internalID: -483805530799023885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_2
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 960
+        width: 41
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 310f4d6d73cf2ad4a8acf64ba5503086
+      internalID: -6770355575810689945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_3
+      rect:
+        serializedVersion: 2
+        x: 784
+        y: 896
+        width: 16
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 190a12e3193063c488e72238346f1d42
+      internalID: -3883829999164869723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_4
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 896
+        width: 16
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b05962ae338c104d8fac2d6ca392671
+      internalID: -1777661216936036411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_5
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 896
+        width: 16
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08a8dfe2a25970144b50c5c73114a54e
+      internalID: 2580617818661954163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_6
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 896
+        width: 16
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 038f553f9eb688541b7827f5916c7899
+      internalID: -4762732769125054067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_7
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 859
+        width: 11
+        height: 149
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa58a893aac3df648be8a836d4c98c2b
+      internalID: -6795974972385369379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_8
+      rect:
+        serializedVersion: 2
+        x: 955
+        y: 859
+        width: 11
+        height: 149
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f475bff735db46f40b26db335d4ab719
+      internalID: -7328555024306896497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_9
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 912
+        width: 76
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e37886fba9c4e7b479fa8eae12011ca8
+      internalID: 6040644136639431997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_10
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 944
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3e4cf52f31dcc945a74373f0c629034
+      internalID: 5904267786133749602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_11
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 832
+        width: 112
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd42beb866b2bde47a82d7d3c64984f3
+      internalID: 6017251201139225823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_12
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 912
+        width: 29
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3b326ff5c7ed0043a5f8d4b42d01a19
+      internalID: 2412582888940229142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_13
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 912
+        width: 29
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d79752a49f39794f8dbfc73084486f2
+      internalID: -4316689921136614849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_14
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 768
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8776536a4c7fb847ad711697c5d44fb
+      internalID: -7168090157361326237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_15
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 832
+        width: 96
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 761aedcf70296024ea7635ccb5efac06
+      internalID: -317143773592160226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_16
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 832
+        width: 96
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e4438529e01f0544af80435cbc4c272
+      internalID: 1509065057949207943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_17
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 832
+        width: 64
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb231f0ca2f908440bc83f4a4b6a37ad
+      internalID: -3893440116857418151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_18
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 832
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7447fae17d0c4b6458f29b30533f94cb
+      internalID: 6063216274156256401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_19
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 832
+        width: 64
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d08fff4be1d81944b43c1d852f6bbe4
+      internalID: -2474525954358123401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_20
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 752
+        width: 96
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f501bb2d183aa8a44ade7af5d5aa0801
+      internalID: 8340114210484638706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_21
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 624
+        width: 160
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 32, y: -30}
+        - {x: 32, y: 0}
+        - {x: 62, y: 0}
+        - {x: 62, y: -30}
+      - - {x: 31.808716, y: -64.148254}
+        - {x: 31.689636, y: -31.98761}
+        - {x: 62.0636, y: -31.86847}
+        - {x: 62.0636, y: -64.148254}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4eb90a8a567d4c14cb96b5afb73e1350
+      internalID: 2866288525349614126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_22
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 736
+        width: 208
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c2d889a1d978d3449f9fc6a908483f5
+      internalID: -1492207256496002674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_23
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 656
+        width: 16
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4ba6e78fc73e6b41ac685bf865de01d
+      internalID: 5172333754041833999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_24
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 656
+        width: 48
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cac84f12ece564f4badd580e53553e4d
+      internalID: 8483370585699788590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_25
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 656
+        width: 48
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3683654fd644f534b9611153e9c0a804
+      internalID: -617703005736529837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_26
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 688
+        width: 64
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2af86389ffade2a4cbd39e7e8a9ab819
+      internalID: 6441773800913481078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_27
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 624
+        width: 80
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59aed22534aa4954093fe70c206986df
+      internalID: -4632235568267527045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_28
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 624
+        width: 80
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0d36df2f5446b04c9d9bdd42b20b422
+      internalID: 7893099717921796052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_29
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 624
+        width: 80
+        height: 106
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7d2ae6d945a3fc4190274ee073e30be
+      internalID: -9102412497858372738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_30
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 688
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5596568555dc9614ab129653058cdd30
+      internalID: -8644739657376057242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_31
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 656
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4934bb063158b5c4fbf351b7300cad48
+      internalID: 4700031957981658475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_32
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 611
+        width: 16
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 983cc3840acb32649a50fb9566a03672
+      internalID: -6851582195299106706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_33
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 480
+        width: 89
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ff787e8728ff7141a1c08198887344c
+      internalID: 8383031118224011424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_34
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 480
+        width: 89
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de25a49032ecf624aa79b678f9eba018
+      internalID: 3312531256333791137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_35
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 480
+        width: 80
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe38472f28b23724da9ca268c3b0b9ec
+      internalID: 9162195964562959593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_36
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 480
+        width: 80
+        height: 122
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77db17580603a234b8007701af2dc77c
+      internalID: 6985126673647442995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_37
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 480
+        width: 96
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e41b06b72e1e51e4ba0c97d447353589
+      internalID: -7340378352168360728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_38
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 399
+        width: 160
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 32, y: 1}
+        - {x: 31, y: 31}
+        - {x: 62, y: 31}
+        - {x: 62, y: 1}
+      - - {x: 32, y: 33}
+        - {x: 32, y: 65}
+        - {x: 62, y: 65}
+        - {x: 62, y: 33}
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fad28b698ad1071498acb673c79bb6b1
+      internalID: 8895694703305544941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_39
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 576
+        width: 16
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0410eb0cfcd2e4242b669bf4e80095cb
+      internalID: 3139511684117837348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_40
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 544
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fcf43cc39aec3848a686b02e904bfc2
+      internalID: 1771810092550897457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_41
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 496
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59c75fd0e94d17144960ccb4854385b7
+      internalID: -7131464855441647899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_42
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 345
+        width: 107
+        height: 103
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3828d22a7241ad246b0324fbc91c3344
+      internalID: 8685196041595787790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_43
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 345
+        width: 107
+        height: 103
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d5de304cc16aa848b5f6a3c184b9dd9
+      internalID: -1794241627365762038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_44
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 272
+        width: 176
+        height: 159
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05e9313c8ce34414c94caabd2e6921b8
+      internalID: -3662568225375159437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_45
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 400
+        width: 208
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cecc4d795009f334a811500bb95b4236
+      internalID: -1811102320702213124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_46
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 368
+        width: 64
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ab081afa921bda45bc293f65b238091
+      internalID: -6594228126990269934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_47
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 368
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dab9fe6d5d2fd947a82646d1a2e6e23
+      internalID: -6774624364970538275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_48
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 368
+        width: 64
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: befbae809f70a3a45a208a95e20ac099
+      internalID: 8208450511196179528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_49
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 213
+        width: 103
+        height: 107
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ff30cb97fa281848a43a60a7914c355
+      internalID: 936405522988824471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_50
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 224
+        width: 112
+        height: 99
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1826b82a24d69e47918d9c8bdaa2697
+      internalID: 6193743747780760128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_51
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 96
+        width: 176
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b408824875238b46bdec7e8eb2a5695
+      internalID: 2457849053783475923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_52
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 80
+        width: 103
+        height: 107
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fbba2a7991a8fa4a9582aa7c5548376
+      internalID: -3911113008544997576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_53
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 16
+        width: 256
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 959d719ef9c845c41861d216f5eeb24a
+      internalID: 657025067791207468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_54
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 112
+        width: 176
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7591b3db07eb32d4da162d6d76f0effe
+      internalID: -220124999374842248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_55
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 16
+        width: 80
+        height: 176
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 150dcc1f724561a4680bdacc7b796488
+      internalID: -9139930131865898705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_56
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 16
+        width: 80
+        height: 176
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bc0792b266dd7b4088b3dbb09a4c50b
+      internalID: 602094698929345489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mainlevbuildB_57
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 16
+        width: 176
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 064addc4b9a85a942ae187c594c93e6a
+      internalID: -7661770901765963730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
