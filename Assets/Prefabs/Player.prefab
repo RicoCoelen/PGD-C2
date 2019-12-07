@@ -208,10 +208,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b680a769f42b1c1448f985484401e10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 12.5
-  sprintMaxSpeed: 30
+  maxSpeed: 15
+  sprintMaxSpeed: 35
   maxAcceleration: 80
-  sprintAcceleration: 50
+  sprintAcceleration: 65
   drag: 80
   reactionMultiplier: 1
   sprintReactionMultiplier: -0.4

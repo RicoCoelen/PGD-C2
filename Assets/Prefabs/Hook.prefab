@@ -52,6 +52,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -180,6 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 10
+  minDistance: 2
   chainJoint: {fileID: 0}
   layer:
     serializedVersion: 2
@@ -188,6 +190,7 @@ MonoBehaviour:
   direction: {x: 0, y: 0}
   speed: 1.5
   interfal: 0.4
+  climbSpeed: 30
   node: {fileID: 7785497642015086677, guid: d05c2fb295f37f948970ef2c1d68d370, type: 3}
   player: {fileID: 0}
   lastNode: {fileID: 0}
@@ -225,6 +228,7 @@ LineRenderer:
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

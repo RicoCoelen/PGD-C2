@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class ChainScript : MonoBehaviour
 {
     public float maxDistance = 5;
+    public float minDistance = 5;
     public DistanceJoint2D chainJoint;
     private PlayerScript playerScript;
     public LayerMask layer;
@@ -17,13 +18,17 @@ public class ChainScript : MonoBehaviour
 
     public float speed = 1;
     public float interfal = 2;
+    public float climbSpeed = 20f;
 
     public GameObject node;
     public GameObject player;
     public GameObject lastNode;
+    private int lastNodesCount;
 
     bool done = false;
     bool stop = false;
+
+    List<GameObject> nodes;
 
     // Use this for initialization
     void Start()
@@ -43,7 +48,9 @@ public class ChainScript : MonoBehaviour
             direction += (Vector2)player.transform.position;
 
             // Keeps track of all the nodes in the chain
+            nodes = new List<GameObject>();
             lastNode = transform.gameObject;
+            nodes.Add(lastNode);
         }
 
         // Initializes everything for the new chain
@@ -98,8 +105,32 @@ public class ChainScript : MonoBehaviour
 
                     lastNode.GetComponent<HingeJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
                 }
-            }
 
+                // Changes distance joint length
+                if (Input.GetButton("down") && chainJoint.distance != minDistance)
+                {
+                    chainJoint.distance += climbSpeed * Time.deltaTime;
+                }
+                else if (chainJoint.distance < minDistance)
+                    chainJoint.distance = minDistance;
+
+                if (Input.GetButton("up") && chainJoint.distance != maxDistance)
+                {
+                    chainJoint.distance -= climbSpeed * Time.deltaTime;
+                }
+                else if (chainJoint.distance >= maxDistance)
+                    chainJoint.distance = maxDistance;
+
+                // Changes chain length if necessary
+                if (isFlexible && done && NodeCheck())
+                {
+                    ChangeLength();
+                }
+
+                lastNodesCount = nodes.Count;
+
+            }
+            
             HitWall();
         }
     }
@@ -138,11 +169,55 @@ public class ChainScript : MonoBehaviour
 
         GameObject go = Instantiate(node, pos2Create, Quaternion.identity);
 
+        nodes.Add(go);
 
         go.transform.SetParent(transform);
 
         lastNode.GetComponent<HingeJoint2D>().connectedBody = go.GetComponent<Rigidbody2D>();
 
         lastNode = go;
+    }
+
+    /// <summary>
+    /// Checks if there are sufficient nodes for the length of the chain
+    /// </summary>
+    bool NodeCheck()
+    {
+        if (chainJoint.distance + interfal > nodes.Count * interfal || chainJoint.distance < nodes.Count * interfal)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    void ChangeLength()
+    {
+        if (chainJoint.distance + (2 * interfal) < nodes.Count * interfal) {
+
+
+
+            for (int i = nodes.Count - 2; i > 0; i--)
+            {
+                if (NodeCheck())
+                {
+                    break;
+                }
+            }
+            nodes[nodes.Count - 1].GetComponent<HingeJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
+        }
+
+        if (chainJoint.distance > nodes.Count * interfal)
+        {
+            while (Vector2.Distance(player.transform.position, lastNode.transform.position) > interfal)
+            {
+                CreateNode();
+            }
+            lastNode.GetComponent<HingeJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
+        }
+
+        
     }
 }
