@@ -9,7 +9,7 @@ public class ChainScript : MonoBehaviour
     public float minDistance = 5;
     public DistanceJoint2D chainJoint;
     private PlayerScript playerScript;
-    public LayerMask layer;
+    public LayerMask noHookLayer;
 
     Vector2 startingPoint;
     public bool isFlexible;
@@ -196,9 +196,9 @@ public class ChainScript : MonoBehaviour
     void ChangeLength()
     {
         // Deletes nodes
-        if (chainJoint.distance + (2 * interfal) < nodes.Count * interfal) {
+        if (chainJoint.distance + (4 * interfal) < nodes.Count * interfal) {
 
-            int numRemove = (int)(nodes.Count * interfal - chainJoint.distance + (2 * interfal));
+            int numRemove = (int)(nodes.Count * interfal - chainJoint.distance + (4 * interfal));
             for (int i = 0; i < numRemove; i++)
             {
                 GameObject removeNode = nodes[nodes.Count - 1];
@@ -206,6 +206,10 @@ public class ChainScript : MonoBehaviour
                 Destroy(removeNode);
                 lastNode = nodes[nodes.Count - 1];
             }
+
+            CreateNode();
+            CreateNode();
+
             nodes[nodes.Count - 1].GetComponent<HingeJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
         }
 

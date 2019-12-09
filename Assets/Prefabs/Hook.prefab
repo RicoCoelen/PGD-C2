@@ -183,9 +183,9 @@ MonoBehaviour:
   maxDistance: 10
   minDistance: 2
   chainJoint: {fileID: 0}
-  layer:
+  noHookLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 32768
   isFlexible: 0
   direction: {x: 0, y: 0}
   speed: 1.5
