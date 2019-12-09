@@ -6,8 +6,8 @@ public class BulletScript : MonoBehaviour
 {
     public float speed = 20f;
     public Rigidbody2D rb;
-    public float minDamage;
-    public float maxDamage;
+    public int minDamage;
+    public int maxDamage;
 
 
     // Start is called before the first frame update
@@ -25,7 +25,7 @@ public class BulletScript : MonoBehaviour
                 {
                     Player.TakeDamage(Random.Range(minDamage, maxDamage));
                 }
-                Destroy(gameObject);
+                Destroy(gameObject); 
                 break;
             default:
                 Destroy(gameObject);
