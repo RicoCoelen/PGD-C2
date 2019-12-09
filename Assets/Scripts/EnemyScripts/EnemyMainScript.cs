@@ -149,7 +149,7 @@ public class EnemyMainScript : MonoBehaviour
                     chasingSpeed = -Mathf.Abs(chasingSpeed);
                     rb.velocity = new Vector2(-direction.x * chasingSpeed * Time.deltaTime, rb.velocity.y);
                     //rb.AddForce(-direction * chasingSpeed * Time.deltaTime);
-                    //rb.MovePosition(transform.position direction * chasingSpeed * Time.deltaTime);
+                    //rb.MovePosition(transform.position + direction * chasingSpeed * Time.deltaTime);
                 }
             }
         }
