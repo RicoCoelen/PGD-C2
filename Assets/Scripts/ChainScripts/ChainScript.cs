@@ -144,7 +144,7 @@ public class ChainScript : MonoBehaviour
         if (hit.collider != player.GetComponent<Collider2D>() && hit.collider != null)
         {
             RaycastHit2D hit2 = Physics2D.Raycast((Vector2)transform.position + Vector2.up, Vector2.up, 0.1f);
-            if (hit2.collider != player.GetComponent<Collider2D>() && hit2.collider != null)
+            if (hit2.collider != player.GetComponent<Collider2D>() && hit2.collider != null && hit2.collider.gameObject.layer != 15)
             {
                 GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
