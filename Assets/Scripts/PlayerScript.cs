@@ -57,6 +57,8 @@ public class PlayerScript : MonoBehaviour
     public float defaultTime = 15f;
     float timeLeft;
 
+    bool prevGrounded = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,16 +75,18 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        MovementJump();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         Movement();
-        MovementJump();
+        
         PlayerTurn(); 
         PlayerHealth();
+
+        hitGround();
 
     }
 
@@ -103,6 +107,15 @@ public class PlayerScript : MonoBehaviour
                 RevisedPlayerMovement(maxAcceleration, reactionMultiplier, maxSpeed, dragMultiplier);
         //}
 
+    }
+
+    private void hitGround()
+    {
+        if (IsGrounded() && !prevGrounded)
+        {
+            AudioManager.PlaySound("Land");
+        }
+        prevGrounded = IsGrounded();
     }
 
     private RaycastHit2D GroundrayCast()
@@ -277,6 +290,7 @@ public class PlayerScript : MonoBehaviour
         // Initial jump
         if (Input.GetButtonDown("Jump") && (IsGrounded()))
         {
+            AudioManager.PlaySound("Jump");
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + jumpVelocity);
         }
 
@@ -320,6 +334,7 @@ public class PlayerScript : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        AudioManager.PlaySound("PlayerHit");
         health = Mathf.Clamp(health -= amount, 0, maxHealth);
         //FlashRed();
     }

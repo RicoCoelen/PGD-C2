@@ -162,9 +162,12 @@ public class EnemyMainScript : MonoBehaviour
         // flash red
         FlashRed();
 
+        AudioManager.PlaySound("EnemyHit");
+
         // if no health die
         if (health <= 0f)
         {
+            AudioManager.PlaySound("Death");
             Destroy(gameObject);
         }
     }

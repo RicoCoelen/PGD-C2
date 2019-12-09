@@ -55,6 +55,8 @@ public class EnemyAttackScript : MonoBehaviour
                 }
                 GameObject temp = Instantiate(bulletPrefab, transform.position, transform.rotation);
 
+                AudioManager.PlaySound("EnemyShot");
+
                 // reset timer
                 timeToShoot = cooldownShoot;
             }
