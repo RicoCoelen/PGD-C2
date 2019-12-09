@@ -190,7 +190,7 @@ MonoBehaviour:
   direction: {x: 0, y: 0}
   speed: 1.5
   interfal: 0.4
-  climbSpeed: 30
+  climbSpeed: 16
   node: {fileID: 7785497642015086677, guid: d05c2fb295f37f948970ef2c1d68d370, type: 3}
   player: {fileID: 0}
   lastNode: {fileID: 0}

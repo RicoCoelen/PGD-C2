@@ -74,9 +74,6 @@ public class ChainScript : MonoBehaviour
             Debug.DrawLine(player.transform.position, GetComponent<Rigidbody2D>().position, Color.green);
         }
 
-
-
-
         // Old hook script
         {
             // Makes the hook move in the clicked direction and creating nodes for in the chains
@@ -105,7 +102,10 @@ public class ChainScript : MonoBehaviour
 
                     lastNode.GetComponent<HingeJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
                 }
+            }
 
+            // Handles chain length
+            { 
                 // Changes distance joint length
                 if (Input.GetButton("down") && chainJoint.distance != minDistance)
                 {
@@ -191,32 +191,34 @@ public class ChainScript : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Changes the chain length by removing or creating nodes
     /// </summary>
     void ChangeLength()
     {
+        // Deletes nodes
         if (chainJoint.distance + (2 * interfal) < nodes.Count * interfal) {
 
-
-
-            for (int i = nodes.Count - 2; i > 0; i--)
+            int numRemove = (int)(nodes.Count * interfal - chainJoint.distance + (2 * interfal));
+            for (int i = 0; i < numRemove; i++)
             {
-                if (NodeCheck())
-                {
-                    break;
-                }
+                GameObject removeNode = nodes[nodes.Count - 1];
+                nodes.Remove(removeNode);
+                Destroy(removeNode);
+                lastNode = nodes[nodes.Count - 1];
             }
             nodes[nodes.Count - 1].GetComponent<HingeJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
         }
 
+        // Creates more nodes in necessary
         if (chainJoint.distance > nodes.Count * interfal)
         {
             while (Vector2.Distance(player.transform.position, lastNode.transform.position) > interfal)
             {
                 CreateNode();
             }
-            lastNode.GetComponent<HingeJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
         }
+
+        lastNode.GetComponent<HingeJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
 
         
     }
