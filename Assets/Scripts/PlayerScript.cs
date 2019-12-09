@@ -57,6 +57,8 @@ public class PlayerScript : MonoBehaviour
     public float defaultTime = 15f;
     float timeLeft;
 
+    bool prevGrounded = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -84,6 +86,8 @@ public class PlayerScript : MonoBehaviour
         PlayerTurn(); 
         //PlayerHealth();
 
+        hitGround();
+
     }
 
     private void Movement()
@@ -95,14 +99,34 @@ public class PlayerScript : MonoBehaviour
         //}
         //else
         //{
-            if (isSwinging()) // TODO: rename sprint to isSwinging or similar   
+        if (isSwinging()) // TODO: rename sprint to isSwinging or similar   
+        {
+            RevisedPlayerMovement(sprintAcceleration, sprintReactionMultiplier, sprintMaxSpeed, dragMultiplier);
+        }
+        else
+        {
+            // Make sure to lower currentMaxSpeed after releasing the swing so the player can't accelerate further in the air
+            if (rb.velocity.x > maxSpeed || rb.velocity.x < -maxSpeed)
             {
-                RevisedPlayerMovement(sprintAcceleration, sprintReactionMultiplier, sprintMaxSpeed, dragMultiplier);
+                if (rb.velocity.x > 0)
+                    currentMaxSpeed = rb.velocity.x;
+                if (rb.velocity.x < 0)
+                    currentMaxSpeed = -rb.velocity.x;
             }
-            else
-                RevisedPlayerMovement(maxAcceleration, reactionMultiplier, maxSpeed, dragMultiplier);
+
+            RevisedPlayerMovement(maxAcceleration, reactionMultiplier, maxSpeed, dragMultiplier);
+        }
         //}
 
+    }
+
+    private void hitGround()
+    {
+        if (IsGrounded() && !prevGrounded)
+        {
+            AudioManager.PlaySound("Land");
+        }
+        prevGrounded = IsGrounded();
     }
 
     private RaycastHit2D GroundrayCast()
@@ -191,8 +215,12 @@ public class PlayerScript : MonoBehaviour
         float speed = rb.velocity.x;
 
         
+
+
         if (currentMaxSpeed < goalMaxSpeed)
+        {
             currentMaxSpeed = goalMaxSpeed;
+        }
 
         // Add acceleration to speed if the keys for going right or left are pressed.
         if (Input.GetButton("Right"))
@@ -279,6 +307,7 @@ public class PlayerScript : MonoBehaviour
         // Initial jump
         if (Input.GetButtonDown("Jump") && (IsGrounded()))
         {
+            AudioManager.PlaySound("Jump");
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + jumpVelocity);
         }
 
@@ -322,6 +351,7 @@ public class PlayerScript : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        AudioManager.PlaySound("PlayerHit");
         health = Mathf.Clamp(health -= amount, 0, maxHealth);
         //FlashRed();
     }

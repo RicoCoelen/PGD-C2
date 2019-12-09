@@ -30,6 +30,8 @@ public class ChainScript : MonoBehaviour
 
     List<GameObject> nodes;
 
+    bool soundPlayed = false;
+
     // Use this for initialization
     void Start()
     {
@@ -72,6 +74,10 @@ public class ChainScript : MonoBehaviour
             chainJoint.enabled = true;
 
             Debug.DrawLine(player.transform.position, GetComponent<Rigidbody2D>().position, Color.green);
+        }
+        else
+        {
+            soundPlayed = false;
         }
 
         // Old hook script
@@ -146,8 +152,15 @@ public class ChainScript : MonoBehaviour
             RaycastHit2D hit2 = Physics2D.Raycast((Vector2)transform.position + Vector2.up, Vector2.up, 0.1f);
             if (hit2.collider != player.GetComponent<Collider2D>() && hit2.collider != null && hit2.collider.gameObject.layer != 15)
             {
+                if (!soundPlayed)
+                {
+                    AudioManager.PlaySound("ChainHit");
+                    soundPlayed = true;
+                }
+                
+
                 GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;          
                 isFlexible = true;
             }
             else

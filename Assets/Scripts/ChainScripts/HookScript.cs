@@ -49,7 +49,7 @@ public class HookScript : MonoBehaviour
     {
         switch(collision.gameObject.tag)
         {
-            case "Grabable":
+            case "Grabable":               
                 collision.gameObject.transform.parent = hook.transform;
                 child = collision.gameObject.transform;
                 Physics2D.IgnoreCollision(child.GetComponent<Collider2D>(), GetComponent<Collider2D>());
