@@ -259,7 +259,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 244638319351267649, guid: 7c305fc203d31894e96c6a81ef197df0,
     type: 3}
   cooldownShoot: 1
-  shootRange: 10
+  shootRange: 13
   muzzleFlash: {fileID: 0}
 --- !u!1 &6031546187804549035
 GameObject:
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchTimer: 5
-  DetectionRange: 13.06
+  DetectionRange: 13.04
   lastDetectionTime: 0
   FOV: 90
   currentTarget: {fileID: 0}
