@@ -93,9 +93,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 3790710829339899784}
-  Level:
+  level:
     serializedVersion: 2
     m_Bits: 512
+  objects:
+    serializedVersion: 2
+    m_Bits: 65536
+  enemies:
+    serializedVersion: 2
+    m_Bits: 2048
   isWalled: 0
   wallCheckDistance: 0.1
 --- !u!1 &3790710829339899784
@@ -199,8 +205,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   currentTarget: {fileID: 0}
-  PlayerGO: {fileID: 8056905871520868893, guid: d156ac5ccfc0d0f489848362a6382f86,
-    type: 3}
 --- !u!1 &3790710829709959288
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,8 +308,6 @@ MonoBehaviour:
   DetectionRange: 13.06
   lastDetectionTime: 0
   FOV: 90
-  PlayerGO: {fileID: 8056905871520868893, guid: d156ac5ccfc0d0f489848362a6382f86,
-    type: 3}
   currentTarget: {fileID: 0}
 --- !u!1 &6031546188730919205
 GameObject:
@@ -352,6 +354,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
