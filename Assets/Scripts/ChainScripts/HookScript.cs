@@ -9,6 +9,8 @@ public class HookScript : MonoBehaviour
     GameObject player;
     public LayerMask grabable;
     public float throwForce;
+    public bool active;
+    public int inputButton;
 
     public float minDamage;
     public float maxDamage;
@@ -17,7 +19,6 @@ public class HookScript : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        
     }
 
     // Update is called once per frame
@@ -30,7 +31,7 @@ public class HookScript : MonoBehaviour
             child.position = transform.position;
         }
 
-        if (child != null && Input.GetMouseButtonDown(0))
+        if (child != null && Input.GetMouseButtonDown(inputButton))
         {
             Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             child.parent = null;
@@ -40,8 +41,6 @@ public class HookScript : MonoBehaviour
             child.GetComponent<Rigidbody2D>().velocity += direction * throwForce;
 
             Destroy(hook);
-
-            player.GetComponent<ThrowHook>().active = false;
         }
     }
 
@@ -66,7 +65,7 @@ public class HookScript : MonoBehaviour
             case "Enemy":
                 collision.gameObject.GetComponent<EnemyMainScript>().TakeDamage(Random.Range(minDamage, maxDamage));
                 Destroy(hook);
-                player.GetComponent<ThrowHook>().active = false;
+                active = false;
                 break;
         }
     }
