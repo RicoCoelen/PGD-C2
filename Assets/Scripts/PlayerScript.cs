@@ -92,13 +92,6 @@ public class PlayerScript : MonoBehaviour
 
     private void Movement()
     {
-        //if (GetComponent<ThrowHook>().active && !IsGrounded())
-        //{
-        //    float playerMovement = Input.GetAxis("Horizontal");
-        //    rb.velocity = new Vector2(playerMovement * Time.deltaTime * moveSpeed + rb.velocity.x, rb.velocity.y);
-        //}
-        //else
-        //{
         if (isSwinging()) // TODO: rename sprint to isSwinging or similar   
         {
             RevisedPlayerMovement(sprintAcceleration, sprintReactionMultiplier, sprintMaxSpeed, dragMultiplier);
@@ -116,8 +109,6 @@ public class PlayerScript : MonoBehaviour
 
             RevisedPlayerMovement(maxAcceleration, reactionMultiplier, maxSpeed, dragMultiplier);
         }
-        //}
-
     }
 
     private void hitGround()
@@ -131,10 +122,10 @@ public class PlayerScript : MonoBehaviour
 
     private RaycastHit2D GroundrayCast()
     {
-        Vector2 position = (Vector2)transform.position + GetComponent<Collider2D>().bounds.size.magnitude * Vector2.down;
-        Vector2 direction = Vector2.down;
+        Vector2 position = (Vector2)transform.position + GetComponent<Collider2D>().bounds.size.y * Vector2.down / 2 - new Vector2(0, 0.2f) + Vector2.right * 0.9f;
+        Vector2 direction = Vector2.left * 1.8f;
 
-        RaycastHit2D hit = Physics2D.Raycast((Vector2)transform.position + GetComponent<Collider2D>().bounds.size.y * Vector2.down / 2 - new Vector2(0, 0.1f), direction, rayLength);
+        RaycastHit2D hit = Physics2D.Raycast(position, direction, rayLength);
 
         return hit;
     }
@@ -142,11 +133,15 @@ public class PlayerScript : MonoBehaviour
     // Give faster speed while attached to the chain
     private bool isSwinging()
     {
-        if (GetComponent<ThrowHook>().active) {
-            if (GetComponent<ThrowHook>().curHook.GetComponent<ChainScript>().isFlexible) {
+        if (GetComponent<ThrowHook>().firstHook != null)
+            if (GetComponent<ThrowHook>().firstHook.GetComponent<ChainScript>().isFlexible)
                 return true;
-            }
-        }
+
+        if (GetComponent<ThrowHook>().secondHook != null)
+            if (GetComponent<ThrowHook>().secondHook.GetComponent<ChainScript>().isFlexible)
+                return true;
+
+
         return false;
     }
 
@@ -158,17 +153,6 @@ public class PlayerScript : MonoBehaviour
             TakeDamage(1);
         }
     }
-
-    /*
-    public void PlayerHealth()
-    {
-        if (health <= 0)
-        {
-            Application.Quit();
-            UnityEditor.EditorApplication.isPlaying = false;
-        }
-    }
-    */
     
     //function to preserve max speed and slowly decrease it depending on if on ground or not
     private float[] Momentum(float speed, float maximumSpeed, float goalMaximumSpeed, float dragMultiplier)
