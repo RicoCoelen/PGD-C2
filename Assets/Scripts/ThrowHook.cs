@@ -30,7 +30,7 @@ public class ThrowHook : MonoBehaviour
             if(firstHook.GetComponent<HookScript>().child != null)
                 firstHook.GetComponent<HookScript>().child.parent = null;
 
-            player.GetComponent<PlayerScript>().chainJump();
+            player.GetComponent<PlayerScript>().ChainJump();
 
             Destroy(firstHook);
 
@@ -54,7 +54,7 @@ public class ThrowHook : MonoBehaviour
             if (secondHook.GetComponent<HookScript>().child != null)
                 secondHook.GetComponent<HookScript>().child.parent = null;
 
-            player.GetComponent<PlayerScript>().chainJump();
+            player.GetComponent<PlayerScript>().ChainJump();
 
             Destroy(secondHook);
 

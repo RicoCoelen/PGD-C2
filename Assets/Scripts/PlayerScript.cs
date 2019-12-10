@@ -43,10 +43,6 @@ public class PlayerScript : MonoBehaviour
 
     private Color originalColor;
 
-    bool sprinting = false;
-    bool crouching = false;
-    bool sliding = false;
-
     GameObject player;
 
     public Sprite crouchSprite;
@@ -82,17 +78,13 @@ public class PlayerScript : MonoBehaviour
     void FixedUpdate()
     {
         Movement();
-        
         PlayerTurn(); 
-        //PlayerHealth();
-
-        hitGround();
-
+        HitGround();
     }
 
     private void Movement()
     {
-        if (isSwinging()) // TODO: rename sprint to isSwinging or similar   
+        if (IsSwinging()) 
         {
             RevisedPlayerMovement(sprintAcceleration, sprintReactionMultiplier, sprintMaxSpeed, dragMultiplier);
         }
@@ -111,7 +103,10 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    private void hitGround()
+    /// <summary>
+    /// Checks if the player lands on the ground this frame
+    /// </summary>
+    private void HitGround()
     {
         if (IsGrounded() && !prevGrounded)
         {
@@ -120,10 +115,10 @@ public class PlayerScript : MonoBehaviour
         prevGrounded = IsGrounded();
     }
 
-    private RaycastHit2D GroundrayCast()
+    private RaycastHit2D GroundrayCast(float xOffset)
     {
-        Vector2 position = (Vector2)transform.position + GetComponent<Collider2D>().bounds.size.y * Vector2.down / 2 - new Vector2(0, 0.2f) + Vector2.right * 0.9f;
-        Vector2 direction = Vector2.left * 1.8f;
+        Vector2 position = (Vector2)transform.position + GetComponent<Collider2D>().bounds.size.y * Vector2.down / 2 - new Vector2(0, 0.2f) + new Vector2(xOffset, 0);
+        Vector2 direction = Vector2.down;
 
         RaycastHit2D hit = Physics2D.Raycast(position, direction, rayLength);
 
@@ -131,7 +126,7 @@ public class PlayerScript : MonoBehaviour
     }
 
     // Give faster speed while attached to the chain
-    private bool isSwinging()
+    private bool IsSwinging()
     {
         if (GetComponent<ThrowHook>().firstHook != null)
             if (GetComponent<ThrowHook>().firstHook.GetComponent<ChainScript>().isFlexible)
@@ -198,9 +193,6 @@ public class PlayerScript : MonoBehaviour
         // Allow changing of the current x velocity.
         float speed = rb.velocity.x;
 
-        
-
-
         if (currentMaxSpeed < goalMaxSpeed)
         {
             currentMaxSpeed = goalMaxSpeed;
@@ -265,19 +257,20 @@ public class PlayerScript : MonoBehaviour
 
         if (!turned)
         {
-            this.transform.rotation = Quaternion.Euler(0, 0, 0);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         else
         {
-            this.transform.rotation = Quaternion.Euler(0, 180, 0);
+            transform.rotation = Quaternion.Euler(0, 180, 0);
         }
 
     }
 
     bool IsGrounded()
     {
-        RaycastHit2D hit = GroundrayCast();
-        if (hit.collider != null)
+        RaycastHit2D hit = GroundrayCast(0.9f);
+        RaycastHit2D hit2 = GroundrayCast(-0.9f);
+        if (hit.collider != null || hit2.collider != null)
         {
             return true;
         }
@@ -296,7 +289,7 @@ public class PlayerScript : MonoBehaviour
         }
 
         // disable gravity while swinging, and also for a small amount of time after releasing the chain to maintain momentum
-        if (chainGravity || (isSwinging() && (Input.GetButton("Right") || Input.GetButton("Left"))))
+        if (chainGravity || (IsSwinging() && (Input.GetButton("Right") || Input.GetButton("Left"))))
         {
             if (chainGravity)
             {
@@ -321,7 +314,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public void chainJump()
+    public void ChainJump()
     {
         if (rb.velocity.y > 7.5f || rb.velocity.y < -7.5f)
         {
