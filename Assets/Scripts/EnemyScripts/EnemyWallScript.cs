@@ -6,9 +6,7 @@ public class EnemyWallScript : MonoBehaviour
 {
     [Header("Wall Check Settings")]
     public GameObject parent;
-    public LayerMask level;
-    public LayerMask objects;
-    public LayerMask enemies;
+    public LayerMask obstacles;
     public bool isWalled = false;
     public float wallCheckDistance;
     private float side;
@@ -34,12 +32,10 @@ public class EnemyWallScript : MonoBehaviour
         }
 
         // raycast
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, sideV, wallCheckDistance, level);
-        RaycastHit2D hit2 = Physics2D.Raycast(transform.position, sideV, wallCheckDistance, objects);
-        RaycastHit2D hit3 = Physics2D.Raycast(transform.position, sideV, wallCheckDistance, enemies);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, sideV, wallCheckDistance, obstacles);
 
         // check if hit level
-        if (hit.collider == true || hit2.collider == true || hit3.collider == true)
+        if (hit.collider == true)
         {
             isWalled = true;
             parent.GetComponent<EnemyMainScript>().isWalled = true;

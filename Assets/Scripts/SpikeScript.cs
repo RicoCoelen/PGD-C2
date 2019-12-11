@@ -19,8 +19,10 @@ public class SpikeScript : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
+        // To come easy and hard mode for diffrent kind of On collisions
+
         if (collision.gameObject.CompareTag("Player"))
         {
             player.GetComponent<PlayerScript>().TakeDamage(spikeDamage);
