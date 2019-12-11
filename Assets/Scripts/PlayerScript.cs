@@ -268,8 +268,8 @@ public class PlayerScript : MonoBehaviour
 
     bool IsGrounded()
     {
-        RaycastHit2D hit = GroundrayCast(0.9f);
-        RaycastHit2D hit2 = GroundrayCast(-0.9f);
+        RaycastHit2D hit = GroundrayCast(GetComponent<Collider2D>().bounds.size.x * 0.5f - 0.1f);
+        RaycastHit2D hit2 = GroundrayCast(GetComponent<Collider2D>().bounds.size.x * -0.5f + 0.1f);
         if (hit.collider != null || hit2.collider != null)
         {
             return true;
