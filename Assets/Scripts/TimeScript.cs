@@ -7,8 +7,8 @@ public class TimeScript : MonoBehaviour
 {
     float startTime;
     float time;
-    string minutes;
-    string seconds;
+    public string minutes;
+    public string seconds;
 
     [SerializeField] Text parTime;
     public string currentParTime = "";
@@ -24,7 +24,7 @@ public class TimeScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         time = Time.time - startTime;
 
