@@ -8,13 +8,18 @@ public class GameManager : MonoBehaviour
 {
     // canvas or screen to hide and show buttons
     public GameObject deathPanel = null;
+    public GameObject winPanel = null;
     public GameObject Player;
 
     // start
     public void Start()
     {
         Time.timeScale = 1;
-        deathPanel.SetActive(false);
+        if (deathPanel != null)
+        {
+            deathPanel.SetActive(false);
+        }
+        
         Player = GameObject.FindWithTag("Player");
     }
 
@@ -82,6 +87,19 @@ public class GameManager : MonoBehaviour
         else
         {
             Quit();
+        }
+    }
+
+    public void GameWin()
+    {
+        if (winPanel != null)
+        {
+            Time.timeScale = 0;
+            winPanel.SetActive(true);
+        }
+        else
+        {
+            PlayNext();
         }
     }
 
