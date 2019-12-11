@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3790710828177811917}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.89, y: -0.92, z: 0}
+  m_LocalPosition: {x: 0.39, y: -0.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3790710829339899794}
@@ -46,7 +46,7 @@ MonoBehaviour:
   parent: {fileID: 3790710829339899784}
   Level:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 33280
   isGrounded: 0
   groundCheckDistance: 0.2
 --- !u!1 &3790710828637393831
@@ -74,7 +74,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3790710828637393831}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.77, y: 0.23, z: 0}
+  m_LocalPosition: {x: 1.1, y: 0.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3790710829339899794}
@@ -93,11 +93,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 3790710829339899784}
-  Level:
+  obstacles:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 35329
   isWalled: 0
-  wallCheckDistance: 0.1
+  wallCheckDistance: 0.3
 --- !u!1 &3790710829339899784
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +191,7 @@ MonoBehaviour:
   movementSpeed: 7
   chasingSpeed: 9
   health: 100
-  fleeLimit: 20
+  fleeLimit: 0.3
   knockBackForce: 10
   flashTime: 1
   cState: 0
@@ -199,8 +199,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   currentTarget: {fileID: 0}
-  PlayerGO: {fileID: 8056905871520868893, guid: d156ac5ccfc0d0f489848362a6382f86,
-    type: 3}
 --- !u!1 &3790710829709959288
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +253,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 244638319351267649, guid: 7c305fc203d31894e96c6a81ef197df0,
     type: 3}
   cooldownShoot: 1
-  shootRange: 10
+  shootRange: 13
   muzzleFlash: {fileID: 0}
 --- !u!1 &6031546187804549035
 GameObject:
@@ -301,11 +299,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchTimer: 5
-  DetectionRange: 13.06
+  DetectionRange: 13.04
   lastDetectionTime: 0
   FOV: 90
-  PlayerGO: {fileID: 8056905871520868893, guid: d156ac5ccfc0d0f489848362a6382f86,
-    type: 3}
   currentTarget: {fileID: 0}
 --- !u!1 &6031546188730919205
 GameObject:
@@ -352,6 +348,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

@@ -133,7 +133,7 @@ public class EnemyMainScript : MonoBehaviour
                 if (isGrounded == true)
                 {
                     chasingSpeed = Mathf.Abs(chasingSpeed);
-                    rb.MovePosition(transform.position + direction * chasingSpeed * Time.deltaTime);
+                    rb.velocity = new Vector2(direction.x * chasingSpeed * Time.deltaTime, rb.velocity.y);
                 }
             }
             else
@@ -143,7 +143,7 @@ public class EnemyMainScript : MonoBehaviour
                 if (isGrounded == true)
                 {
                     chasingSpeed = -Mathf.Abs(chasingSpeed);
-                    rb.MovePosition(transform.position + -direction * chasingSpeed * Time.deltaTime);
+                    rb.velocity = new Vector2(-direction.x * chasingSpeed * Time.deltaTime, rb.velocity.y);
                 }
             }
         }
