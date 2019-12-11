@@ -84,10 +84,10 @@ public class GameManager : MonoBehaviour
             deathPanel.SetActive(true);
             Time.timeScale = 0;
         }
-        else
-        {
-            Quit();
-        }
+        //else
+        //{
+        //    Quit();
+        //}
     }
 
     public void GameWin()
