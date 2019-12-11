@@ -6,11 +6,11 @@ public class SpikeScript : MonoBehaviour
 {
     public GameObject player;
     public float spikeDamage = 1;
+    private float lastUpdate;
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -21,12 +21,14 @@ public class SpikeScript : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        // To come easy and hard mode for diffrent kind of On collisions
-
         if (collision.gameObject.CompareTag("Player"))
         {
-            player.GetComponent<PlayerScript>().TakeDamage(spikeDamage);
-            //Debug.Log("collision");
+            if (Time.time - lastUpdate >= 1f)
+            {
+                player.GetComponent<PlayerScript>().TakeDamage(spikeDamage);
+                lastUpdate = Time.time;
+
+            }
         }
     }
 }
