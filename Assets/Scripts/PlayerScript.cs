@@ -55,6 +55,8 @@ public class PlayerScript : MonoBehaviour
 
     bool prevGrounded = false;
 
+    Vector2 playerLastGroundedPosition = new Vector2(0, 0);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -80,6 +82,7 @@ public class PlayerScript : MonoBehaviour
         Movement();
         PlayerTurn(); 
         HitGround();
+        LastGroundedPosition();
     }
 
     private void Movement()
@@ -114,6 +117,18 @@ public class PlayerScript : MonoBehaviour
         }
         prevGrounded = IsGrounded();
     }
+
+    private void LastGroundedPosition()
+    {
+        RaycastHit2D groundRay = GroundrayCast(GetComponent<Collider2D>().bounds.size.x * 0.5f);
+
+        // Change to colliding with checkpoint
+        if (groundRay.collider.gameObject.name != "Hazards")
+        {
+            playerLastGroundedPosition = groundRay.point + new Vector2(0, GetComponent<Collider2D>().bounds.size.y * 0.5f);
+        }
+    }
+    
 
     private RaycastHit2D GroundrayCast(float xOffset)
     {
@@ -330,6 +345,7 @@ public class PlayerScript : MonoBehaviour
     {
         AudioManager.PlaySound("PlayerHit");
         health = Mathf.Clamp(health -= amount, 0, maxHealth);
+        transform.position = playerLastGroundedPosition;
         //FlashRed();
     }
 
