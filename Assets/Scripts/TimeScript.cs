@@ -9,6 +9,7 @@ public class TimeScript : MonoBehaviour
     float time;
     public string minutes;
     public string seconds;
+    private bool runonce = true;
 
     [SerializeField] Text parTime;
     public string currentParTime = "";
@@ -26,11 +27,21 @@ public class TimeScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        time = Time.time - startTime;
+        if (runonce == true)
+        {
+            if (Input.anyKey && runonce == true)
+            {
+                runonce = false;
+            }
+        } 
+        else
+        {
+            time = Time.time - startTime;
 
-        minutes = ((int) time / 60).ToString();
-        seconds = (time % 60).ToString("f1");
+            minutes = ((int)time / 60).ToString();
+            seconds = (time % 60).ToString("f1");
 
-        gameObject.GetComponent<Text>().text = "Time: " + minutes + ":" + seconds;
+            gameObject.GetComponent<Text>().text = "Time: " + minutes + ":" + seconds;
+        }
     }
 }
