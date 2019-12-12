@@ -48,29 +48,5 @@ public class ThrowHook : MonoBehaviour
             active = true;
         }
 
-        if (Input.GetMouseButtonUp(1) && secondHook != null)
-        {
-
-            if (secondHook.GetComponent<HookScript>().child != null)
-                secondHook.GetComponent<HookScript>().child.parent = null;
-
-            player.GetComponent<PlayerScript>().ChainJump();
-
-            Destroy(secondHook);
-
-            active = false;
-        }
-        else if (Input.GetMouseButtonDown(1) && secondHook == null)
-        {
-            Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            secondHook = Instantiate(hook, transform.position, Quaternion.identity);
-
-            secondHook.GetComponent<ChainScript>().direction = direction;
-
-            secondHook.GetComponent<HookScript>().inputButton = 1;
-
-            active = true;
-        }
     }
 }
