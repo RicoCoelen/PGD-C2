@@ -147,11 +147,6 @@ public class PlayerScript : MonoBehaviour
             if (GetComponent<ThrowHook>().firstHook.GetComponent<ChainScript>().isFlexible)
                 return true;
 
-        if (GetComponent<ThrowHook>().secondHook != null)
-            if (GetComponent<ThrowHook>().secondHook.GetComponent<ChainScript>().isFlexible)
-                return true;
-
-
         return false;
     }
 
@@ -347,6 +342,9 @@ public class PlayerScript : MonoBehaviour
     {
         AudioManager.PlaySound("PlayerHit");
         health = Mathf.Clamp(health -= amount, 0, maxHealth);
+
+        if (GetComponent<ThrowHook>().firstHook != null)
+            Destroy(GetComponent<ThrowHook>().firstHook);
         transform.position = playerLastGroundedPosition;
         //FlashRed();
     }
