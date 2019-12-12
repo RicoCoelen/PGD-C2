@@ -63,6 +63,8 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         //originalColor = renderer.GetComponent<SpriteRenderer>().color;
         player = GameObject.FindGameObjectWithTag("Player");
+
+        playerLastGroundedPosition = transform.position;
     }
 
     private void Awake()
@@ -82,7 +84,6 @@ public class PlayerScript : MonoBehaviour
         Movement();
         PlayerTurn(); 
         HitGround();
-        LastGroundedPosition();
     }
 
     private void Movement()
@@ -118,18 +119,17 @@ public class PlayerScript : MonoBehaviour
         prevGrounded = IsGrounded();
     }
 
-    private void LastGroundedPosition()
+    public void LastGroundedPosition()
     {
-        RaycastHit2D groundRay = GroundrayCast(GetComponent<Collider2D>().bounds.size.x * 0.5f);
+        //RaycastHit2D groundRay = GroundrayCast(GetComponent<Collider2D>().bounds.size.x * 0.5f);
 
         // Change to colliding with checkpoint
-        if (groundRay.collider.gameObject.name != "Hazards")
+        if (IsGrounded())
         {
-            playerLastGroundedPosition = groundRay.point + new Vector2(0, GetComponent<Collider2D>().bounds.size.y * 0.5f);
+            playerLastGroundedPosition = transform.position;
         }
     }
     
-
     private RaycastHit2D GroundrayCast(float xOffset)
     {
         Vector2 position = (Vector2)transform.position + GetComponent<Collider2D>().bounds.size.y * Vector2.down / 2 - new Vector2(0, 0.2f) + new Vector2(xOffset, 0);
@@ -283,12 +283,14 @@ public class PlayerScript : MonoBehaviour
 
     bool IsGrounded()
     {
-        RaycastHit2D hit = GroundrayCast(GetComponent<Collider2D>().bounds.size.x * 0.5f - 0.1f);
-        RaycastHit2D hit2 = GroundrayCast(GetComponent<Collider2D>().bounds.size.x * -0.5f + 0.1f);
+        // Probably get layers set up so you don't need to hardcode what not to jump on.
+        RaycastHit2D hit = GroundrayCast(GetComponent<Collider2D>().bounds.size.x * 0.3f - 0.1f);
+        RaycastHit2D hit2 = GroundrayCast(GetComponent<Collider2D>().bounds.size.x * -0.3f + 0.1f);
         if (hit.collider != null || hit2.collider != null)
         {
             return true;
         }
+
 
         return false;
     }
