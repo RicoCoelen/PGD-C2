@@ -29,6 +29,7 @@ public class TimeScript : MonoBehaviour
     {
         if (runonce == true)
         {
+            startTime = Time.time;
             if (Input.anyKey && runonce == true)
             {
                 runonce = false;
