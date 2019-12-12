@@ -73,7 +73,6 @@ public class GameManager : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
-        UnityEditor.EditorApplication.isPlaying = false;
     }
 
     // function to stop game and show death panel
