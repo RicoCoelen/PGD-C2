@@ -28,7 +28,7 @@ public class GateScript : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collider)
     {
-        if (collider.gameObject.CompareTag("Player") && Input.GetKeyDown(KeyCode.W))
+        if (collider.gameObject.CompareTag("Player") && Input.GetKey(KeyCode.W))
         {
             // find timer and enemy if exist
             Timer = GameObject.Find("Timer");
