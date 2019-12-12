@@ -55,12 +55,16 @@ public class PlayerScript : MonoBehaviour
 
     bool prevGrounded = false;
 
+    Vector2 playerLastGroundedPosition = new Vector2(0, 0);
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         //originalColor = renderer.GetComponent<SpriteRenderer>().color;
         player = GameObject.FindGameObjectWithTag("Player");
+
+        playerLastGroundedPosition = transform.position;
     }
 
     private void Awake()
@@ -115,6 +119,17 @@ public class PlayerScript : MonoBehaviour
         prevGrounded = IsGrounded();
     }
 
+    public void LastGroundedPosition()
+    {
+        //RaycastHit2D groundRay = GroundrayCast(GetComponent<Collider2D>().bounds.size.x * 0.5f);
+
+        // Change to colliding with checkpoint
+        if (IsGrounded())
+        {
+            playerLastGroundedPosition = transform.position;
+        }
+    }
+    
     private RaycastHit2D GroundrayCast(float xOffset)
     {
         Vector2 position = (Vector2)transform.position + GetComponent<Collider2D>().bounds.size.y * Vector2.down / 2 - new Vector2(0, 0.2f) + new Vector2(xOffset, 0);
@@ -131,11 +146,6 @@ public class PlayerScript : MonoBehaviour
         if (GetComponent<ThrowHook>().firstHook != null)
             if (GetComponent<ThrowHook>().firstHook.GetComponent<ChainScript>().isFlexible)
                 return true;
-
-        if (GetComponent<ThrowHook>().secondHook != null)
-            if (GetComponent<ThrowHook>().secondHook.GetComponent<ChainScript>().isFlexible)
-                return true;
-
 
         return false;
     }
@@ -268,12 +278,14 @@ public class PlayerScript : MonoBehaviour
 
     bool IsGrounded()
     {
-        RaycastHit2D hit = GroundrayCast(GetComponent<Collider2D>().bounds.size.x * 0.5f - 0.1f);
-        RaycastHit2D hit2 = GroundrayCast(GetComponent<Collider2D>().bounds.size.x * -0.5f + 0.1f);
+        // Probably get layers set up so you don't need to hardcode what not to jump on.
+        RaycastHit2D hit = GroundrayCast(GetComponent<Collider2D>().bounds.size.x * 0.3f - 0.1f);
+        RaycastHit2D hit2 = GroundrayCast(GetComponent<Collider2D>().bounds.size.x * -0.3f + 0.1f);
         if (hit.collider != null || hit2.collider != null)
         {
             return true;
         }
+
 
         return false;
     }
@@ -330,6 +342,10 @@ public class PlayerScript : MonoBehaviour
     {
         AudioManager.PlaySound("PlayerHit");
         health = Mathf.Clamp(health -= amount, 0, maxHealth);
+
+        if (GetComponent<ThrowHook>().firstHook != null)
+            Destroy(GetComponent<ThrowHook>().firstHook);
+        transform.position = playerLastGroundedPosition;
         //FlashRed();
     }
 
