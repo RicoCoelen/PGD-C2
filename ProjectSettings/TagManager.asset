@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Grabable
   - Anchored Grabable
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
