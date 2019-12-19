@@ -4869,8 +4869,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   rb: {fileID: -4799548866590049776}
-  minDamage: 2
-  maxDamage: 2
+  minDamage: 1
+  maxDamage: 1
 --- !u!50 &-4799548866590049776
 Rigidbody2D:
   serializedVersion: 4
