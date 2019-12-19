@@ -57,6 +57,8 @@ public class PlayerScript : MonoBehaviour
     Vector2 playerLastGroundedPosition = new Vector2(0, 0);
     private Vector2 jump;
 
+    int directionSwinging = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,13 +78,18 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         MovementJump();
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         Movement();
-        PlayerTurn(); 
+        PlayerTurn();
+        if (IsSwinging())
+        {
+            Rotation();
+        }
         HitGround();
     }
 
@@ -144,10 +151,23 @@ public class PlayerScript : MonoBehaviour
     private bool IsSwinging()
     {
         if (GetComponent<ThrowHook>().firstHook != null)
+        {
             if (GetComponent<ThrowHook>().firstHook.GetComponent<ChainScript>().isFlexible)
+            {
+                if (directionSwinging == 0)
+                {
+                    if (turned)
+                        directionSwinging = 1;
+                    else
+                        directionSwinging = 2;
+                }
                 return true;
-
+            }
+        }
+        directionSwinging = 0;
+        GetComponentInChildren<SpriteRenderer>().flipX = false;
         return false;
+
     }
 
     // Debug function
@@ -256,11 +276,11 @@ public class PlayerScript : MonoBehaviour
     void PlayerTurn()
     {
         // Turn the player around if they are moving in one direction above a certain speed
-        if (rb.velocity.x > 5)
+        if (rb.velocity.x > 0)
         {
             turned = false;
         }
-        if (rb.velocity.x < -5)
+        if (rb.velocity.x < 0)
         {
             turned = true;
         }
@@ -359,6 +379,28 @@ public class PlayerScript : MonoBehaviour
     void ResetColor()
     {
         //renderer.GetComponent<SpriteRenderer>().color = originalColor;
+    }
+
+    void Rotation()
+    {
+        var playerToHookDirection = (GetComponent<ThrowHook>().firstHook.transform.position - (Vector3)transform.position).normalized;
+        var angle = Mathf.Atan2(playerToHookDirection.y, playerToHookDirection.x) * Mathf.Rad2Deg;
+
+        if (directionSwinging == 1)
+        {
+            GetComponentInChildren<SpriteRenderer>().flipX = true;
+        }
+        else if (directionSwinging == 2)
+        {
+            GetComponentInChildren<SpriteRenderer>().flipX = false;
+        }
+        transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+        var nodes = GameObject.FindGameObjectsWithTag("Node");
+        foreach(GameObject node in nodes)
+        {
+            node.transform.rotation = transform.rotation;
+        }
+
     }
 
 }

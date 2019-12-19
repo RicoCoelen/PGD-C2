@@ -181,7 +181,14 @@ public class ChainScript : MonoBehaviour
         pos2Create *= interfal;
         pos2Create += (Vector2)lastNode.transform.position;
 
+        var playerToHookDirection = (GetComponent<Rigidbody2D>().transform.position - (Vector3) startingPoint).normalized;
+        var angle = Mathf.Atan2(playerToHookDirection.y, playerToHookDirection.x) * Mathf.Rad2Deg;
+
+
+
         GameObject go = Instantiate(node, pos2Create, Quaternion.identity);
+
+        go.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
 
         nodes.Add(go);
 
