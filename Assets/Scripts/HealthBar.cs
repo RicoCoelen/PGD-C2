@@ -12,6 +12,7 @@ public class HealthBar : MonoBehaviour
 
     private void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         // Get the playerscript
         playerScript = player.GetComponent<PlayerScript>();
     }

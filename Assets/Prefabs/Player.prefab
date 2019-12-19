@@ -193,7 +193,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &8056905871520868891
 MonoBehaviour:
@@ -208,17 +208,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 15
-  sprintMaxSpeed: 35
+  swingingMaxSpeed: 100
   maxAcceleration: 80
-  sprintAcceleration: 65
-  drag: 80
+  swingingAcceleration: 80
+  drag: 70
   reactionMultiplier: 1
-  sprintReactionMultiplier: -0.4
+  swingingReactionMultiplier: 0.25
   moveSpeed: 60
   hillMultiplier: 300
   dragMultiplier: 0.5
   slideDragMultiplier: 0.2
-  airDragMultiplier: 0.15
+  airDragMultiplier: 0.02
   jumpVelocity: 25
   fallMultiplier: 7.5
   gravityMultiplier: 2.75
@@ -229,7 +229,6 @@ MonoBehaviour:
   maxHealth: 3
   health: 3
   flashTime: 1
-  crouchSprite: {fileID: 21300000, guid: 13ffcb33d80c201468414dad0a71fdf6, type: 3}
   sprite: {fileID: 21300000, guid: 4d98756ca6f27f642b02fd9b59db5d8e, type: 3}
   defaultTime: 20
 --- !u!114 &8056905871520868890

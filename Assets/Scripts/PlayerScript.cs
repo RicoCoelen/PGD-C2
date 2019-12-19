@@ -8,12 +8,12 @@ public class PlayerScript : MonoBehaviour
 
     [Header("MoveSpeed settings")]
     public float maxSpeed = 80f;
-    public float sprintMaxSpeed = 100f;
+    public float swingingMaxSpeed = 100f;
     public float maxAcceleration = 40f;
-    public float sprintAcceleration = 80f;
+    public float swingingAcceleration = 80f;
     public float drag = 40f;
     public float reactionMultiplier = 0.5f;
-    public float sprintReactionMultiplier = 0.25f;
+    public float swingingReactionMultiplier = 0.25f;
 
     public float moveSpeed = 60f;
     float currentMaxSpeed;
@@ -45,7 +45,6 @@ public class PlayerScript : MonoBehaviour
 
     GameObject player;
 
-    public Sprite crouchSprite;
     public Sprite sprite;
 
     bool chainGravity = false;
@@ -56,6 +55,7 @@ public class PlayerScript : MonoBehaviour
     bool prevGrounded = false;
 
     Vector2 playerLastGroundedPosition = new Vector2(0, 0);
+    private Vector2 jump;
 
     // Start is called before the first frame update
     void Start()
@@ -90,7 +90,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (IsSwinging()) 
         {
-            RevisedPlayerMovement(sprintAcceleration, sprintReactionMultiplier, sprintMaxSpeed, dragMultiplier);
+            RevisedPlayerMovement(swingingAcceleration, swingingReactionMultiplier, swingingMaxSpeed, dragMultiplier);
         }
         else
         {
@@ -297,7 +297,8 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetButtonDown("Jump") && (IsGrounded()))
         {
             AudioManager.PlaySound("Jump");
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + jumpVelocity);
+            jump = new Vector2(0, jumpVelocity);
+            rb.AddForce(jump, ForceMode2D.Impulse);
         }
 
         // disable gravity while swinging, and also for a small amount of time after releasing the chain to maintain momentum
