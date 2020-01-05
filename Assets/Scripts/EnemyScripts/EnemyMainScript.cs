@@ -107,6 +107,7 @@ public class EnemyMainScript : MonoBehaviour
         {
             if (isGrounded == false || isWalled == true)
             {
+                rb.velocity = Vector2.zero;
                 movementSpeed *= -1;
                 facingRight = !facingRight;
             }
@@ -128,22 +129,18 @@ public class EnemyMainScript : MonoBehaviour
 
             if (currentTarget.transform.position.x > transform.position.x)
             {
-                facingRight = true;
-                
                 if (isGrounded == true)
                 {
                     chasingSpeed = Mathf.Abs(chasingSpeed);
-                    rb.velocity = new Vector2(direction.x * chasingSpeed * Time.deltaTime, rb.velocity.y);
+                    rb.velocity = new Vector2(direction.x * chasingSpeed, rb.velocity.y);
                 }
             }
             else
             {
-                facingRight = false;
-                
                 if (isGrounded == true)
                 {
                     chasingSpeed = -Mathf.Abs(chasingSpeed);
-                    rb.velocity = new Vector2(-direction.x * chasingSpeed * Time.deltaTime, rb.velocity.y);
+                    rb.velocity = new Vector2(-direction.x * chasingSpeed, rb.velocity.y);
                 }
             }
         }
