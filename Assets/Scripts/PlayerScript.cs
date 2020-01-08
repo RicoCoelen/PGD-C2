@@ -191,7 +191,15 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            finalDrag = (drag * airDragMultiplier);
+            // Increase airdrag while not holding the movement keys
+            if (!Input.GetButton("Right") && !Input.GetButton("Left"))
+            {
+                finalDrag = (drag * airDragMultiplier * 3f);
+            }
+            else
+            {
+                finalDrag = (drag * airDragMultiplier);
+            }
         }
 
         // if no movement keys are pressed lower or increase speed by the drag value until it goes back to 0

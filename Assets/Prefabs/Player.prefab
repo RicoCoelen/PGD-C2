@@ -69,7 +69,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 3b9c3646fcaa6e941b73b72cdb07b926, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -216,9 +216,9 @@ MonoBehaviour:
   swingingReactionMultiplier: 0.25
   moveSpeed: 60
   hillMultiplier: 300
-  dragMultiplier: 0.5
+  dragMultiplier: 0.75
   slideDragMultiplier: 0.2
-  airDragMultiplier: 0.02
+  airDragMultiplier: 0.05
   jumpVelocity: 25
   fallMultiplier: 7.5
   gravityMultiplier: 2.75
