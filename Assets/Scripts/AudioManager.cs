@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
         enemyHit = Resources.Load<AudioClip>("Hit_Enemy");
 
 
+
         audioSource = GetComponent<AudioSource>();
     }
 
