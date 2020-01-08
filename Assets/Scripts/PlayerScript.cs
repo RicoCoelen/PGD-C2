@@ -62,6 +62,8 @@ public class PlayerScript : MonoBehaviour
     AudioSource audioSource;
     public static AudioClip playerFootstep;
 
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -80,11 +82,24 @@ public class PlayerScript : MonoBehaviour
         currentMaxSpeed = maxSpeed;
     }
 
+    void Animation()
+    {
+        if (IsSwinging())
+        {
+            animator.SetBool("IsSwinging", true);
+        }
+        else
+        {
+            animator.SetBool("IsSwinging", false);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         MovementJump();
         Audio();
+        Animation();
     }
 
     // Update is called once per frame
@@ -99,7 +114,6 @@ public class PlayerScript : MonoBehaviour
         HitGround();
     }
 
-    [System.Obsolete]
     public void Audio()
     {
         if ((rb.velocity.x < -1 || rb.velocity.x > 1))
@@ -107,8 +121,8 @@ public class PlayerScript : MonoBehaviour
             if (!audioSource.isPlaying && IsGrounded())
             {
                 audioSource.clip = playerFootstep;
-                audioSource.volume = Random.RandomRange(0.8f, 1f);
-                audioSource.pitch = Random.RandomRange(0.8f, 1.1f);
+                audioSource.volume = Random.Range(0.8f, 1f);
+                audioSource.pitch = Random.Range(0.8f, 1.1f);
                 audioSource.Play();
             }
         }

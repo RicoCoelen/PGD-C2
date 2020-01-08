@@ -175,7 +175,7 @@ public class ChainScript : MonoBehaviour
     /// </summary>
     void CreateNode()
     {
-
+        
         Vector2 pos2Create = player.transform.position - lastNode.transform.position;
         pos2Create.Normalize();
         pos2Create *= interfal;
