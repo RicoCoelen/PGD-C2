@@ -59,6 +59,9 @@ public class PlayerScript : MonoBehaviour
 
     int directionSwinging = 0;
 
+    AudioSource audioSource;
+    public static AudioClip playerFootstep;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +70,9 @@ public class PlayerScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
 
         playerLastGroundedPosition = transform.position;
+        playerFootstep = Resources.Load<AudioClip>("footstep");
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Awake()
@@ -78,7 +84,7 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         MovementJump();
-        
+        Audio();
     }
 
     // Update is called once per frame
@@ -91,6 +97,21 @@ public class PlayerScript : MonoBehaviour
             Rotation();
         }
         HitGround();
+    }
+
+    [System.Obsolete]
+    public void Audio()
+    {
+        if ((rb.velocity.x < -1 || rb.velocity.x > 1))
+        {
+            if (!audioSource.isPlaying && IsGrounded())
+            {
+                audioSource.clip = playerFootstep;
+                audioSource.volume = Random.RandomRange(0.8f, 1f);
+                audioSource.pitch = Random.RandomRange(0.8f, 1.1f);
+                audioSource.Play();
+            }
+        }
     }
 
     private void Movement()
@@ -239,7 +260,6 @@ public class PlayerScript : MonoBehaviour
             {
                 speed += (currentAcceleration * Time.deltaTime);
             }
-
         }
         else if (Input.GetButton("Left"))
         {
@@ -305,7 +325,6 @@ public class PlayerScript : MonoBehaviour
         {
             return true;
         }
-
 
         return false;
     }
