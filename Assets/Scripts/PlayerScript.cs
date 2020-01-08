@@ -171,7 +171,7 @@ public class PlayerScript : MonoBehaviour
     // Give faster speed while attached to the chain
     private bool IsSwinging()
     {
-        if (GetComponent<ThrowHook>().firstHook != null)
+        if (GetComponent<ThrowHook>().firstHook != null && !IsGrounded())
         {
             if (GetComponent<ThrowHook>().firstHook.GetComponent<ChainScript>().isFlexible)
             {
