@@ -4,10 +4,22 @@ using UnityEngine;
 
 public class music : MonoBehaviour
 {
-    void Awake()
+    public AudioClip otherClip;
+    AudioSource audioSource;
+
+    void Start()
     {
-        DontDestroyOnLoad(transform.gameObject);
+        audioSource = GetComponent<AudioSource>();
     }
 
+    void Update()
+    {
+        if (!audioSource.isPlaying)
+        {
+            audioSource.clip = otherClip;
+            audioSource.Play();
+            DontDestroyOnLoad(transform.gameObject);
 
+        }
+    }
 }
