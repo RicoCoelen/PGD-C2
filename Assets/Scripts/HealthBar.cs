@@ -22,6 +22,6 @@ public class HealthBar : MonoBehaviour
     {
         // Change the fillamount of the healthbar based on the players current and maxhealth
         health.GetComponent<Image>().fillAmount = playerScript.health / playerScript.maxHealth;
-        text.GetComponent<Text>().text = "Health: " + playerScript.health;
+        text.GetComponent<Text>().text = "Lives: " + playerScript.health;
     }
 }
