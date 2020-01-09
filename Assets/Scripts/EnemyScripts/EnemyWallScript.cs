@@ -49,6 +49,6 @@ public class EnemyWallScript : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        Gizmos.DrawLine(transform.position, new Vector3(side, transform.position.y, transform.position.z));
+        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x + wallCheckDistance, transform.position.y, transform.position.z));
     }
 }

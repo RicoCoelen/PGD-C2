@@ -27,6 +27,8 @@ public class EnemyMainScript : MonoBehaviour
     public GameObject currentTarget = null;
     private GameObject PlayerGO;
 
+    public Animator animator;
+
     // State Types
     public enum State
     {
@@ -75,10 +77,10 @@ public class EnemyMainScript : MonoBehaviour
     void FlipCorrection()
     {
         // check velocity and let enemy stay left after walking
-        if (rb.velocity.x > 0 && !facingRight || rb.velocity.x < 0 && facingRight)
-        {
-            facingRight = !facingRight;
-        }
+        //if (rb.velocity.x > 0 && !facingRight || rb.velocity.x < 0 && facingRight)
+        //{
+        //    facingRight = !facingRight;
+        //}
 
         // rotate gameobject
         if (facingRight == true)
@@ -105,6 +107,8 @@ public class EnemyMainScript : MonoBehaviour
         }
         else
         {
+            animator.SetBool("isAiming", false);
+
             if (isGrounded == false || isWalled == true)
             {
                 movementSpeed *= -1;
@@ -122,31 +126,23 @@ public class EnemyMainScript : MonoBehaviour
         }
         else
         {
-            // move current rigidbody to tracked player
-            Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
-            direction.y = 0;
+            animator.SetBool("isAiming", true);
 
-            if (currentTarget.transform.position.x > transform.position.x)
+            // Stand still and aim at the player
+            rb.velocity = new Vector2(0, rb.velocity.y);
+
+            // Get direction to the player
+            if (currentTarget.transform.position.x < transform.position.x)
             {
-                facingRight = true;
-                
-                if (isGrounded == true)
-                {
-                    chasingSpeed = Mathf.Abs(chasingSpeed);
-                    rb.velocity = new Vector2(direction.x * chasingSpeed * Time.deltaTime, rb.velocity.y);
-                }
+                facingRight = false;
             }
             else
             {
-                facingRight = false;
-                
-                if (isGrounded == true)
-                {
-                    chasingSpeed = -Mathf.Abs(chasingSpeed);
-                    rb.velocity = new Vector2(-direction.x * chasingSpeed * Time.deltaTime, rb.velocity.y);
-                }
+                facingRight = true;
             }
+            
         }
+
     }
 
     public void TakeDamage(float amount)
