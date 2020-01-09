@@ -100,12 +100,13 @@ public class PlayerScript : MonoBehaviour
         MovementJump();
         Audio();
         Animation();
+        Movement();
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Movement();
         PlayerTurn();
         if (IsSwinging())
         {
