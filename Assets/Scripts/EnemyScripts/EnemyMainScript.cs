@@ -27,6 +27,7 @@ public class EnemyMainScript : MonoBehaviour
     private GameObject PlayerGO;
 
     public Animator animator;
+    public GameObject visorLight;
 
     // State Types
     public enum State
@@ -85,10 +86,12 @@ public class EnemyMainScript : MonoBehaviour
         if (facingRight == true)
         {
             transform.localRotation = Quaternion.Euler(0, 0, 0);
+            visorLight.transform.rotation = Quaternion.Euler(0, 0, -90);
         }
         else
         {
             transform.localRotation = Quaternion.Euler(0, 180, 0);
+            visorLight.transform.rotation = Quaternion.Euler(0, 0, 90);
         }
     }
 
@@ -130,6 +133,8 @@ public class EnemyMainScript : MonoBehaviour
             // Stand still and aim at the player
             rb.velocity = new Vector2(0, rb.velocity.y);
 
+
+
             // Get direction to the player
             if (currentTarget.transform.position.x < transform.position.x)
             {
@@ -139,7 +144,13 @@ public class EnemyMainScript : MonoBehaviour
             {
                 facingRight = true;
             }
-            
+
+            // Get the angle to the player and rotate the visor light towards them
+            Vector3 difference = currentTarget.transform.position - transform.position;
+            float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+            rotationZ -= 90;
+            visorLight.transform.rotation = Quaternion.Euler(0, 0, rotationZ);
+
         }
 
     }

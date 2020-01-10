@@ -15,7 +15,6 @@ public class EnemyAttackScript : MonoBehaviour
     public GameObject muzzleFlash;
     private float timeToShoot;
     private Vector3 direction;
-    
 
     private void Start()
     {
@@ -32,7 +31,6 @@ public class EnemyAttackScript : MonoBehaviour
         {
             direction = (GetComponentInParent<EnemyMainScript>().currentTarget.transform.position - transform.position).normalized;
         }
-       
     }
 
     private void TryShoot()
