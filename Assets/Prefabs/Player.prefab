@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3673756227256967058}
   - component: {fileID: 424893105346346067}
   - component: {fileID: 4636866807461089879}
+  - component: {fileID: 7231093200323991298}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -50,7 +51,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,6 +102,44 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7231093200323991298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5925130785970647039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000117527d6
+  m_ShapePath:
+  - {x: -0.36995924, y: -0.9760786, z: 0}
+  - {x: -0.13661349, y: -0.9396137, z: 0}
+  - {x: 0.032004893, y: -0.44287324, z: 0}
+  - {x: 0.21429498, y: -0.9897435, z: 0}
+  - {x: 0.42401958, y: -0.9825913, z: 0}
+  - {x: 0.20062318, y: -0.33805642, z: 0}
+  - {x: 0.20062318, y: 0.11766887, z: 0}
+  - {x: 0.45582935, y: -0.12386553, z: 0}
+  - {x: 0.5739818, y: -0.098832786, z: 0}
+  - {x: 0.15960795, y: 0.45946276, z: 0}
+  - {x: 0.14872313, y: 0.8128031, z: 0}
+  - {x: -0.13556755, y: 0.8157053, z: 0}
+  - {x: -0.29109263, y: 0.45828116, z: 0}
+  - {x: -0.49215806, y: 0.14938495, z: 0}
+  - {x: -0.49984992, y: -0.114662394, z: 0}
+  - {x: -0.2729218, y: -0.32319087, z: 0}
+  m_ShapePathHash: -2054066432
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 78016
 --- !u!1 &8056905871520868893
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,7 +572,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
