@@ -4867,10 +4867,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6096f9e2172da4a429d2cc97487a36b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 10
   rb: {fileID: -4799548866590049776}
   minDamage: 1
   maxDamage: 1
+  direction: {x: 0, y: 0, z: 0}
 --- !u!50 &-4799548866590049776
 Rigidbody2D:
   serializedVersion: 4
@@ -4886,7 +4887,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.1
+  m_GravityScale: 0.05
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

@@ -8,12 +8,12 @@ public class BulletScript : MonoBehaviour
     public Rigidbody2D rb;
     public int minDamage;
     public int maxDamage;
-
+    public Vector3 direction;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb.velocity = transform.right * speed;
+        rb.velocity = direction * speed;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

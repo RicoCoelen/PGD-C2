@@ -247,8 +247,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
-  maxHealth: 3
-  health: 3
+  maxHealth: 5
+  health: 5
   flashTime: 1
   sprite: {fileID: 21300000, guid: 4d98756ca6f27f642b02fd9b59db5d8e, type: 3}
   defaultTime: 20

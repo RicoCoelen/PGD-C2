@@ -12,7 +12,6 @@ public class EnemyMainScript : MonoBehaviour
 
     [Header("Enemy Stats")]
     public float movementSpeed = 10f;
-    public float chasingSpeed = 10f;
     public float health = 100f;
     public float fleeLimit = 20f;
     public float knockBackForce = 10f;
@@ -103,7 +102,7 @@ public class EnemyMainScript : MonoBehaviour
     {
         if (currentTarget != null)
         {
-            cState = State.CHASING;
+            cState = State.CHASING;        
         }
         else
         {

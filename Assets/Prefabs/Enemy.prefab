@@ -188,8 +188,7 @@ MonoBehaviour:
   facingRight: 1
   isGrounded: 0
   isWalled: 0
-  movementSpeed: 7
-  chasingSpeed: 9
+  movementSpeed: 3
   health: 100
   fleeLimit: 0.3
   knockBackForce: 10
@@ -225,7 +224,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3790710829709959288}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.636, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3790710829339899794}
@@ -246,15 +245,12 @@ MonoBehaviour:
   Player:
     serializedVersion: 2
     m_Bits: 256
-  isStabbing: 0
-  attackRange: 1.2
-  cooldownAttack: 1
-  meleeDamage: 1
+  playerPosition: {fileID: 0}
   isShooting: 0
   bulletPrefab: {fileID: 244638319351267649, guid: 7c305fc203d31894e96c6a81ef197df0,
     type: 3}
-  cooldownShoot: 1
-  shootRange: 13
+  cooldownShoot: 1.5
+  shootRange: 15
   muzzleFlash: {fileID: 0}
 --- !u!1 &6031546187804549035
 GameObject:

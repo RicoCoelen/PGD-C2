@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class EnemyAttackScript : MonoBehaviour
 {
-    [Header("Melee Attack")]
     public LayerMask Player;
-    public bool isStabbing = false;
-    public float attackRange;
-    public float cooldownAttack;
-    public float meleeDamage;
-    private float timeToAttack;
+    public GameObject playerPosition;
 
     [Header("Ranged Attack")]
     public bool isShooting = false;
@@ -19,33 +14,35 @@ public class EnemyAttackScript : MonoBehaviour
     public float shootRange;
     public GameObject muzzleFlash;
     private float timeToShoot;
-    private Vector2 direction;
+    private Vector3 direction;
+    
 
-
+    private void Start()
+    {
+        // Enabel shooting cooldown on start
+        timeToShoot = cooldownShoot;
+    }
     // Update is called once per frame
     void Update()
     {
-        TryMelee();
         TryShoot();
 
         // check if player is left or right in sights
-        if (GetComponentInParent<EnemyMainScript>().facingRight == true)
+        if (GetComponentInParent<EnemyMainScript>().currentTarget != null)
         {
-            direction = Vector2.right;
+            direction = (GetComponentInParent<EnemyMainScript>().currentTarget.transform.position - transform.position).normalized;
         }
-        else
-        {
-            direction = Vector2.left;
-        }
+       
     }
 
     private void TryShoot()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, shootRange, Player);
+        //Debug.DrawLine(transform.position, transform.position + direction * shootRange);
 
         if (hit.collider == true)
         {
-            // melee attack
+            // shooting attack
             if (timeToShoot <= 0)
             {
                 isShooting = true;
@@ -54,6 +51,7 @@ public class EnemyAttackScript : MonoBehaviour
                     Instantiate(muzzleFlash, transform.position, transform.rotation);
                 }
                 GameObject temp = Instantiate(bulletPrefab, transform.position, transform.rotation);
+                temp.gameObject.GetComponent<BulletScript>().direction = direction;
 
                 AudioManager.PlaySound("EnemyShot");
 
@@ -69,50 +67,10 @@ public class EnemyAttackScript : MonoBehaviour
         }
     }
 
-    private void TryMelee()
-    {
-        // melee attack
-        if (timeToAttack <= 0)
-        {
-            // check if something enters collision area
-            Collider2D[] playerToDamage = Physics2D.OverlapCircleAll(transform.position, attackRange, Player);
-
-            // if not empty
-            if (playerToDamage.Length > 0)
-            {
-                // activate animation
-                isStabbing = true;
-                // loop trough attacked game objects
-                for (int i = 0; i < playerToDamage.Length; i++)
-                {
-                    if (playerToDamage[i].gameObject.CompareTag("Player"))
-                    {
-                        playerToDamage[i].GetComponent<PlayerScript>().TakeDamage(meleeDamage);
-                    }
-                }
-            }
-            else
-            {
-                // stop animation
-                isStabbing = false;
-            }
-            // reset timer
-            timeToAttack = cooldownAttack;
-        }
-        else
-        {
-            // reset timer
-            timeToAttack -= Time.deltaTime;
-        }
-    }
-
     void OnDrawGizmosSelected()
     {
-        // attack zone
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-
         // shoot raycast
-        Gizmos.DrawLine(transform.position, transform.position + new Vector3(direction.x * shootRange, 0, 0));
+        Gizmos.color = Color.red;
+        //Gizmos.DrawLine(transform.position, transform.position + direction * shootRange);
     }
 }
