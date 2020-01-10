@@ -12,6 +12,7 @@ public class EnemyMainScript : MonoBehaviour
 
     [Header("Enemy Stats")]
     public float movementSpeed = 10f;
+    private float currentMoveSpeed;
     public float health = 100f;
     public float fleeLimit = 20f;
     public float knockBackForce = 10f;
@@ -76,22 +77,25 @@ public class EnemyMainScript : MonoBehaviour
 
     void FlipCorrection()
     {
-        // check velocity and let enemy stay left after walking
-        //if (rb.velocity.x > 0 && !facingRight || rb.velocity.x < 0 && facingRight)
-        //{
-        //    facingRight = !facingRight;
-        //}
-
         // rotate gameobject
         if (facingRight == true)
         {
-            transform.localRotation = Quaternion.Euler(0, 0, 0);
-            visorLight.transform.rotation = Quaternion.Euler(0, 0, -90);
+            transform.rotation = Quaternion.Euler(0, 0, 0);          
+            currentMoveSpeed = movementSpeed;
+            if (currentTarget == null)
+            {
+                visorLight.transform.rotation = Quaternion.Euler(0, 0, -90);
+            }
+
         }
         else
         {
-            transform.localRotation = Quaternion.Euler(0, 180, 0);
-            visorLight.transform.rotation = Quaternion.Euler(0, 0, 90);
+            transform.rotation = Quaternion.Euler(0, 180, 0);        
+            currentMoveSpeed = -movementSpeed;
+            if (currentTarget == null)
+            {
+                visorLight.transform.rotation = Quaternion.Euler(0, 0, 90);
+            }
         }
     }
 
@@ -113,10 +117,10 @@ public class EnemyMainScript : MonoBehaviour
 
             if (isGrounded == false || isWalled == true)
             {
-                movementSpeed *= -1;
                 facingRight = !facingRight;
+                FlipCorrection();
             }
-            rb.velocity = new Vector2(movementSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(currentMoveSpeed, rb.velocity.y);
         }
     }
 
@@ -133,8 +137,6 @@ public class EnemyMainScript : MonoBehaviour
             // Stand still and aim at the player
             rb.velocity = new Vector2(0, rb.velocity.y);
 
-
-
             // Get direction to the player
             if (currentTarget.transform.position.x < transform.position.x)
             {
@@ -144,12 +146,6 @@ public class EnemyMainScript : MonoBehaviour
             {
                 facingRight = true;
             }
-
-            // Get the angle to the player and rotate the visor light towards them
-            Vector3 difference = currentTarget.transform.position - transform.position;
-            float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-            rotationZ -= 90;
-            visorLight.transform.rotation = Quaternion.Euler(0, 0, rotationZ);
 
         }
 

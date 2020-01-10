@@ -266,7 +266,7 @@ MonoBehaviour:
   health: 100
   fleeLimit: 0.3
   knockBackForce: 10
-  flashTime: 1
+  flashTime: 0.25
   cState: 0
   Player:
     serializedVersion: 2
@@ -309,7 +309,7 @@ MonoBehaviour:
   - {x: -0.7538972, y: -0.41178375, z: 0}
   m_ShapePathHash: 1138282197
   m_Mesh: {fileID: 0}
-  m_InstanceId: 70828
+  m_InstanceId: 54200
 --- !u!1 &3790710829709959288
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,7 +335,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3790710829709959288}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 0.5, z: 0}
+  m_LocalPosition: {x: 1.5, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3790710829339899794}
@@ -357,10 +357,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   playerPosition: {fileID: 0}
+  visorLight: {fileID: 2609299514907741607}
   isShooting: 0
   bulletPrefab: {fileID: 244638319351267649, guid: 7c305fc203d31894e96c6a81ef197df0,
     type: 3}
-  cooldownShoot: 1.5
+  cooldownShoot: 0.5
   shootRange: 15
   muzzleFlash: {fileID: 0}
 --- !u!1 &6031546187804549035
@@ -406,11 +407,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cf58c6fc461fe04e9cac3dcb8a2cb2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  searchTimer: 5
+  searchTimer: 2
   DetectionRange: 13.04
   lastDetectionTime: 0
   FOV: 90
   currentTarget: {fileID: 0}
+  visorLight: {fileID: 2609299514907741607}
 --- !u!1 &6031546188730919205
 GameObject:
   m_ObjectHideFlags: 0

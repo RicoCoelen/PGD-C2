@@ -6,6 +6,7 @@ public class EnemyAttackScript : MonoBehaviour
 {
     public LayerMask Player;
     public GameObject playerPosition;
+    public GameObject visorLight;
 
     [Header("Ranged Attack")]
     public bool isShooting = false;
@@ -15,21 +16,28 @@ public class EnemyAttackScript : MonoBehaviour
     public GameObject muzzleFlash;
     private float timeToShoot;
     private Vector3 direction;
+    
 
     private void Start()
     {
-        // Enabel shooting cooldown on start
-        timeToShoot = cooldownShoot;
+        // Enable shooting cooldown on start
+        resetTimeToShoot();
+        playerPosition = GameObject.FindGameObjectWithTag("Player");
     }
+
     // Update is called once per frame
     void Update()
     {
-        TryShoot();
-
+        
         // check if player is left or right in sights
         if (GetComponentInParent<EnemyMainScript>().currentTarget != null)
         {
-            direction = (GetComponentInParent<EnemyMainScript>().currentTarget.transform.position - transform.position).normalized;
+            direction = (playerPosition.transform.position - transform.position).normalized;
+            TryShoot();
+
+        } else
+        {
+            resetTimeToShoot();
         }
     }
 
@@ -40,6 +48,12 @@ public class EnemyAttackScript : MonoBehaviour
 
         if (hit.collider == true)
         {
+            // Get the angle to the player and rotate the visor light towards them
+            Vector3 difference = playerPosition.transform.position - transform.position;
+            float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+            rotationZ -= 90;
+            visorLight.transform.rotation = Quaternion.Euler(0, 0, rotationZ);
+
             // shooting attack
             if (timeToShoot <= 0)
             {
@@ -63,6 +77,10 @@ public class EnemyAttackScript : MonoBehaviour
                 timeToShoot -= Time.deltaTime;
             }
         }
+    }
+    public void resetTimeToShoot()
+    {
+        timeToShoot = cooldownShoot;
     }
 
     void OnDrawGizmosSelected()
