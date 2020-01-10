@@ -139,7 +139,7 @@ MonoBehaviour:
   - {x: -0.2729218, y: -0.32319087, z: 0}
   m_ShapePathHash: -2054066432
   m_Mesh: {fileID: 0}
-  m_InstanceId: 78016
+  m_InstanceId: 45982
 --- !u!1 &8056905871520868893
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,8 +231,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.108807504, y: -0.1274724}
-  m_Size: {x: 1.997615, y: 3.6172323}
+  m_Offset: {x: 0.03910923, y: -0.16333127}
+  m_Size: {x: 2.1320848, y: 3.68895}
   m_Direction: 0
 --- !u!50 &8056905871520868892
 Rigidbody2D:
