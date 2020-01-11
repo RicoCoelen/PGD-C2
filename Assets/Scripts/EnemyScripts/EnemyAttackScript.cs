@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class EnemyAttackScript : MonoBehaviour
 {
-    [Header("Melee Attack")]
     public LayerMask Player;
-    public bool isStabbing = false;
-    public float attackRange;
-    public float cooldownAttack;
-    public float meleeDamage;
-    private float timeToAttack;
+    public GameObject playerPosition;
+    public GameObject visorLight;
+    public bool canSeeEnemy;
 
     [Header("Ranged Attack")]
     public bool isShooting = false;
@@ -19,100 +16,86 @@ public class EnemyAttackScript : MonoBehaviour
     public float shootRange;
     public GameObject muzzleFlash;
     private float timeToShoot;
-    private Vector2 direction;
+    private Vector3 direction;
 
+    
+    private void Start()
+    {
+        // Enable shooting cooldown on start
+        resetTimeToShoot();
+        playerPosition = GameObject.FindGameObjectWithTag("Player");
+    }
 
     // Update is called once per frame
     void Update()
     {
-        TryMelee();
-        TryShoot();
-
+        
         // check if player is left or right in sights
-        if (GetComponentInParent<EnemyMainScript>().facingRight == true)
+        if (GetComponentInParent<EnemyMainScript>().currentTarget != null)
         {
-            direction = Vector2.right;
-        }
-        else
+            direction = (playerPosition.transform.position - transform.position).normalized;
+            TryShoot();
+
+        } else
         {
-            direction = Vector2.left;
+            resetTimeToShoot();
         }
     }
 
     private void TryShoot()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, shootRange, Player);
+        //Debug.DrawLine(transform.position, transform.position + direction * shootRange);
 
         if (hit.collider == true)
         {
-            // melee attack
-            if (timeToShoot <= 0)
+            if (hit.collider.gameObject.CompareTag("Player"))
             {
-                isShooting = true;
-                if (muzzleFlash != null)
+                canSeeEnemy = true;
+                // Get the angle to the player and rotate the visor light towards them
+                Vector3 difference = playerPosition.transform.position - transform.position;
+                float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+                rotationZ -= 90;
+                visorLight.transform.rotation = Quaternion.Euler(0, 0, rotationZ);
+
+                // shooting attack
+                if (timeToShoot <= 0)
                 {
-                    Instantiate(muzzleFlash, transform.position, transform.rotation);
+                    isShooting = true;
+                    if (muzzleFlash != null)
+                    {
+                        Instantiate(muzzleFlash, transform.position, transform.rotation);
+                    }
+                    GameObject temp = Instantiate(bulletPrefab, transform.position, transform.rotation);
+                    temp.gameObject.GetComponent<BulletScript>().direction = direction;
+
+                    AudioManager.PlaySound("EnemyShot");
+
+                    // reset timer
+                    timeToShoot = cooldownShoot;
                 }
-                GameObject temp = Instantiate(bulletPrefab, transform.position, transform.rotation);
-
-                AudioManager.PlaySound("EnemyShot");
-
-                // reset timer
-                timeToShoot = cooldownShoot;
+                else
+                {
+                    isShooting = false;
+                    // reset timer
+                    timeToShoot -= Time.deltaTime;
+                }
             }
             else
             {
-                isShooting = false;
-                // reset timer
-                timeToShoot -= Time.deltaTime;
-            }
+                canSeeEnemy = false;
+            }        
         }
     }
-
-    private void TryMelee()
+    public void resetTimeToShoot()
     {
-        // melee attack
-        if (timeToAttack <= 0)
-        {
-            // check if something enters collision area
-            Collider2D[] playerToDamage = Physics2D.OverlapCircleAll(transform.position, attackRange, Player);
-
-            // if not empty
-            if (playerToDamage.Length > 0)
-            {
-                // activate animation
-                isStabbing = true;
-                // loop trough attacked game objects
-                for (int i = 0; i < playerToDamage.Length; i++)
-                {
-                    if (playerToDamage[i].gameObject.CompareTag("Player"))
-                    {
-                        playerToDamage[i].GetComponent<PlayerScript>().TakeDamage(meleeDamage);
-                    }
-                }
-            }
-            else
-            {
-                // stop animation
-                isStabbing = false;
-            }
-            // reset timer
-            timeToAttack = cooldownAttack;
-        }
-        else
-        {
-            // reset timer
-            timeToAttack -= Time.deltaTime;
-        }
+        timeToShoot = cooldownShoot;
     }
 
     void OnDrawGizmosSelected()
     {
-        // attack zone
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-
         // shoot raycast
-        Gizmos.DrawLine(transform.position, transform.position + new Vector3(direction.x * shootRange, 0, 0));
+        Gizmos.color = Color.red;
+        //Gizmos.DrawLine(transform.position, transform.position + direction * shootRange);
     }
 }

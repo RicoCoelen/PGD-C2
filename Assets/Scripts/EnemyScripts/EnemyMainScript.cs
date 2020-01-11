@@ -12,7 +12,7 @@ public class EnemyMainScript : MonoBehaviour
 
     [Header("Enemy Stats")]
     public float movementSpeed = 10f;
-    public float chasingSpeed = 10f;
+    private float currentMoveSpeed;
     public float health = 100f;
     public float fleeLimit = 20f;
     public float knockBackForce = 10f;
@@ -26,6 +26,9 @@ public class EnemyMainScript : MonoBehaviour
     public LayerMask Player;
     public GameObject currentTarget = null;
     private GameObject PlayerGO;
+
+    public Animator animator;
+    public GameObject visorLight;
 
     // State Types
     public enum State
@@ -74,20 +77,25 @@ public class EnemyMainScript : MonoBehaviour
 
     void FlipCorrection()
     {
-        // check velocity and let enemy stay left after walking
-        if (rb.velocity.x > 0 && !facingRight || rb.velocity.x < 0 && facingRight)
-        {
-            facingRight = !facingRight;
-        }
-
         // rotate gameobject
         if (facingRight == true)
         {
-            transform.localRotation = Quaternion.Euler(0, 0, 0);
+            transform.rotation = Quaternion.Euler(0, 0, 0);          
+            currentMoveSpeed = movementSpeed;
+            if (currentTarget == null)
+            {
+                visorLight.transform.rotation = Quaternion.Euler(0, 0, -90);
+            }
+
         }
         else
         {
-            transform.localRotation = Quaternion.Euler(0, 180, 0);
+            transform.rotation = Quaternion.Euler(0, 180, 0);        
+            currentMoveSpeed = -movementSpeed;
+            if (currentTarget == null)
+            {
+                visorLight.transform.rotation = Quaternion.Euler(0, 0, 90);
+            }
         }
     }
 
@@ -101,16 +109,18 @@ public class EnemyMainScript : MonoBehaviour
     {
         if (currentTarget != null)
         {
-            cState = State.CHASING;
+            cState = State.CHASING;        
         }
         else
         {
+            animator.SetBool("isAiming", false);
+
             if (isGrounded == false || isWalled == true)
             {
-                movementSpeed *= -1;
                 facingRight = !facingRight;
+                FlipCorrection();
             }
-            rb.velocity = new Vector2(movementSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(currentMoveSpeed, rb.velocity.y);
         }
     }
 
@@ -122,31 +132,27 @@ public class EnemyMainScript : MonoBehaviour
         }
         else
         {
-            // move current rigidbody to tracked player
-            Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
-            direction.y = 0;
+            animator.SetBool("isAiming", true);
 
-            if (currentTarget.transform.position.x > transform.position.x)
+            // Stand still and aim at the player
+            rb.velocity = new Vector2(0, rb.velocity.y);
+
+            // Check if the player can still be seen
+            if (GetComponentInChildren<EnemyAttackScript>().canSeeEnemy)
             {
-                facingRight = true;
-                
-                if (isGrounded == true)
+                // Get direction to the player
+                if (currentTarget.transform.position.x < transform.position.x)
                 {
-                    chasingSpeed = Mathf.Abs(chasingSpeed);
-                    rb.velocity = new Vector2(direction.x * chasingSpeed * Time.deltaTime, rb.velocity.y);
+                    facingRight = false;
+                }
+                else
+                {
+                    facingRight = true;
                 }
             }
-            else
-            {
-                facingRight = false;
-                
-                if (isGrounded == true)
-                {
-                    chasingSpeed = -Mathf.Abs(chasingSpeed);
-                    rb.velocity = new Vector2(-direction.x * chasingSpeed * Time.deltaTime, rb.velocity.y);
-                }
-            }
+
         }
+
     }
 
     public void TakeDamage(float amount)
