@@ -39,9 +39,12 @@ public class GrabbingScript : MonoBehaviour
             {
                 // get current item connected to chain
                 GameObject connectedObject = GetComponent<ThrowHook>().firstHook.GetComponent<HookScript>().child.gameObject;
+                // if grabable
                 if (connectedObject != null && connectedObject.tag == "Grabable")
                 {
                     GrabItem(connectedObject);
+                    connectedObject.transform.parent = null;
+                    Destroy(GetComponent<ThrowHook>().firstHook);
                 }
             }
         }
