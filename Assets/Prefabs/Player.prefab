@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 15
-  swingingMaxSpeed: 100
+  swingingMaxSpeed: 1000
   maxAcceleration: 80
   swingingAcceleration: 80
   drag: 70
