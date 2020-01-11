@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class GrabbingScript : MonoBehaviour
 {
+    // current item
     public GameObject currentItem = null;
     public Rigidbody2D currentItemRigidBody = null;
+    // item place
     public Transform ItemHolder;
+    // throw force
     public float forceMultiplier = 1;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    // coroutine
+    private IEnumerator coroutine;
 
     // Update is called once per frame
     void Update()
@@ -35,14 +35,17 @@ public class GrabbingScript : MonoBehaviour
         }
     }
 
-    private void ToggleCollision(GameObject go)
+    private void ToggleCollision(GameObject go, bool isTrue)
     {
         // check if item has rigidbody
-        if (go.TryGetComponent<Collider2D>(out Collider2D collider))
+        if (go.TryGetComponent<Collider>(out Collider collider))
         {
+            Debug.Log(isTrue);
             if (collider != null)
             {
-                collider.enabled = !collider.enabled;
+                // find a way to temporarily disable collision with player
+                //Physics.IgnoreCollision(collider, GetComponent<Collider>(), isTrue);
+                //Debug.Log(isTrue);
             }
         }
     }
@@ -61,38 +64,49 @@ public class GrabbingScript : MonoBehaviour
 
     public void GrabItem(GameObject item)
     {
+        // toggle simulation, toggle collison object
         ToggleRigidBody(item);
-        ToggleCollision(item);
+        ToggleCollision(item, true);
 
         currentItem = item;
+        // check if item has rigidbody
+        if (currentItem.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb2d))
+        {
+            if (rb2d != null)
+            {
+                currentItemRigidBody = rb2d;
+            }
+        }
     }
 
     public void ThrowItem()
     {
+        // toggle physics simulation
         ToggleRigidBody(currentItem);
+        // add collision back
+        coroutine = TurnCollisionOn(currentItem);
+        StartCoroutine(coroutine);
 
-        GameObject tempitem = currentItem;
-        currentItem = null;
-
-        if (tempitem.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
+        // check if current item has rigidbody
+        if (currentItemRigidBody != null)
         {
-            if (rb != null)
-            {
-                Vector3 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                Vector2 direction = (Vector2) (mousepos - tempitem.transform.position).normalized;
-                rb.AddForce(direction * forceMultiplier);
-               
-            }
+            Vector3 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 direction = (Vector2) (mousepos - currentItem.transform.position).normalized;
+            currentItemRigidBody.AddForce(direction * forceMultiplier, ForceMode2D.Impulse);
         }
 
-        // add collision back
-        ToggleCollision(tempitem);
+        // clean current item
+        currentItem = null;
+        // clean current rigidbody after thrown
+        currentItemRigidBody = null;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // check if holding item
         if (currentItem == null)
         {
+            // do according to gameobject tag
             switch (collision.gameObject.tag)
             {
                 case "Grabable":
@@ -103,6 +117,32 @@ public class GrabbingScript : MonoBehaviour
                     GrabItem(collision.gameObject);
                     break;
             }
+        }
+    }
+
+    IEnumerator TurnCollisionOn(GameObject go)
+    {
+        // YieldInstruction waits for 1 seconds.
+        yield return new WaitForSeconds(1);
+
+        // toggle collision back on
+        Debug.Log("runned");
+        ToggleCollision(go, false);
+    }
+
+    void onCollisionEnter2D(Collision2D coll)
+    {
+        if (coll.gameObject.tag == "Grabable")
+        {
+            coll.gameObject.GetComponent<Collider>().enabled = false;
+        }
+    }
+
+    void onCollisionExit2D(Collision2D coll)
+    {
+        if (coll.gameObject.tag == "Grabable")
+        {
+            coll.gameObject.GetComponent<Collider>().enabled = true;
         }
     }
 }
