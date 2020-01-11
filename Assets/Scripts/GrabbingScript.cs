@@ -33,6 +33,18 @@ public class GrabbingScript : MonoBehaviour
                 currentItem.transform.rotation = ItemHolder.transform.rotation;
             }
         }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                // get current item connected to chain
+                GameObject connectedObject = GetComponent<ThrowHook>().firstHook.GetComponent<HookScript>().child.gameObject;
+                if (connectedObject != null && connectedObject.tag == "Grabable")
+                {
+                    GrabItem(connectedObject);
+                }
+            }
+        }
     }
 
     private void ToggleCollision(GameObject go, bool isTrue)
