@@ -42,7 +42,9 @@ public class EnemyVisionScript : MonoBehaviour
                         GetComponentInParent<EnemyMainScript>().currentTarget = PlayerGO;
                         currentTarget = PlayerGO;
                         lastDetectionTime = Time.time;
-                    } 
+                    }
+
+                    
                 }
             }
         }

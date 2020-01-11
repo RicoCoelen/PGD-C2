@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2609299514907741607}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: -0.7058676, w: 0.70834386}
   m_LocalPosition: {x: 0.125, y: 1.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -56,10 +56,10 @@ MonoBehaviour:
   m_AlphaBlendOnOverlap: 0
   m_ShadowIntensity: 0.2
   m_ShadowVolumeIntensity: 0.2
-  m_PointLightInnerAngle: 33.12
+  m_PointLightInnerAngle: 30.93
   m_PointLightOuterAngle: 48
   m_PointLightInnerRadius: 1
-  m_PointLightOuterRadius: 17.5
+  m_PointLightOuterRadius: 19.900095
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -309,7 +309,7 @@ MonoBehaviour:
   - {x: -0.7538972, y: -0.41178375, z: 0}
   m_ShapePathHash: 1138282197
   m_Mesh: {fileID: 0}
-  m_InstanceId: 54200
+  m_InstanceId: 73738
 --- !u!1 &3790710829709959288
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,14 +355,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 769
   playerPosition: {fileID: 0}
   visorLight: {fileID: 2609299514907741607}
   isShooting: 0
   bulletPrefab: {fileID: 244638319351267649, guid: 7c305fc203d31894e96c6a81ef197df0,
     type: 3}
   cooldownShoot: 0.5
-  shootRange: 15
+  shootRange: 18
   muzzleFlash: {fileID: 0}
 --- !u!1 &6031546187804549035
 GameObject:
@@ -408,11 +408,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   searchTimer: 2
-  DetectionRange: 13.04
+  DetectionRange: 18
   lastDetectionTime: 0
   FOV: 90
   currentTarget: {fileID: 0}
-  visorLight: {fileID: 2609299514907741607}
 --- !u!1 &6031546188730919205
 GameObject:
   m_ObjectHideFlags: 0

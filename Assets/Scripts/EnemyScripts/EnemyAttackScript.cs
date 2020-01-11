@@ -7,6 +7,7 @@ public class EnemyAttackScript : MonoBehaviour
     public LayerMask Player;
     public GameObject playerPosition;
     public GameObject visorLight;
+    public bool canSeeEnemy;
 
     [Header("Ranged Attack")]
     public bool isShooting = false;
@@ -16,8 +17,8 @@ public class EnemyAttackScript : MonoBehaviour
     public GameObject muzzleFlash;
     private float timeToShoot;
     private Vector3 direction;
-    
 
+    
     private void Start()
     {
         // Enable shooting cooldown on start
@@ -48,34 +49,42 @@ public class EnemyAttackScript : MonoBehaviour
 
         if (hit.collider == true)
         {
-            // Get the angle to the player and rotate the visor light towards them
-            Vector3 difference = playerPosition.transform.position - transform.position;
-            float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-            rotationZ -= 90;
-            visorLight.transform.rotation = Quaternion.Euler(0, 0, rotationZ);
-
-            // shooting attack
-            if (timeToShoot <= 0)
+            if (hit.collider.gameObject.CompareTag("Player"))
             {
-                isShooting = true;
-                if (muzzleFlash != null)
+                canSeeEnemy = true;
+                // Get the angle to the player and rotate the visor light towards them
+                Vector3 difference = playerPosition.transform.position - transform.position;
+                float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+                rotationZ -= 90;
+                visorLight.transform.rotation = Quaternion.Euler(0, 0, rotationZ);
+
+                // shooting attack
+                if (timeToShoot <= 0)
                 {
-                    Instantiate(muzzleFlash, transform.position, transform.rotation);
+                    isShooting = true;
+                    if (muzzleFlash != null)
+                    {
+                        Instantiate(muzzleFlash, transform.position, transform.rotation);
+                    }
+                    GameObject temp = Instantiate(bulletPrefab, transform.position, transform.rotation);
+                    temp.gameObject.GetComponent<BulletScript>().direction = direction;
+
+                    AudioManager.PlaySound("EnemyShot");
+
+                    // reset timer
+                    timeToShoot = cooldownShoot;
                 }
-                GameObject temp = Instantiate(bulletPrefab, transform.position, transform.rotation);
-                temp.gameObject.GetComponent<BulletScript>().direction = direction;
-
-                AudioManager.PlaySound("EnemyShot");
-
-                // reset timer
-                timeToShoot = cooldownShoot;
+                else
+                {
+                    isShooting = false;
+                    // reset timer
+                    timeToShoot -= Time.deltaTime;
+                }
             }
             else
             {
-                isShooting = false;
-                // reset timer
-                timeToShoot -= Time.deltaTime;
-            }
+                canSeeEnemy = false;
+            }        
         }
     }
     public void resetTimeToShoot()

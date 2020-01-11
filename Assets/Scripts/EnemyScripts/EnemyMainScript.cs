@@ -137,14 +137,18 @@ public class EnemyMainScript : MonoBehaviour
             // Stand still and aim at the player
             rb.velocity = new Vector2(0, rb.velocity.y);
 
-            // Get direction to the player
-            if (currentTarget.transform.position.x < transform.position.x)
+            // Check if the player can still be seen
+            if (GetComponentInChildren<EnemyAttackScript>().canSeeEnemy)
             {
-                facingRight = false;
-            }
-            else
-            {
-                facingRight = true;
+                // Get direction to the player
+                if (currentTarget.transform.position.x < transform.position.x)
+                {
+                    facingRight = false;
+                }
+                else
+                {
+                    facingRight = true;
+                }
             }
 
         }
