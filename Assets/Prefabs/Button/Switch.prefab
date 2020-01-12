@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1202019551669313445}
   - component: {fileID: 8159293679537494257}
   - component: {fileID: -6579448904894661769}
-  - component: {fileID: 3312780255072893690}
   m_Layer: 0
   m_Name: Switch
   m_TagString: Untagged
@@ -101,6 +100,7 @@ MonoBehaviour:
   switchOff: {fileID: 6633679555199675754, guid: 1b0fed2d35e937347b9c55a77200ef15,
     type: 3}
   player: {fileID: 8056905871520868893, guid: d156ac5ccfc0d0f489848362a6382f86, type: 3}
+  door: {fileID: 0}
   isOn: 0
 --- !u!61 &-6579448904894661769
 BoxCollider2D:
@@ -127,30 +127,4 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1.1902962, y: 1.1815557}
-  m_EdgeRadius: 0
---- !u!61 &3312780255072893690
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8749365789611895280}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.0064735413, y: -0.010216236}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 3}
-    newSize: {x: 3, y: 3}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.1773529, y: 1.1815557}
   m_EdgeRadius: 0

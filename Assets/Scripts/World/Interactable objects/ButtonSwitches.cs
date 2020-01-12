@@ -7,25 +7,48 @@ public class ButtonSwitches : MonoBehaviour
     [SerializeField]
     private GameObject switchOn, switchOff;
     public GameObject player;
+    [SerializeField]
+    public GameObject door;
     
     public bool isOn = false;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        gameObject.GetComponent<SpriteRenderer>().sprite = switchOff.GetComponent<SpriteRenderer>().sprite;
+        if(isOn == false)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = switchOff.GetComponent<SpriteRenderer>().sprite;
+        }
 
+        if(isOn == true)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = switchOn.GetComponent<SpriteRenderer>().sprite;
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        //gameObject.GetComponent<SpriteRenderer>().sprite = switchOn.GetComponent<SpriteRenderer>().sprite;
+        //isOn = true;
+
+    }
+
+    public void switchState()
+    {
+        if(isOn == false)
         {
-            Debug.Log("collision button");
+            gameObject.GetComponent<SpriteRenderer>().sprite = switchOn.GetComponent<SpriteRenderer>().sprite;
+            isOn = true;
         }
 
-        gameObject.GetComponent<SpriteRenderer>().sprite = switchOn.GetComponent<SpriteRenderer>().sprite;
-        isOn = true;
-
+        if(isOn == true)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = switchOff.GetComponent<SpriteRenderer>().sprite;
+            isOn = false;
+        }
+    }
+    public void Update()
+    {
+        
     }
 }
