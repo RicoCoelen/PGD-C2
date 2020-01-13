@@ -7,8 +7,11 @@ TagManager:
   - Enemy
   - Grabable
   - Anchored Grabable
+<<<<<<< HEAD
   - Node
+=======
   - Switch
+>>>>>>> feature/Doorswitches
   layers:
   - Default
   - TransparentFX
