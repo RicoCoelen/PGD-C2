@@ -35,16 +35,20 @@ public class GrabbingScript : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Mouse1))
+            if (GetComponent<ThrowHook>().firstHook != null && GetComponent<ThrowHook>().firstHook.TryGetComponent<HookScript>(out HookScript hs))
             {
-                // get current item connected to chain
-                GameObject connectedObject = GetComponent<ThrowHook>().firstHook.GetComponent<HookScript>().child.gameObject;
-                // if grabable
-                if (connectedObject != null && connectedObject.tag == "Grabable")
+                if (hs != null && hs.child != null)
                 {
-                    GrabItem(connectedObject);
-                    connectedObject.transform.parent = null;
-                    Destroy(GetComponent<ThrowHook>().firstHook);
+                    // get current item connected to chain
+                    GameObject connectedObject = hs.child.gameObject;
+
+                    // if grabable
+                    if (connectedObject != null && connectedObject.tag == "Grabable")
+                    {
+                        GrabItem(connectedObject);
+                        connectedObject.transform.parent = null;
+                        Destroy(GetComponent<ThrowHook>().firstHook);
+                    }
                 }
             }
         }
