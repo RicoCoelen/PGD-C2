@@ -26,26 +26,23 @@ public class ButtonSwitches : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        //gameObject.GetComponent<SpriteRenderer>().sprite = switchOn.GetComponent<SpriteRenderer>().sprite;
-        //isOn = true;
-
-    }
-
-    public void switchState()
+    public void switchState() //Wordt aangeroepen wanneer de chain collision heeft met de switch
     {
         if(isOn == false)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = switchOn.GetComponent<SpriteRenderer>().sprite;
-            isOn = true;
+            door.GetComponent<SpriteRenderer>().sprite = door.GetComponent<Door>().doorOpen.GetComponent<SpriteRenderer>().sprite;
+            door.GetComponent<BoxCollider2D>().enabled = false;
+            isOn = !isOn;
         }
-
-        if(isOn == true)
+        else if(isOn == true)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = switchOff.GetComponent<SpriteRenderer>().sprite;
-            isOn = false;
+            door.GetComponent<SpriteRenderer>().sprite = door.GetComponent<Door>().doorClosed.GetComponent<SpriteRenderer>().sprite;
+            door.GetComponent<BoxCollider2D>().enabled = true;
+            isOn = !isOn;
         }
+        Debug.Log(isOn + "ison");
     }
     public void Update()
     {

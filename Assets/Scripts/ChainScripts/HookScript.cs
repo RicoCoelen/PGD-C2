@@ -68,9 +68,25 @@ public class HookScript : MonoBehaviour
                 active = false;
                 break;
 
-            case "Switch":
+            /*case "Switch":
                 collision.gameObject.GetComponent<Door>().openDoor();
                 collision.gameObject.GetComponent<ButtonSwitches>().switchState();
+                Destroy(hook);
+                Debug.Log("hook");
+                break;*/
+        }
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Switch":
+                //Debug.Log(collision.gameObject);
+                collision.gameObject.GetComponent<ButtonSwitches>().switchState();
+                //collision.gameObject.GetComponent<ButtonSwitches>().door.GetComponent<Door>().openDoor();
+                
                 Destroy(hook);
                 Debug.Log("hook");
                 break;

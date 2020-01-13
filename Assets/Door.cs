@@ -6,13 +6,13 @@ public class Door : MonoBehaviour
 {
     public GameObject doorClosed;
     public GameObject doorOpen;
-    public bool isopen = false;
+    public bool isopen;
     // Start is called before the first frame update
     void Start()
     {
         if(isopen == true)
         {
-            gameObject.GetComponent<SpriteRenderer>().sprite = doorOpen.GetComponent<SpriteRenderer>().sprite; 
+            gameObject.GetComponent<SpriteRenderer>().sprite = doorOpen.GetComponent<SpriteRenderer>().sprite;
         }
 
         if(isopen == false)
@@ -23,6 +23,7 @@ public class Door : MonoBehaviour
 
     public void openDoor()
     {
+        
         if (isopen == false)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = doorOpen.GetComponent<SpriteRenderer>().sprite;
@@ -36,6 +37,8 @@ public class Door : MonoBehaviour
             gameObject.GetComponent<BoxCollider2D>().enabled = true;
             isopen = false;
         }
+        Debug.Log(isopen + "isopen");
+        
     }
     // Update is called once per frame
     void Update()
