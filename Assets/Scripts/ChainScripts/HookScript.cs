@@ -83,10 +83,7 @@ public class HookScript : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Switch":
-                //Debug.Log(collision.gameObject);
-                collision.gameObject.GetComponent<ButtonSwitches>().switchState();
-                //collision.gameObject.GetComponent<ButtonSwitches>().door.GetComponent<Door>().openDoor();
-                
+                collision.gameObject.GetComponent<ButtonSwitches>().switchState();           
                 Destroy(hook);
                 Debug.Log("hook");
                 break;

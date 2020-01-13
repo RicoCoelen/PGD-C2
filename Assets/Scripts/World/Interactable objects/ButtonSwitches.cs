@@ -31,14 +31,14 @@ public class ButtonSwitches : MonoBehaviour
         if(isOn == false)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = switchOn.GetComponent<SpriteRenderer>().sprite;
-            door.GetComponent<SpriteRenderer>().sprite = door.GetComponent<Door>().doorOpen.GetComponent<SpriteRenderer>().sprite;
+            door.GetComponent<SpriteRenderer>().sprite = door.GetComponent<DoorScript>().doorOpen.GetComponent<SpriteRenderer>().sprite;
             door.GetComponent<BoxCollider2D>().enabled = false;
             isOn = !isOn;
         }
         else if(isOn == true)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = switchOff.GetComponent<SpriteRenderer>().sprite;
-            door.GetComponent<SpriteRenderer>().sprite = door.GetComponent<Door>().doorClosed.GetComponent<SpriteRenderer>().sprite;
+            door.GetComponent<SpriteRenderer>().sprite = door.GetComponent<DoorScript>().doorClosed.GetComponent<SpriteRenderer>().sprite;
             door.GetComponent<BoxCollider2D>().enabled = true;
             isOn = !isOn;
         }
