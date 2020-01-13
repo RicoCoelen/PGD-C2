@@ -99,8 +99,8 @@ public class GrabbingScript : MonoBehaviour
         // toggle physics simulation
         ToggleRigidBody(currentItem);
         // add collision back
-        coroutine = TurnCollisionOn(currentItem);
-        StartCoroutine(coroutine);
+        //coroutine = TurnCollisionOn(currentItem);
+        //StartCoroutine(coroutine);
 
         // check if current item has rigidbody
         if (currentItemRigidBody != null)
@@ -118,21 +118,21 @@ public class GrabbingScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // check if holding item
-        if (currentItem == null)
-        {
-            // do according to gameobject tag
-            switch (collision.gameObject.tag)
-            {
-                case "Grabable":
-                    GrabItem(collision.gameObject);
-                    break;
+        //// check if holding item
+        //if (currentItem == null)
+        //{
+        //    // do according to gameobject tag
+        //    switch (collision.gameObject.tag)
+        //    {
+        //        case "Grabable":
+        //            GrabItem(collision.gameObject);
+        //            break;
 
-                case "Enemy":
-                    GrabItem(collision.gameObject);
-                    break;
-            }
-        }
+        //        case "Enemy":
+        //            GrabItem(collision.gameObject);
+        //            break;
+        //    }
+        //}
     }
 
     IEnumerator TurnCollisionOn(GameObject go)
@@ -141,23 +141,6 @@ public class GrabbingScript : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         // toggle collision back on
-        Debug.Log("runned");
         ToggleCollision(go, false);
-    }
-
-    void onCollisionEnter2D(Collision2D coll)
-    {
-        if (coll.gameObject.tag == "Grabable")
-        {
-            coll.gameObject.GetComponent<Collider>().enabled = false;
-        }
-    }
-
-    void onCollisionExit2D(Collision2D coll)
-    {
-        if (coll.gameObject.tag == "Grabable")
-        {
-            coll.gameObject.GetComponent<Collider>().enabled = true;
-        }
     }
 }

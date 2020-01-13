@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 8056905871520868891}
   - component: {fileID: 8056905871520868890}
   - component: {fileID: 4427746168945051446}
-  - component: {fileID: 999628833}
+  - component: {fileID: 8892146369966395860}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -376,7 +376,7 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &999628833
+--- !u!114 &8892146369966395860
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -385,7 +385,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8056905871520868893}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59c9e55fed59f654a827e06bdc861839, type: 3}
+  m_Script: {fileID: 11500000, guid: ebb2fa12c867b064f828f1cb0f26b9b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentItem: {fileID: 0}
