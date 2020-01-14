@@ -163,8 +163,8 @@ DistanceJoint2D:
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
-  m_AutoConfigureDistance: 1
-  m_Distance: 1
+  m_AutoConfigureDistance: 0
+  m_Distance: 0.4
   m_MaxDistanceOnly: 0
 --- !u!114 &2285249621283153336
 MonoBehaviour:
@@ -178,3 +178,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 966b89c58678d1a44bf1a8a3ba066ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hinge: 0

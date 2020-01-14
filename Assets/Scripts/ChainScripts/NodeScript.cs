@@ -6,6 +6,9 @@ public class NodeScript : MonoBehaviour
     DistanceJoint2D hookJoint;
     Rigidbody2D player;
 
+    public bool hinge = false;
+    public bool skipped = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +31,7 @@ public class NodeScript : MonoBehaviour
         // Zet de connectedbody van de node aan de speler,
         // Zet de connectedbody van de hook aan de speler,
         // 
+        // List is ordered
 
 
 
@@ -36,10 +40,7 @@ public class NodeScript : MonoBehaviour
 
         if (collision.gameObject.layer == 9 && hook.GetComponent<ChainScript>().isFlexible)
         {
-            GetComponent<DistanceJoint2D>().enabled = true;
-            hookJoint.connectedBody = GetComponent<Rigidbody2D>();
-            GetComponent<DistanceJoint2D>().connectedBody = player;
-            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+            hinge = true;
         }
 
 
