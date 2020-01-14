@@ -9,6 +9,8 @@ TagManager:
   - Anchored Grabable
   - Node
   - Switch
+  - Breakable Wall
+  - Hook
   layers:
   - Default
   - TransparentFX

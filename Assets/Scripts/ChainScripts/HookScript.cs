@@ -68,12 +68,7 @@ public class HookScript : MonoBehaviour
                 active = false;
                 break;
 
-            /*case "Switch":
-                collision.gameObject.GetComponent<Door>().openDoor();
-                collision.gameObject.GetComponent<ButtonSwitches>().switchState();
-                Destroy(hook);
-                Debug.Log("hook");
-                break;*/
+            
         }
 
     }
@@ -86,6 +81,12 @@ public class HookScript : MonoBehaviour
                 collision.gameObject.GetComponent<ButtonSwitches>().switchState();           
                 Destroy(hook);
                 Debug.Log("hook");
+                break;
+
+            case "Breakable Wall":
+                Debug.Log("YEET");
+                collision.gameObject.GetComponent<BreakableWall>().BreakWall();
+                Destroy(hook);
                 break;
         }
     }
