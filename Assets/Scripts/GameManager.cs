@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     {
         if (Player != null)
         {
-            if (Player.GetComponent<PlayerScript>().health <= 0)
+            if (Player.GetComponent<PlayerScript>().lives <= 0)
             {
                 GameOver();
             }

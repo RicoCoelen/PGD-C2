@@ -44,8 +44,6 @@ public class EnemyMainScript : MonoBehaviour
     {
         // initiate rigidbody
         rb = GetComponent<Rigidbody2D>();
-        // always start idle
-        cState = State.IDLE;
         originalColor = Color.white;
         PlayerGO = GameObject.FindGameObjectWithTag("Player");
     }
@@ -102,7 +100,7 @@ public class EnemyMainScript : MonoBehaviour
     void EnemyIdle()
     {
         // todo but just stand still
-        cState = State.PATROLLING;
+        //cState = State.PATROLLING;
     }
 
     void EnemyPatrolling()
