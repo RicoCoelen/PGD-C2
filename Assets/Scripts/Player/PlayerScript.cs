@@ -393,27 +393,6 @@ public class PlayerScript : MonoBehaviour
         if (GetComponent<ThrowHook>().firstHook != null)
             Destroy(GetComponent<ThrowHook>().firstHook);
         transform.position = playerLastGroundedPosition;
-        //FlashRed();
-    }
-
-    //void FlashRed()
-    //{
-    //    //renderer.GetComponent<SpriteRenderer>().color = Color.red;
-    //    Invoke("ResetColor", flashTime);
-    //}
-
-    //void ResetColor()
-    //{
-    //    //renderer.GetComponent<SpriteRenderer>().color = originalColor;
-    //}
-
-    // Debug function
-    public void TestDamage()
-    {
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            TakeDamage(1);
-        }
     }
 
     // Rotate the player towards the hook anchor when swinging
