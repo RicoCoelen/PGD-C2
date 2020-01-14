@@ -68,11 +68,6 @@ public class ChainScript : MonoBehaviour
     {
         if (isFlexible)
         {
-            transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 2f), ForceMode2D.Impulse);
-            chainJoint.distance = Vector2.Distance(player.transform.position, GetComponent<Rigidbody2D>().position);
-            //chainJoint.connectedBody = player.GetComponent<Rigidbody2D>();
-            chainJoint.enabled = true;
-
             Debug.DrawLine(player.transform.position, GetComponent<Rigidbody2D>().position, Color.green);
         }
         else
@@ -107,6 +102,14 @@ public class ChainScript : MonoBehaviour
                     }
 
                     lastNode.GetComponent<HingeJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
+
+                    if (isFlexible)
+                    {
+                        transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 2f), ForceMode2D.Impulse);
+                        chainJoint.distance = Vector2.Distance(player.transform.position, GetComponent<Rigidbody2D>().position);
+                        chainJoint.connectedBody = player.GetComponent<Rigidbody2D>();
+                        chainJoint.enabled = true;
+                    }
                 }
             }
 
