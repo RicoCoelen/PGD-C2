@@ -5,64 +5,53 @@ using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
-
     [Header("MoveSpeed settings")]
     public float maxSpeed = 80f;
-    public float swingingMaxSpeed = 100f;
     public float maxAcceleration = 40f;
-    public float swingingAcceleration = 80f;
     public float drag = 40f;
-    public float reactionMultiplier = 0.5f;
-    public float swingingReactionMultiplier = 0.25f;
-
+    public float reactionMultiplier = 0.5f; 
     public float moveSpeed = 60f;
-    float currentMaxSpeed;
-
-    public float hillMultiplier = 300f;
-
-    bool turned = false;
-
     public float dragMultiplier = 0.5f;
     public float slideDragMultiplier = 0.2f;
-    public float airDragMultiplier = 0.05f;
-
-    Rigidbody2D rb;
 
     [Header("Jump settings")]
     public float jumpVelocity = 25f;
     public float fallMultiplier = 7.5f;
     public float gravityMultiplier = 0.01f;
+    public float airDragMultiplier = 0.05f;
     public float rayLength = 1;
-    public LayerMask groundLayer;
+    
+    [Header("Swinging Settings")]
+    public float swingingMaxSpeed = 100f;
+    public float swingingAcceleration = 80f;
+    public float swingingReactionMultiplier = 0.25f;
+    public float disableGravitySpeed = 7.5f;
+    public float swingingGravityTime = 20f;
 
-    public float maxHealth = 10f;
-    public float health = 10f;
+    [Header("Health and variables")]
+    public float maxLives = 10f;
+    public float lives = 10f;
 
+    Rigidbody2D rb;
+    GameObject player;
+    float currentMaxSpeed;
+    bool turned = false;
+    int directionSwinging = 0;
+    
     //public Renderer renderer;
-    public float flashTime;
-
+    public float flashTime;  
     private Color originalColor;
 
-    GameObject player;
-
-    public Sprite sprite;
-
     bool chainGravity = false;
-
-    public float defaultTime = 15f;
-    float timeLeft;
-
     bool prevGrounded = false;
-
     Vector2 playerLastGroundedPosition = new Vector2(0, 0);
-    private Vector2 jump;
-
-    int directionSwinging = 0;
+    float timeLeft;
 
     AudioSource audioSource;
     public static AudioClip playerFootstep;
-
     public Animator animator;
+
+    public LayerMask groundLayer;
 
     // Start is called before the first frame update
     void Start()
@@ -82,6 +71,7 @@ public class PlayerScript : MonoBehaviour
         currentMaxSpeed = maxSpeed;
     }
 
+    // Set swinging bool for the animation player
     void Animation()
     {
         if (IsSwinging())
@@ -104,7 +94,7 @@ public class PlayerScript : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+    // FixedUpdate is called per fixed Timestep (0.02 seconds / 50 times per second)
     void FixedUpdate()
     {
         PlayerTurn();
@@ -115,6 +105,7 @@ public class PlayerScript : MonoBehaviour
         HitGround();
     }
 
+    // Play footstep audio when walking
     public void Audio()
     {
         if ((rb.velocity.x < -1 || rb.velocity.x > 1))
@@ -129,11 +120,13 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    // Function for handling what variables to give to the playerMovement function
     private void Movement()
     {
+        // Give different values for movement if the player is swinging or not
         if (IsSwinging()) 
         {
-            RevisedPlayerMovement(swingingAcceleration, swingingReactionMultiplier, swingingMaxSpeed, dragMultiplier);
+            PlayerMovement(swingingAcceleration, swingingReactionMultiplier, swingingMaxSpeed, dragMultiplier);
         }
         else
         {
@@ -146,7 +139,7 @@ public class PlayerScript : MonoBehaviour
                     currentMaxSpeed = -rb.velocity.x;
             }
 
-            RevisedPlayerMovement(maxAcceleration, reactionMultiplier, maxSpeed, dragMultiplier);
+            PlayerMovement(maxAcceleration, reactionMultiplier, maxSpeed, dragMultiplier);
         }
     }
 
@@ -162,6 +155,7 @@ public class PlayerScript : MonoBehaviour
         prevGrounded = IsGrounded();
     }
 
+    // Get the last position where the player was grounded, used for the checkpoints
     public void LastGroundedPosition()
     {
         //RaycastHit2D groundRay = GroundrayCast(GetComponent<Collider2D>().bounds.size.x * 0.5f);
@@ -173,6 +167,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
     
+    // Send a raycast to the ground
     private RaycastHit2D GroundrayCast(float xOffset)
     {
         Vector2 position = (Vector2)transform.position + GetComponent<Collider2D>().bounds.size.y * Vector2.down / 2 - new Vector2(0, 0.2f) + new Vector2(xOffset, 0);
@@ -205,17 +200,8 @@ public class PlayerScript : MonoBehaviour
         return false;
 
     }
-
-    // Debug function
-    public void TestDamage()
-    {
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            TakeDamage(1);
-        }
-    }
     
-    //function to preserve max speed and slowly decrease it depending on if on ground or not
+    // function to preserve max speed and slowly decrease it depending on if on ground or not
     private float[] Momentum(float speed, float maximumSpeed, float goalMaximumSpeed, float dragMultiplier)
     {
         float finalDrag;
@@ -262,7 +248,8 @@ public class PlayerScript : MonoBehaviour
         return newValues;
     }
 
-    public void RevisedPlayerMovement(float currentAcceleration, float currentReactionMultiplier, float goalMaxSpeed, float dragMultiplier)
+    // Function to handle player movement
+    public void PlayerMovement(float currentAcceleration, float currentReactionMultiplier, float goalMaxSpeed, float dragMultiplier)
     {
         // Allow changing of the current x velocity.
         float speed = rb.velocity.x;
@@ -296,8 +283,6 @@ public class PlayerScript : MonoBehaviour
             }
 
         }
-
-        
 
         // lower movement speed
         float[] newValues = Momentum(speed, currentMaxSpeed, goalMaxSpeed, dragMultiplier);
@@ -354,25 +339,24 @@ public class PlayerScript : MonoBehaviour
 
     public void MovementJump()
     {
-        
         // Initial jump
         if (Input.GetButtonDown("Jump") && (IsGrounded()))
         {
             AudioManager.PlaySound("Jump");
-            jump = new Vector2(0, jumpVelocity);
-            rb.AddForce(jump, ForceMode2D.Impulse);
+            rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
         }
 
         // disable gravity while swinging, and also for a small amount of time after releasing the chain to maintain momentum
         if (chainGravity || (IsSwinging() && (Input.GetButton("Right") || Input.GetButton("Left"))))
         {
+            // Remove chainGravity after timeLeft reaches 0 when lowering by 60 per second
             if (chainGravity)
             {
                 timeLeft -= 60 * Time.deltaTime;
                 if (timeLeft < 0)
                 {
                     chainGravity = false;
-                    timeLeft = defaultTime;
+                    timeLeft = swingingGravityTime;
                 }
             }
         }
@@ -381,7 +365,7 @@ public class PlayerScript : MonoBehaviour
             //gravity
             rb.velocity += (Vector2.up * Physics2D.gravity * (gravityMultiplier - 1)) * Time.deltaTime;
 
-            // Speed up falling when releasing the jump button
+            // Speed up falling when releasing the jump button while still jumping
             if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
             {
                 rb.velocity += (Vector2.up * Physics2D.gravity * (fallMultiplier - 1)) * Time.deltaTime;
@@ -389,22 +373,22 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    // When vertical velocity is above a point while swinging, disable gravity for a short period of time
     public void ChainJump()
     {
-        if (rb.velocity.y > 7.5f || rb.velocity.y < -7.5f)
+        if (rb.velocity.y > disableGravitySpeed || rb.velocity.y < -disableGravitySpeed)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
-            timeLeft = defaultTime;
+            timeLeft = swingingGravityTime;
             chainGravity = true;
         }
     }
     
-
-
+    // Function to lower the player lives when getting hit and reset them back to a checkpoint
     public void TakeDamage(float amount)
     {
         AudioManager.PlaySound("PlayerHit");
-        health = Mathf.Clamp(health -= amount, 0, maxHealth);
+        lives = Mathf.Clamp(lives -= amount, 0, maxLives);
 
         if (GetComponent<ThrowHook>().firstHook != null)
             Destroy(GetComponent<ThrowHook>().firstHook);
@@ -412,17 +396,27 @@ public class PlayerScript : MonoBehaviour
         //FlashRed();
     }
 
-    void FlashRed()
+    //void FlashRed()
+    //{
+    //    //renderer.GetComponent<SpriteRenderer>().color = Color.red;
+    //    Invoke("ResetColor", flashTime);
+    //}
+
+    //void ResetColor()
+    //{
+    //    //renderer.GetComponent<SpriteRenderer>().color = originalColor;
+    //}
+
+    // Debug function
+    public void TestDamage()
     {
-        //renderer.GetComponent<SpriteRenderer>().color = Color.red;
-        Invoke("ResetColor", flashTime);
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            TakeDamage(1);
+        }
     }
 
-    void ResetColor()
-    {
-        //renderer.GetComponent<SpriteRenderer>().color = originalColor;
-    }
-
+    // Rotate the player towards the hook anchor when swinging
     void Rotation()
     {
         var playerToHookDirection = (GetComponent<ThrowHook>().firstHook.transform.position - (Vector3)transform.position).normalized;

@@ -62,10 +62,10 @@ public class EnemyAttackScript : MonoBehaviour
                 if (timeToShoot <= 0)
                 {
                     isShooting = true;
-                    if (muzzleFlash != null)
-                    {
-                        Instantiate(muzzleFlash, transform.position, transform.rotation);
-                    }
+                    //if (muzzleFlash != null)
+                    //{
+                    //    Instantiate(muzzleFlash, transform.position, transform.rotation);
+                    //}
                     GameObject temp = Instantiate(bulletPrefab, transform.position, transform.rotation);
                     temp.gameObject.GetComponent<BulletScript>().direction = direction;
 

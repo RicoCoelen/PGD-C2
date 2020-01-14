@@ -264,30 +264,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 15
-  swingingMaxSpeed: 1000
   maxAcceleration: 80
-  swingingAcceleration: 80
   drag: 70
   reactionMultiplier: 1
-  swingingReactionMultiplier: 0.25
   moveSpeed: 60
-  hillMultiplier: 300
   dragMultiplier: 0.75
   slideDragMultiplier: 0.2
-  airDragMultiplier: 0.05
   jumpVelocity: 25
   fallMultiplier: 7.5
   gravityMultiplier: 2.75
+  airDragMultiplier: 0.05
   rayLength: 0.2
+  swingingMaxSpeed: 1000
+  swingingAcceleration: 80
+  swingingReactionMultiplier: 0.25
+  disableGravitySpeed: 7.25
+  swingingGravityTime: 20
+  maxLives: 5
+  lives: 5
+  flashTime: 1
+  animator: {fileID: 4636866807461089879}
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
-  maxHealth: 5
-  health: 5
-  flashTime: 1
-  sprite: {fileID: 21300000, guid: 4d98756ca6f27f642b02fd9b59db5d8e, type: 3}
-  defaultTime: 20
-  animator: {fileID: 4636866807461089879}
 --- !u!114 &8056905871520868890
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -473,7 +473,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Health: '
+  m_Text: 'Lives:'
 --- !u!1 &8858975902605151875
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,6 +604,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1121353045021080288, guid: 8c6a0bf338eedbe46aa1b96e25457e5f,
+        type: 3}
+      propertyPath: m_Text
+      value: 'Lives:'
       objectReference: {fileID: 0}
     - target: {fileID: 1121353045734808480, guid: 8c6a0bf338eedbe46aa1b96e25457e5f,
         type: 3}
