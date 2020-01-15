@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 6385452311929255331}
   m_Layer: 13
   m_Name: Hook
-  m_TagString: Untagged
+  m_TagString: Hook
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,6 +144,7 @@ MonoBehaviour:
   node: {fileID: 7785497642015086677, guid: d05c2fb295f37f948970ef2c1d68d370, type: 3}
   player: {fileID: 0}
   lastNode: {fileID: 0}
+  nodes: []
 --- !u!114 &1049925879235827440
 MonoBehaviour:
   m_ObjectHideFlags: 0
