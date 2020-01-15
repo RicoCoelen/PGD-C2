@@ -22,6 +22,10 @@ public class BreakableWall : MonoBehaviour
                 BreakWall();
                 Destroy(GameObject.FindGameObjectWithTag("Hook"));
                 break;
+            case "Grabable":
+                BreakWall();
+                collision.gameObject.GetComponent<BreakableScript>().Break();
+                break;
         }
     }
 

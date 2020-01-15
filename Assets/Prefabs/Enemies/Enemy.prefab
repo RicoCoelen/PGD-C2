@@ -262,6 +262,7 @@ MonoBehaviour:
   facingRight: 1
   isGrounded: 0
   isWalled: 0
+  forceDamageLimit: 3.5
   movementSpeed: 3
   health: 100
   fleeLimit: 0.3
@@ -358,6 +359,7 @@ MonoBehaviour:
     m_Bits: 769
   playerPosition: {fileID: 0}
   visorLight: {fileID: 2609299514907741607}
+  canSeeEnemy: 0
   isShooting: 0
   bulletPrefab: {fileID: 244638319351267649, guid: 7c305fc203d31894e96c6a81ef197df0,
     type: 3}

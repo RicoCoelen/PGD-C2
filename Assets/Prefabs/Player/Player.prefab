@@ -165,7 +165,7 @@ MonoBehaviour:
   - {x: -0.2633276, y: -0.32319087, z: 0}
   m_ShapePathHash: -2014623022
   m_Mesh: {fileID: 0}
-  m_InstanceId: 36678
+  m_InstanceId: 88852
 --- !u!1 &8056905871520868893
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 8056905871520868890}
   - component: {fileID: 4427746168945051446}
   - component: {fileID: 8892146369966395860}
+  - component: {fileID: 999628839}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -311,9 +312,11 @@ MonoBehaviour:
   swingingReactionMultiplier: 0.25
   disableGravitySpeed: 7.25
   swingingGravityTime: 20
+  swingGravityModifier: 0.5
   maxLives: 5
   lives: 5
   flashTime: 1
+  playerFootstep: {fileID: 0}
   animator: {fileID: 4636866807461089879}
   groundLayer:
     serializedVersion: 2
@@ -431,6 +434,22 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &8892146369966395860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8056905871520868893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91c6612b7a99c84f862b0b83dc29e53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentItem: {fileID: 0}
+  currentItemRigidBody: {fileID: 0}
+  ItemHolder: {fileID: 1271799719}
+  forceMultiplier: 35
 --- !u!82 &999628839
 AudioSource:
   m_ObjectHideFlags: 0
@@ -527,22 +546,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8892146369966395860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8056905871520868893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebb2fa12c867b064f828f1cb0f26b9b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentItem: {fileID: 0}
-  currentItemRigidBody: {fileID: 0}
-  ItemHolder: {fileID: 1271799719}
-  forceMultiplier: 35
 --- !u!1 &8909435165974215624
 GameObject:
   m_ObjectHideFlags: 0
