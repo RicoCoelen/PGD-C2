@@ -48,12 +48,8 @@ public class PlayerScript : MonoBehaviour
     float timeLeft;
 
     AudioSource audioSource;
-<<<<<<< HEAD:Assets/Scripts/Player/PlayerScript.cs
-    public static AudioClip playerFootstep;
-=======
     public AudioClip playerFootstep;
 
->>>>>>> feature/ChainWrapPoints:Assets/Scripts/PlayerScript.cs
     public Animator animator;
 
     public LayerMask groundLayer;
