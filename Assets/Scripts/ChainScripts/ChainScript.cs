@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 
 public class ChainScript : MonoBehaviour
@@ -22,11 +23,12 @@ public class ChainScript : MonoBehaviour
     public GameObject node;
     public GameObject player;
     public GameObject lastNode;
+    private int lastNodesCount;
 
     bool done = false;
     bool stop = false;
 
-    public List<GameObject> nodes;
+    List<GameObject> nodes;
 
     bool soundPlayed = false;
 
@@ -64,9 +66,13 @@ public class ChainScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Debug
         if (isFlexible)
         {
+            transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 2f), ForceMode2D.Impulse);
+            chainJoint.distance = Vector2.Distance(player.transform.position, GetComponent<Rigidbody2D>().position);
+            chainJoint.connectedBody = player.GetComponent<Rigidbody2D>();
+            chainJoint.enabled = true;
+
             Debug.DrawLine(player.transform.position, GetComponent<Rigidbody2D>().position, Color.green);
         }
         else
@@ -74,134 +80,64 @@ public class ChainScript : MonoBehaviour
             soundPlayed = false;
         }
 
-        HandleTravel();
-        SetDistance();
-        HitWall();
-
-
-        // Handles nodes and joints around corners
-        for (int i = 0; i < nodes.Count; i++)
+        // Old hook script
         {
-            if (nodes[i].GetComponent<NodeScript>() == null)
+            // Makes the hook move in the clicked direction and creating nodes for in the chains
             {
-                continue;
-            }
-            else if (nodes[i].GetComponent<NodeScript>().hinge)
-            {
+                // Moves the hook to
+                if (!stop)
+                    transform.position = Vector2.MoveTowards(transform.position, direction, speed);
 
-                if (nodes[i + 1] != null)
+                // Creates nodes while hook is traveling
+                if (transform.position != (Vector3)direction && !stop)
                 {
-                    if (nodes[i + 1].GetComponent<NodeScript>().hinge)
+                    if (Vector2.Distance(player.transform.position, lastNode.transform.position) > interfal)
                     {
-                        nodes[i].GetComponent<NodeScript>().skipped = true;
-                        //nodes[i].GetComponent<NodeScript>().hinge = false;
-                    }
-                    else
-                    {
-                        nodes[i].GetComponent<DistanceJoint2D>().enabled = true;
-                        nodes[i].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-
-                        chainJoint.GetComponent<DistanceJoint2D>().enabled = false;
-
-                        for (int j = i; j > 0; j--)
-                        {
-                            if (nodes[j].GetComponent<NodeScript>() == null)
-                            {
-                                break;
-                            }
-                            else if (nodes[j].GetComponent<NodeScript>().skipped == false)
-                            {
-                                foreach (GameObject node in nodes)
-                                {
-                                    node.GetComponent<DistanceJoint2D>().enabled = false;
-                                }
-
-                                Debug.Log("Node " + i + " should connect");
-
-                                nodes[i].GetComponent<DistanceJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
-                                nodes[i].GetComponent<DistanceJoint2D>().distance = Vector3.Distance(nodes[i].GetComponent<Rigidbody2D>().position, player.GetComponent<Rigidbody2D>().position);
-                                nodes[i].GetComponent<DistanceJoint2D>().enabled = true;
-                            }
-                        }
-                        // For loop toward the hook to find the last unskipped hinge
-                        // Then set its body to this
-                        // Set this distanceJoint2D to the player
+                        CreateNode();
                     }
                 }
+                // Creates remaning nodes and attaches player to chain
+                else if (done == false)
+                {
+                    done = true;
 
+                    while (Vector2.Distance(player.transform.position, lastNode.transform.position) > interfal + interfal / 2)
+                    {
+                        CreateNode();
+                    }
 
-
-
-                //nodes[j - 1].GetComponent<DistanceJoint2D>().connectedBody = nodes[i].GetComponent<Rigidbody2D>();
-                //nodes[j - 1].GetComponent<DistanceJoint2D>().distance = Vector2.Distance(GetComponent<Rigidbody2D>().position, nodes[i - 1].GetComponent<Rigidbody2D>().position);
-                //nodes[j].GetComponent<DistanceJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
+                    lastNode.GetComponent<HingeJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
+                }
             }
-        }
-    }
 
-    /// <summary>
-    /// Makes the hook travel in the given direction until done
-    /// </summary>
-    void HandleTravel()
-    {
-        // Moves the hook to
-        if (!stop)
-            transform.position = Vector2.MoveTowards(transform.position, direction, speed);
-
-        // Creates nodes while hook is traveling
-        if (transform.position != (Vector3)direction && !stop)
-        {
-            if (Vector2.Distance(player.transform.position, lastNode.transform.position) > interfal)
+            // Handles chain length
             {
-                CreateNode();
+                // Changes distance joint length
+                if (Input.GetButton("down") && chainJoint.distance != minDistance)
+                {
+                    chainJoint.distance += climbSpeed * Time.deltaTime;
+                }
+                else if (chainJoint.distance < minDistance)
+                    chainJoint.distance = minDistance;
+
+                if (Input.GetButton("up") && chainJoint.distance != maxDistance)
+                {
+                    chainJoint.distance -= climbSpeed * Time.deltaTime;
+                }
+                else if (chainJoint.distance >= maxDistance)
+                    chainJoint.distance = maxDistance;
+
+                // Changes chain length if necessary
+                if (isFlexible && done && NodeCheck())
+                {
+                    ChangeLength();
+                }
+
+                lastNodesCount = nodes.Count;
+
             }
-        }
 
-        // Creates remaning nodes and attaches player to chain
-        else if (done == false)
-        {
-            done = true;
-
-            while (Vector2.Distance(player.transform.position, lastNode.transform.position) > interfal + interfal / 2)
-            {
-                CreateNode();
-            }
-
-            lastNode.GetComponent<HingeJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
-
-            if (isFlexible)
-            {
-                transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 2f), ForceMode2D.Impulse);
-                chainJoint.distance = Vector2.Distance(player.transform.position, GetComponent<Rigidbody2D>().position);
-                chainJoint.connectedBody = player.GetComponent<Rigidbody2D>();
-                chainJoint.enabled = true;
-            }
-        }
-    }
-
-
-    void SetDistance()
-    {
-        // Decreases the length of the chain
-        if (Input.GetButton("down") && chainJoint.distance != minDistance)
-        {
-            chainJoint.distance += climbSpeed * Time.deltaTime;
-        }
-        else if (chainJoint.distance < minDistance)
-            chainJoint.distance = minDistance;
-
-        // Increases the length of the chain
-        if (Input.GetButton("up") && chainJoint.distance != maxDistance)
-        {
-            chainJoint.distance -= climbSpeed * Time.deltaTime;
-        }
-        else if (chainJoint.distance >= maxDistance)
-            chainJoint.distance = maxDistance;
-
-        // Changes the amount of nodes if chain is to long or short
-        if (isFlexible && done && NodeCheck())
-        {
-            ChangeLength();
+            HitWall();
         }
     }
 
@@ -215,7 +151,7 @@ public class ChainScript : MonoBehaviour
         if (hit.collider != player.GetComponent<Collider2D>() && hit.collider != null)
         {
             RaycastHit2D hit2 = Physics2D.Raycast((Vector2)transform.position + (Vector2.up * 0.2f), Vector2.up, 0.1f);
-            if (hit2.collider != player.GetComponent<Collider2D>() && hit2.collider != null && hit2.collider.gameObject.layer != 15 && hit2.collider.gameObject.tag != "Switch" && hit2.collider.tag != "Grabable")
+            if (hit2.collider != player.GetComponent<Collider2D>() && hit2.collider != null && hit2.collider.gameObject.layer != 15 && hit2.collider.gameObject.tag != "Switch")
             {
                 if (!soundPlayed)
                 {
@@ -309,5 +245,7 @@ public class ChainScript : MonoBehaviour
         }
 
         lastNode.GetComponent<HingeJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
+
+
     }
 }
