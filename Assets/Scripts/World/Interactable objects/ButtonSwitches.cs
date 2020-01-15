@@ -51,7 +51,6 @@ public class ButtonSwitches : MonoBehaviour
             isOn = !isOn;
             light2d.color = Color.red;
         }
-        Debug.Log(isOn + "ison");
     }
     public void Update()
     {

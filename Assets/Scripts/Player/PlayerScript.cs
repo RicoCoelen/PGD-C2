@@ -27,6 +27,7 @@ public class PlayerScript : MonoBehaviour
     public float swingingReactionMultiplier = 0.25f;
     public float disableGravitySpeed = 7.5f;
     public float swingingGravityTime = 20f;
+    public float swingGravityModifier = 0.5f;
 
     [Header("Health and variables")]
     public float maxLives = 10f;
@@ -352,29 +353,38 @@ public class PlayerScript : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
         }
 
-        // disable gravity while swinging, and also for a small amount of time after releasing the chain to maintain momentum
-        if (chainGravity )
+        // disable gravity for a small amount of time after releasing the chain to maintain momentum    
+        if (chainGravity)
         {
             // Remove chainGravity after timeLeft reaches 0 when lowering by 60 per second
-            if (chainGravity)
+            timeLeft -= 60 * Time.deltaTime;
+            if (timeLeft < 0)
             {
-                timeLeft -= 60 * Time.deltaTime;
-                if (timeLeft < 0)
-                {
-                    chainGravity = false;
-                    timeLeft = swingingGravityTime;
-                }
+                chainGravity = false;
+                timeLeft = swingingGravityTime;
             }
         }
         else
         {
+            // Apply a modifier to gravity while the player is swinging
+            float modifier;
+
+            if (IsSwinging())
+            {
+                modifier = swingGravityModifier;
+            }
+            else
+            {
+                modifier = 1;
+            }
+
             //gravity
-            rb.velocity += (Vector2.up * Physics2D.gravity * (gravityMultiplier - 1)) * Time.deltaTime;
+            rb.velocity += (Vector2.up * Physics2D.gravity * ((gravityMultiplier * modifier)  - 1)) * Time.deltaTime;
 
             // Speed up falling when releasing the jump button while still jumping
             if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
             {
-                rb.velocity += (Vector2.up * Physics2D.gravity * (fallMultiplier - 1)) * Time.deltaTime;
+                rb.velocity += (Vector2.up * Physics2D.gravity * ((fallMultiplier * modifier) - 1)) * Time.deltaTime;
             }
         }
     }

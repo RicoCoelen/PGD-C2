@@ -276,7 +276,7 @@ MonoBehaviour:
   airDragMultiplier: 0.05
   rayLength: 0.2
   swingingMaxSpeed: 1000
-  swingingAcceleration: 80
+  swingingAcceleration: 120
   swingingReactionMultiplier: 0.25
   disableGravitySpeed: 7.25
   swingingGravityTime: 20
