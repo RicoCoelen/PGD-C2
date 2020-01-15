@@ -17,8 +17,9 @@ public class ButtonSwitches : MonoBehaviour
 
     private void Start()
     {
-        light2d = GetComponent<Light2D>();
+        light2d = GetComponentInChildren<Light2D>();
         player = GameObject.FindGameObjectWithTag("Player");
+
         if(isOn == false)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = switchOff.GetComponent<SpriteRenderer>().sprite;
