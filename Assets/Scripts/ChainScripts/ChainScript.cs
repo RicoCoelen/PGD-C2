@@ -111,7 +111,16 @@ public class ChainScript : MonoBehaviour
                             }
                             else if (nodes[j].GetComponent<NodeScript>().skipped == false)
                             {
+                                foreach (GameObject node in nodes)
+                                {
+                                    node.GetComponent<DistanceJoint2D>().enabled = false;
+                                }
+
+                                Debug.Log("Node " + i + " should connect");
+
                                 nodes[i].GetComponent<DistanceJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
+                                nodes[i].GetComponent<DistanceJoint2D>().distance = Vector3.Distance(nodes[i].GetComponent<Rigidbody2D>().position, player.GetComponent<Rigidbody2D>().position);
+                                nodes[i].GetComponent<DistanceJoint2D>().enabled = true;
                             }
                         }
                         // For loop toward the hook to find the last unskipped hinge
