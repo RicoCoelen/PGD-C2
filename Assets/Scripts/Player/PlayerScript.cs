@@ -44,7 +44,7 @@ public class PlayerScript : MonoBehaviour
 
     bool chainGravity = false;
     bool prevGrounded = false;
-    Vector2 playerLastGroundedPosition = new Vector2(0, 0);
+    Vector2 playerCheckpointPosition = new Vector2(0, 0);
     float timeLeft;
 
     AudioSource audioSource;
@@ -53,6 +53,8 @@ public class PlayerScript : MonoBehaviour
 
     public LayerMask groundLayer;
 
+    private CheckPoint activeCheckpoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,7 +62,7 @@ public class PlayerScript : MonoBehaviour
         //originalColor = renderer.GetComponent<SpriteRenderer>().color;
         player = GameObject.FindGameObjectWithTag("Player");
 
-        playerLastGroundedPosition = transform.position;
+        playerCheckpointPosition = transform.position;
         playerFootstep = Resources.Load<AudioClip>("footstep");
 
         audioSource = GetComponent<AudioSource>();
@@ -156,15 +158,19 @@ public class PlayerScript : MonoBehaviour
     }
 
     // Get the last position where the player was grounded, used for the checkpoints
-    public void LastGroundedPosition()
+    public void CheckpointReached(CheckPoint checkpoint)
     {
         //RaycastHit2D groundRay = GroundrayCast(GetComponent<Collider2D>().bounds.size.x * 0.5f);
 
         // Change to colliding with checkpoint
-        if (IsGrounded())
+        playerCheckpointPosition = checkpoint.transform.position;
+
+        if (activeCheckpoint != null)
         {
-            playerLastGroundedPosition = transform.position;
+            activeCheckpoint.currentActive = false;
         }
+
+        activeCheckpoint = checkpoint;
     }
     
     // Send a raycast to the ground
@@ -392,7 +398,7 @@ public class PlayerScript : MonoBehaviour
 
         if (GetComponent<ThrowHook>().firstHook != null)
             Destroy(GetComponent<ThrowHook>().firstHook);
-        transform.position = playerLastGroundedPosition;
+        transform.position = playerCheckpointPosition;
     }
 
     // Rotate the player towards the hook anchor when swinging
