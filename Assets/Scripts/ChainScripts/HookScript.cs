@@ -27,7 +27,6 @@ public class HookScript : MonoBehaviour
 
         if (child != null)
         {
-           
             child.position = transform.position;
         }
 
@@ -48,11 +47,12 @@ public class HookScript : MonoBehaviour
     {
         switch(collision.gameObject.tag)
         {
-            case "Grabable":               
+            case "Grabable":
                 collision.gameObject.transform.parent = hook.transform;
                 child = collision.gameObject.transform;
                 Physics2D.IgnoreCollision(child.GetComponent<Collider2D>(), GetComponent<Collider2D>());
                 Physics2D.IgnoreCollision(child.GetComponent<Collider2D>(), player.GetComponent<Collider2D>());
+                child.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
                 break;
 
             case "Anchored Grabable":
