@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class ButtonSwitches : MonoBehaviour
 {
@@ -9,19 +10,25 @@ public class ButtonSwitches : MonoBehaviour
     public GameObject player;
     [SerializeField]
     public GameObject door;
-    
+    Light2D light2d;
+
+
     public bool isOn = false;
 
     private void Start()
     {
+        light2d = GetComponentInChildren<Light2D>();
         player = GameObject.FindGameObjectWithTag("Player");
+
         if(isOn == false)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = switchOff.GetComponent<SpriteRenderer>().sprite;
+            light2d.color = Color.red;
         }
 
         if(isOn == true)
         {
+            light2d.color = Color.green;
             gameObject.GetComponent<SpriteRenderer>().sprite = switchOn.GetComponent<SpriteRenderer>().sprite;
         }
     }
@@ -34,6 +41,7 @@ public class ButtonSwitches : MonoBehaviour
             door.GetComponent<SpriteRenderer>().sprite = door.GetComponent<DoorScript>().doorOpen.GetComponent<SpriteRenderer>().sprite;
             door.GetComponent<BoxCollider2D>().enabled = false;
             isOn = !isOn;
+            light2d.color = Color.green;
         }
         else if(isOn == true)
         {
@@ -41,8 +49,8 @@ public class ButtonSwitches : MonoBehaviour
             door.GetComponent<SpriteRenderer>().sprite = door.GetComponent<DoorScript>().doorClosed.GetComponent<SpriteRenderer>().sprite;
             door.GetComponent<BoxCollider2D>().enabled = true;
             isOn = !isOn;
+            light2d.color = Color.red;
         }
-        Debug.Log(isOn + "ison");
     }
     public void Update()
     {

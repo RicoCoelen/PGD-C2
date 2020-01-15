@@ -49,3 +49,6 @@ TagManager:
   - name: Enemy
     uniqueID: 3592910097
     locked: 0
+  - name: Invisible
+    uniqueID: 536817139
+    locked: 0

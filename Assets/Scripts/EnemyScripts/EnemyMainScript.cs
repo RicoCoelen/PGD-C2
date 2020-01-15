@@ -44,8 +44,6 @@ public class EnemyMainScript : MonoBehaviour
     {
         // initiate rigidbody
         rb = GetComponent<Rigidbody2D>();
-        // always start idle
-        cState = State.IDLE;
         originalColor = Color.white;
         PlayerGO = GameObject.FindGameObjectWithTag("Player");
     }
@@ -99,12 +97,20 @@ public class EnemyMainScript : MonoBehaviour
         }
     }
 
+    // Stand idle and attack the enemy when in sight
     void EnemyIdle()
     {
-        // todo but just stand still
-        cState = State.PATROLLING;
+        if (currentTarget != null)
+        {
+            animator.SetBool("isAiming", true);
+        }
+        else
+        {
+            animator.SetBool("isAiming", false);
+        }
     }
 
+    // Move left and right, turning around when reaching the end of a platform or when walking into a wall.
     void EnemyPatrolling()
     {
         if (currentTarget != null)
@@ -124,6 +130,7 @@ public class EnemyMainScript : MonoBehaviour
         }
     }
 
+    // Stand still and aim at the enemy, turn around based on the enemy position and go back to patrolling after losing target
     void EnemyChasing()
     {
         if (currentTarget == null)
