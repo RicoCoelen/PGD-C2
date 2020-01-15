@@ -21,7 +21,7 @@ public class TimeScript : MonoBehaviour
 
         // Only show the Par time UI if there is a par time set
         if (!string.IsNullOrWhiteSpace(currentParTime))
-        parTime.GetComponent<Text>().text = " Dev Time: " + currentParTime;
+        parTime.GetComponent<Text>().text = " Par Time: " + currentParTime;
     }
 
     // Update is called once per frame

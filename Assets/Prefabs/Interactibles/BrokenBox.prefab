@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 31705421848560151}
   m_Layer: 0
   m_Name: BrokenBox
-  m_TagString: Untagged
+  m_TagString: Breakable Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,7 +51,7 @@ GameObject:
   - component: {fileID: 8306625303410453679}
   m_Layer: 18
   m_Name: New Sprite (6)
-  m_TagString: Untagged
+  m_TagString: Breakable Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 4481180707646236381}
   m_Layer: 18
   m_Name: New Sprite (2)
-  m_TagString: Untagged
+  m_TagString: Breakable Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 3298075988676021378}
   m_Layer: 18
   m_Name: New Sprite (5)
-  m_TagString: Untagged
+  m_TagString: Breakable Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -444,7 +444,7 @@ GameObject:
   - component: {fileID: 662501649156745613}
   m_Layer: 18
   m_Name: New Sprite (1)
-  m_TagString: Untagged
+  m_TagString: Breakable Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -575,7 +575,7 @@ GameObject:
   - component: {fileID: 7632241694079260684}
   m_Layer: 18
   m_Name: New Sprite (4)
-  m_TagString: Untagged
+  m_TagString: Breakable Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -706,7 +706,7 @@ GameObject:
   - component: {fileID: 350143050662745817}
   m_Layer: 18
   m_Name: New Sprite
-  m_TagString: Untagged
+  m_TagString: Breakable Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -837,7 +837,7 @@ GameObject:
   - component: {fileID: 8741047722053172082}
   m_Layer: 18
   m_Name: New Sprite (3)
-  m_TagString: Untagged
+  m_TagString: Breakable Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

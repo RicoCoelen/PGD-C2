@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6151625005230810652}
   m_Layer: 18
   m_Name: Breakable wall_11
-  m_TagString: Untagged
+  m_TagString: Breakable Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 1305656997100189887}
   m_Layer: 0
   m_Name: BrokenBits
-  m_TagString: Untagged
+  m_TagString: Breakable Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 6151625003441948268}
   m_Layer: 18
   m_Name: Breakable wall_7
-  m_TagString: Untagged
+  m_TagString: Breakable Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -483,7 +483,7 @@ GameObject:
   - component: {fileID: 6151625004941580314}
   m_Layer: 18
   m_Name: Breakable wall_9
-  m_TagString: Untagged
+  m_TagString: Breakable Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -669,7 +669,7 @@ GameObject:
   - component: {fileID: 6151625003651592361}
   m_Layer: 18
   m_Name: Breakable wall_4
-  m_TagString: Untagged
+  m_TagString: Breakable Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -857,7 +857,7 @@ GameObject:
   - component: {fileID: 6151625003862643155}
   m_Layer: 18
   m_Name: Breakable wall_12
-  m_TagString: Untagged
+  m_TagString: Breakable Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1047,7 +1047,7 @@ GameObject:
   - component: {fileID: 6151625004721508644}
   m_Layer: 18
   m_Name: Breakable wall_3
-  m_TagString: Untagged
+  m_TagString: Breakable Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1234,7 +1234,7 @@ GameObject:
   - component: {fileID: 6151625004014946816}
   m_Layer: 18
   m_Name: Breakable wall_2
-  m_TagString: Untagged
+  m_TagString: Breakable Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1420,7 +1420,7 @@ GameObject:
   - component: {fileID: 6151625005164705691}
   m_Layer: 18
   m_Name: Breakable wall_10
-  m_TagString: Untagged
+  m_TagString: Breakable Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1607,7 +1607,7 @@ GameObject:
   - component: {fileID: 6151625003872660002}
   m_Layer: 18
   m_Name: Breakable wall_8
-  m_TagString: Untagged
+  m_TagString: Breakable Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
