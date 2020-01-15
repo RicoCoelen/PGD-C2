@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 6385452311929255331}
   m_Layer: 13
   m_Name: Hook
-  m_TagString: Hook
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
