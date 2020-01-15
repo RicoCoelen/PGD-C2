@@ -60,7 +60,7 @@ public class PlayerScript : MonoBehaviour
     int directionSwinging = 0;
 
     AudioSource audioSource;
-    public static AudioClip playerFootstep;
+    public AudioClip playerFootstep;
 
     public Animator animator;
 

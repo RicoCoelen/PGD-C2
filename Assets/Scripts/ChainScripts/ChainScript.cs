@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 
 public class ChainScript : MonoBehaviour
@@ -83,31 +82,50 @@ public class ChainScript : MonoBehaviour
         // Handles nodes and joints around corners
         for (int i = 0; i < nodes.Count; i++)
         {
-            if (nodes[i].GetComponent<NodeScript>() == null) {
+            if (nodes[i].GetComponent<NodeScript>() == null)
+            {
                 continue;
             }
             else if (nodes[i].GetComponent<NodeScript>().hinge)
             {
-                nodes[i].GetComponent<DistanceJoint2D>().enabled = true;
-                nodes[i].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
 
                 if (nodes[i + 1] != null)
                 {
                     if (nodes[i + 1].GetComponent<NodeScript>().hinge)
                     {
                         nodes[i].GetComponent<NodeScript>().skipped = true;
+                        //nodes[i].GetComponent<NodeScript>().hinge = false;
                     }
                     else
                     {
+                        nodes[i].GetComponent<DistanceJoint2D>().enabled = true;
+                        nodes[i].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+
+                        chainJoint.GetComponent<DistanceJoint2D>().enabled = false;
+
+                        for (int j = i; j > 0; j--)
+                        {
+                            if (nodes[j].GetComponent<NodeScript>() == null)
+                            {
+                                break;
+                            }
+                            else if (nodes[j].GetComponent<NodeScript>().skipped == false)
+                            {
+                                nodes[i].GetComponent<DistanceJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
+                            }
+                        }
                         // For loop toward the hook to find the last unskipped hinge
                         // Then set its body to this
                         // Set this distanceJoint2D to the player
                     }
                 }
 
-                nodes[i - 1].GetComponent<DistanceJoint2D>().connectedBody = nodes[i].GetComponent<Rigidbody2D>();
-                nodes[i - 1].GetComponent<DistanceJoint2D>().distance = Vector2.Distance(GetComponent<Rigidbody2D>().position, nodes[i - 1].GetComponent<Rigidbody2D>().position);
-                nodes[i].GetComponent<DistanceJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
+
+
+
+                //nodes[j - 1].GetComponent<DistanceJoint2D>().connectedBody = nodes[i].GetComponent<Rigidbody2D>();
+                //nodes[j - 1].GetComponent<DistanceJoint2D>().distance = Vector2.Distance(GetComponent<Rigidbody2D>().position, nodes[i - 1].GetComponent<Rigidbody2D>().position);
+                //nodes[j].GetComponent<DistanceJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
             }
         }
     }
