@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1347615742771501929}
   - component: {fileID: 623012289254749122}
   - component: {fileID: 6151625005230810652}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Breakable wall_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 8841157274646202826}
   - component: {fileID: 2203801704726579695}
   - component: {fileID: 6151625003441948268}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Breakable wall_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -459,7 +459,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -481,7 +481,7 @@ GameObject:
   - component: {fileID: 5222863422568839175}
   - component: {fileID: 6239252357284818206}
   - component: {fileID: 6151625004941580314}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Breakable wall_9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -645,7 +645,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -667,7 +667,7 @@ GameObject:
   - component: {fileID: 2283933748248690662}
   - component: {fileID: 4404564829166898853}
   - component: {fileID: 6151625003651592361}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Breakable wall_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -833,7 +833,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -855,7 +855,7 @@ GameObject:
   - component: {fileID: 352147510672219690}
   - component: {fileID: 8493225688677022622}
   - component: {fileID: 6151625003862643155}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Breakable wall_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1023,7 +1023,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -1045,7 +1045,7 @@ GameObject:
   - component: {fileID: 4297645270744785497}
   - component: {fileID: 1506703592597001053}
   - component: {fileID: 6151625004721508644}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Breakable wall_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1210,7 +1210,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -1232,7 +1232,7 @@ GameObject:
   - component: {fileID: 5897585138740218104}
   - component: {fileID: 4886632524286135026}
   - component: {fileID: 6151625004014946816}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Breakable wall_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1396,7 +1396,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -1418,7 +1418,7 @@ GameObject:
   - component: {fileID: 1533611892823424397}
   - component: {fileID: 4550692550064573027}
   - component: {fileID: 6151625005164705691}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Breakable wall_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1583,7 +1583,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -1605,7 +1605,7 @@ GameObject:
   - component: {fileID: 5429886289103414192}
   - component: {fileID: 6432822862418408318}
   - component: {fileID: 6151625003872660002}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Breakable wall_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1769,7 +1769,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1

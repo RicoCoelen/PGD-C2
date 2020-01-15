@@ -6,6 +6,7 @@ public class BreakableWall : MonoBehaviour
 {
 
     public GameObject brokenBits;
+    public GameObject hook;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,8 +18,10 @@ public class BreakableWall : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Hook":
-                Debug.Log("Hokk + Break");
+                Debug.Log("Hook + Break");
                 BreakWall();
+                //Destroy();
+                
                 break;
         }
     }

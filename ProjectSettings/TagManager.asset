@@ -30,7 +30,7 @@ TagManager:
   - NotHookable
   - HookOnly
   - NoJump
-  - 
+  - IgnorePlayer
   - 
   - 
   - 
