@@ -43,11 +43,16 @@ public class GrabbingScript : MonoBehaviour
                     GameObject connectedObject = hs.child.gameObject;
 
                     // if grabable
-                    if (connectedObject != null && connectedObject.tag == "Grabable")
+                    if (connectedObject != null)
                     {
-                        GrabItem(connectedObject);
-                        connectedObject.transform.parent = null;
-                        Destroy(GetComponent<ThrowHook>().firstHook);
+                        switch(connectedObject.tag)
+                        {
+                            case "Grabable":
+                                GrabItem(connectedObject);
+                                connectedObject.transform.parent = null;
+                                Destroy(GetComponent<ThrowHook>().firstHook);
+                                break;
+                        }
                     }
                 }
             }
@@ -122,6 +127,7 @@ public class GrabbingScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // grab item if collides with player collier
         //// check if holding item
         //if (currentItem == null)
         //{
