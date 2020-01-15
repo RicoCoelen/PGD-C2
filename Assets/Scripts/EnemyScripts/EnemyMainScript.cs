@@ -11,6 +11,7 @@ public class EnemyMainScript : MonoBehaviour
     public bool isWalled = false;
 
     [Header("Enemy Stats")]
+    public float forceDamageLimit = 10f;
     public float movementSpeed = 10f;
     private float currentMoveSpeed;
     public float health = 100f;
@@ -196,4 +197,18 @@ public class EnemyMainScript : MonoBehaviour
         GetComponentInChildren<SpriteRenderer>().color = originalColor;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "Grabable":
+                // if thrown object hits enemy die, instantiate broken prefab
+                if (collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude > forceDamageLimit)
+                {
+                    TakeDamage(9999);
+                    collision.gameObject.GetComponent<BreakableScript>().Break();
+                }
+                break;
+        }
+    }
 }
