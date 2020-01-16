@@ -7,7 +7,9 @@ public class AudioManager : MonoBehaviour
     public static AudioClip playerJump, playerLand, playerHit, chainHit, death, enemyShot, enemyHit;
     static AudioSource audioSource;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Here we load the AudioClips so we don't have to do that again.
+    /// </summary>
     void Start()
     {
         playerJump = Resources.Load<AudioClip>("Jump");
@@ -23,6 +25,11 @@ public class AudioManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+    /// <summary>
+    /// In the switch case we select the audioSource to play at the right moment.
+    /// We call the case from the other scripts to play the right audio.
+    /// </summary>
+    /// <param name="clip"></param>
     public static void PlaySound(string clip)
     {
         switch (clip)

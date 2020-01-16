@@ -30,6 +30,10 @@ public class ChainScript : MonoBehaviour
 
     bool soundPlayed = false;
 
+    private NodeScript nodeScript;
+    private DistanceJoint2D nodeDistanceJoint;
+    private Rigidbody2D nodeBody;
+
     // Use this for initialization
     void Start()
     {
@@ -88,13 +92,17 @@ public class ChainScript : MonoBehaviour
     {
         for (int i = 0; i < nodes.Count; i++)
         {
+            nodeScript = nodes[i].GetComponent<NodeScript>();
+            nodeDistanceJoint = nodes[i].GetComponent<DistanceJoint2D>();
+            nodeBody = nodes[i].GetComponent<Rigidbody2D>();
+
             // Checks if the node is the anchor, then continue
             if (nodes[i].GetComponent<NodeScript>() == null)
             {
                 continue;
             }
             // Checks if the bool is true, which is set true or false in the NodeScript.
-            else if (nodes[i].GetComponent<NodeScript>().hinge)
+            else if (nodeScript.hinge)
             {
                 // If the next note is not empty it will run this because otherwise it will have missing variables.
                 if (nodes[i + 1] != null)
@@ -102,12 +110,12 @@ public class ChainScript : MonoBehaviour
                     // This if else script is there to determine if anything should happen. Since we only want to have a distance joint between the player and the last node that is touching part of the level.
                     if (nodes[i + 1].GetComponent<NodeScript>().hinge)
                     {
-                        nodes[i].GetComponent<NodeScript>().skipped = true;
+                        nodeScript.skipped = true;
                     }
                     else
                     {
-                        nodes[i].GetComponent<DistanceJoint2D>().enabled = true;
-                        nodes[i].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                        nodeDistanceJoint.enabled = true;
+                        nodeBody.bodyType = RigidbodyType2D.Kinematic;
 
                         chainJoint.enabled = false;
 
@@ -130,9 +138,9 @@ public class ChainScript : MonoBehaviour
 
                                 Debug.Log("Node " + i + " should wrap");
 
-                                nodes[i].GetComponent<DistanceJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
-                                nodes[i].GetComponent<DistanceJoint2D>().distance = Vector3.Distance(nodes[i].GetComponent<Rigidbody2D>().position, player.GetComponent<Rigidbody2D>().position);
-                                nodes[i].GetComponent<DistanceJoint2D>().enabled = true;
+                                nodeDistanceJoint.connectedBody = player.GetComponent<Rigidbody2D>();
+                                nodeDistanceJoint.distance = Vector3.Distance(nodeBody.position, player.GetComponent<Rigidbody2D>().position);
+                                nodeDistanceJoint.enabled = true;
                             }
                         }
                         
@@ -146,8 +154,8 @@ public class ChainScript : MonoBehaviour
                             foreach (GameObject node in nodes)
                             {
                                 nodes[i].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                                nodes[i].GetComponent<DistanceJoint2D>().enabled = false;
-                                nodes[i].GetComponent<NodeScript>().hinge = false;
+                                nodeDistanceJoint.enabled = false;
+                                nodeScript.hinge = false;
                             }
 
                             // And then set the hook to the player again.

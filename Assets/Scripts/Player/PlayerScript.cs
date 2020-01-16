@@ -396,12 +396,17 @@ public class PlayerScript : MonoBehaviour
         transform.position = playerLastGroundedPosition;
     }
 
-    // Rotate the player towards the hook anchor when swinging
+
+    /// <summary>
+    /// Here we rotate the player towards the hook if the player is swinging.
+    /// </summary>
     void Rotation()
     {
+        // Get the direction from player to hook then changing it to angle's so we can use rotation.
         var playerToHookDirection = (GetComponent<ThrowHook>().firstHook.transform.position - (Vector3)transform.position).normalized;
         var angle = Mathf.Atan2(playerToHookDirection.y, playerToHookDirection.x) * Mathf.Rad2Deg;
 
+        // We check for the direction the player starts swinging in so we can flip it.
         if (directionSwinging == 1)
         {
             GetComponentInChildren<SpriteRenderer>().flipX = true;
@@ -410,6 +415,8 @@ public class PlayerScript : MonoBehaviour
         {
             GetComponentInChildren<SpriteRenderer>().flipX = false;
         }
+
+        // We set the rotation of the player comparing with the angle.
         transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
         var nodes = GameObject.FindGameObjectsWithTag("Node");
         foreach(GameObject node in nodes)
