@@ -4,16 +4,27 @@ using UnityEngine;
 
 public class HookScript : MonoBehaviour
 {
-    public Transform child;
+    [Header("Game Objects")]
     public GameObject hook;
-    GameObject player;
-    public LayerMask grabable;
-    public float throwForce;
-    public bool active;
-    public int inputButton;
+    public Transform child;
 
+    [Header("Attack")]
     public float minDamage;
     public float maxDamage;
+
+    [Header("Layer")]
+    public LayerMask grabable;
+
+    [Header("Input")]
+    public int inputButton;
+
+    [Header("Throw")]
+    public float throwForce;
+
+
+    [System.NonSerialized] public bool active;
+
+    private GameObject player;
 
     // Start is called before the first frame update
     void Start()
