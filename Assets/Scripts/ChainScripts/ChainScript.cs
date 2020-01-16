@@ -77,20 +77,29 @@ public class ChainScript : MonoBehaviour
         HandleTravel();
         SetDistance();
         HitWall();
+        WrappingChain();
+    }
 
-
-        // Handles nodes and joints around corners
+    /// <summary>
+    /// This part of the code is handeling the wrapping and unwrapping of the chain, so it can swing around corners aswell.
+    /// This is done by looping through all of the list with notes and then activating or deactivating a DistanceJoint2D
+    /// </summary>
+    void WrappingChain()
+    {
         for (int i = 0; i < nodes.Count; i++)
         {
+            // Checks if the node is the anchor, then continue
             if (nodes[i].GetComponent<NodeScript>() == null)
             {
                 continue;
             }
+            // Checks if the bool is true, which is set true or false in the NodeScript.
             else if (nodes[i].GetComponent<NodeScript>().hinge)
             {
-
+                // If the next note is not empty it will run this because otherwise it will have missing variables.
                 if (nodes[i + 1] != null)
                 {
+                    // This if else script is there to determine if anything should happen. Since we only want to have a distance joint between the player and the last node that is touching part of the level.
                     if (nodes[i + 1].GetComponent<NodeScript>().hinge)
                     {
                         nodes[i].GetComponent<NodeScript>().skipped = true;
@@ -102,12 +111,16 @@ public class ChainScript : MonoBehaviour
 
                         chainJoint.enabled = false;
 
+                        // Because we want to check from the player to the hook, we flip the for loop, so we start on the last node. 
                         for (int j = i; j > 0; j--)
                         {
                             if (nodes[j].GetComponent<NodeScript>() == null)
                             {
                                 break;
                             }
+                            // In this else if we set all the nodes to disable their DistanceJoint2D. So that we can enable the right one.
+                            // After doing that, we set the connectedBody to the player and set the distance to the distance in between.
+                            // We only enable the DistaneJoint2D for that node.
                             else if (nodes[j].GetComponent<NodeScript>().skipped == false)
                             {
                                 foreach (GameObject node in nodes)
@@ -117,49 +130,37 @@ public class ChainScript : MonoBehaviour
 
                                 Debug.Log("Node " + i + " should wrap");
 
-                                // Instantiate the DistanceJoint2D for node i so the player has a new rotation point.
                                 nodes[i].GetComponent<DistanceJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
                                 nodes[i].GetComponent<DistanceJoint2D>().distance = Vector3.Distance(nodes[i].GetComponent<Rigidbody2D>().position, player.GetComponent<Rigidbody2D>().position);
                                 nodes[i].GetComponent<DistanceJoint2D>().enabled = true;
-
-                                
-                            }
-
-                            // Instantiate the DistanceJoint2D for node i so the player goes back down and can rotate around the hook.
-                            if (nodes[i].GetComponent<Rigidbody2D>().position.y > player.GetComponent<Rigidbody2D>().position.y)
-                            {
-                                Debug.Log("Node " + i + " should unwrap");
-                                
-
-                                foreach (GameObject node in nodes)
-                                {
-                                    nodes[i].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                                    nodes[i].GetComponent<DistanceJoint2D>().enabled = false;
-                                    nodes[i].GetComponent<NodeScript>().hinge = false;
-                                }
-
-                                chainJoint.connectedBody = player.GetComponent<Rigidbody2D>();
-                                chainJoint.distance = Vector3.Distance(chainJoint.GetComponent<Rigidbody2D>().position, player.GetComponent<Rigidbody2D>().position);
-                                if (chainJoint.distance > maxDistance) 
-                                {
-                                    chainJoint.distance = maxDistance;
-
-                                }
-                                chainJoint.enabled = true;
                             }
                         }
-                        // For loop toward the hook to find the last unskipped hinge
-                        // Then set its body to this
-                        // Set this distanceJoint2D to the player
+                        
+                        // For the unwrapping the code compares the node position and player position and if the player y is smaller then the node y
+                        // It disables the DistanceJoint2D
+                        if (nodes[i].GetComponent<Rigidbody2D>().position.y > player.GetComponent<Rigidbody2D>().position.y)
+                        {
+                            Debug.Log("Node " + i + " should unwrap");
+
+                            // For all the nodes we reset the nodes back to a beginning state.
+                            foreach (GameObject node in nodes)
+                            {
+                                nodes[i].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                                nodes[i].GetComponent<DistanceJoint2D>().enabled = false;
+                                nodes[i].GetComponent<NodeScript>().hinge = false;
+                            }
+
+                            // And then set the hook to the player again.
+                            chainJoint.connectedBody = player.GetComponent<Rigidbody2D>();
+                            chainJoint.distance = Vector3.Distance(chainJoint.GetComponent<Rigidbody2D>().position, player.GetComponent<Rigidbody2D>().position);
+                            if (chainJoint.distance > maxDistance)
+                            {
+                                chainJoint.distance = maxDistance;
+                            }
+                            chainJoint.enabled = true;
+                        }
                     }
                 }
-
-
-
-
-                //nodes[j - 1].GetComponent<DistanceJoint2D>().connectedBody = nodes[i].GetComponent<Rigidbody2D>();
-                //nodes[j - 1].GetComponent<DistanceJoint2D>().distance = Vector2.Distance(GetComponent<Rigidbody2D>().position, nodes[i - 1].GetComponent<Rigidbody2D>().position);
-                //nodes[j].GetComponent<DistanceJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
             }
         }
     }
