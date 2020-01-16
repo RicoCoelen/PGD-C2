@@ -56,18 +56,25 @@ public class PlayerScript : MonoBehaviour
     public LayerMask groundLayer;
 
     private CheckPoint activeCheckpoint;
+    private SpriteRenderer spriteRenderer;
+    private ThrowHook throwHook;
+    private Collider2D playerCollider;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        //originalColor = renderer.GetComponent<SpriteRenderer>().color;
         player = GameObject.FindGameObjectWithTag("Player");
 
         playerCheckpointPosition = transform.position;
         playerFootstep = Resources.Load<AudioClip>("footstep");
 
         audioSource = GetComponent<AudioSource>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        throwHook = GetComponent<ThrowHook>();
+        playerCollider = GetComponent<Collider2D>();
+
+
     }
 
     private void Awake()
@@ -178,7 +185,7 @@ public class PlayerScript : MonoBehaviour
     // Send a raycast to the ground
     private RaycastHit2D GroundrayCast(float xOffset)
     {
-        Vector2 position = (Vector2)transform.position + GetComponent<Collider2D>().bounds.size.y * Vector2.down / 2 - new Vector2(0, 0.2f) + new Vector2(xOffset, 0);
+        Vector2 position = (Vector2)transform.position + playerCollider.bounds.size.y * Vector2.down / 2 - new Vector2(0, 0.2f) + new Vector2(xOffset, 0);
         Vector2 direction = Vector2.down;
 
         RaycastHit2D hit = Physics2D.Raycast(position, direction, rayLength);
@@ -189,9 +196,9 @@ public class PlayerScript : MonoBehaviour
     // Give faster speed while attached to the chain
     private bool IsSwinging()
     {
-        if (GetComponent<ThrowHook>().firstHook != null && !IsGrounded())
+        if (throwHook.firstHook != null && !IsGrounded())
         {
-            if (GetComponent<ThrowHook>().firstHook.GetComponent<ChainScript>().isFlexible)
+            if (throwHook.firstHook.GetComponent<ChainScript>().isFlexible)
             {
                 if (directionSwinging == 0)
                 {
@@ -204,7 +211,7 @@ public class PlayerScript : MonoBehaviour
             }
         }
         directionSwinging = 0;
-        GetComponentInChildren<SpriteRenderer>().flipX = false;
+        spriteRenderer.flipX = false;
         return false;
 
     }
@@ -335,8 +342,8 @@ public class PlayerScript : MonoBehaviour
     bool IsGrounded()
     {
         // Probably get layers set up so you don't need to hardcode what not to jump on.
-        RaycastHit2D hit = GroundrayCast(GetComponent<Collider2D>().bounds.size.x * 0.3f - 0.1f);
-        RaycastHit2D hit2 = GroundrayCast(GetComponent<Collider2D>().bounds.size.x * -0.3f + 0.1f);
+        RaycastHit2D hit = GroundrayCast(playerCollider.bounds.size.x * 0.3f - 0.1f);
+        RaycastHit2D hit2 = GroundrayCast(playerCollider.bounds.size.x * -0.3f + 0.1f);
         if (hit.collider != null || hit2.collider != null)
         {
             return true;
@@ -407,24 +414,24 @@ public class PlayerScript : MonoBehaviour
         AudioManager.PlaySound("PlayerHit");
         lives = Mathf.Clamp(lives -= amount, 0, maxLives);
 
-        if (GetComponent<ThrowHook>().firstHook != null)
-            Destroy(GetComponent<ThrowHook>().firstHook);
+        if (throwHook.firstHook != null)
+            Destroy(throwHook.firstHook);
         transform.position = playerCheckpointPosition;
     }
 
     // Rotate the player towards the hook anchor when swinging
     void Rotation()
     {
-        var playerToHookDirection = (GetComponent<ThrowHook>().firstHook.transform.position - (Vector3)transform.position).normalized;
+        var playerToHookDirection = (throwHook.firstHook.transform.position - (Vector3)transform.position).normalized;
         var angle = Mathf.Atan2(playerToHookDirection.y, playerToHookDirection.x) * Mathf.Rad2Deg;
 
         if (directionSwinging == 1)
         {
-            GetComponentInChildren<SpriteRenderer>().flipX = true;
+            spriteRenderer.flipX = true;
         }
         else if (directionSwinging == 2)
         {
-            GetComponentInChildren<SpriteRenderer>().flipX = false;
+            spriteRenderer.flipX = false;
         }
         transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
         var nodes = GameObject.FindGameObjectsWithTag("Node");

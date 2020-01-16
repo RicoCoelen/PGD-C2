@@ -10,10 +10,12 @@ public class EnemyVisionScript : MonoBehaviour
     public float FOV = 90;
     private GameObject PlayerGO;
     public GameObject currentTarget;
+    EnemyMainScript enemyMainScript; 
 
     private void Start()
     {
         PlayerGO = GameObject.FindGameObjectWithTag("Player");
+        enemyMainScript = GetComponentInParent<EnemyMainScript>();
     }
 
     void Update()
@@ -39,7 +41,7 @@ public class EnemyVisionScript : MonoBehaviour
                     if (angle < FOV / 2)
                     {
                         //Debug.DrawLine(transform.position, hit.point);
-                        GetComponentInParent<EnemyMainScript>().currentTarget = PlayerGO;
+                        enemyMainScript.currentTarget = PlayerGO;
                         currentTarget = PlayerGO;
                         lastDetectionTime = Time.time;
                     }
@@ -52,7 +54,7 @@ public class EnemyVisionScript : MonoBehaviour
         // make enemy forget after while
         if (currentTarget != null && Time.time - lastDetectionTime > searchTimer)
         {
-            GetComponentInParent<EnemyMainScript>().currentTarget = null;
+            enemyMainScript.currentTarget = null;
             currentTarget = null;
         }
     }
@@ -62,7 +64,7 @@ public class EnemyVisionScript : MonoBehaviour
         Quaternion rot = Quaternion.AngleAxis(0, Vector3.forward);
         Quaternion rot2 = Quaternion.AngleAxis(90, Vector3.forward);
 
-        if (GetComponentInParent<EnemyMainScript>().facingRight == true)
+        if (enemyMainScript.facingRight == true)
         {
             Gizmos.DrawLine(transform.position, transform.position + rot * Vector3.right);
             Gizmos.DrawLine(transform.position, transform.position + rot2 * Vector3.right);

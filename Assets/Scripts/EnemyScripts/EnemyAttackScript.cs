@@ -17,13 +17,15 @@ public class EnemyAttackScript : MonoBehaviour
     public GameObject muzzleFlash;
     private float timeToShoot;
     private Vector3 direction;
+    EnemyMainScript enemyMainScript;
+    BulletScript bulletScript;
 
-    
     private void Start()
     {
         // Enable shooting cooldown on start
         resetTimeToShoot();
         playerPosition = GameObject.FindGameObjectWithTag("Player");
+        enemyMainScript = GetComponentInParent<EnemyMainScript>();
     }
 
     // Update is called once per frame
@@ -31,7 +33,7 @@ public class EnemyAttackScript : MonoBehaviour
     {
         
         // check if player is left or right in sights
-        if (GetComponentInParent<EnemyMainScript>().currentTarget != null)
+        if (enemyMainScript.currentTarget != null)
         {
             direction = (playerPosition.transform.position - transform.position).normalized;
             TryShoot();

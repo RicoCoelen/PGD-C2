@@ -9,6 +9,12 @@ public class EnemyGroundScript : MonoBehaviour
     public LayerMask Level;
     public bool isGrounded = false;
     public float groundCheckDistance;
+    EnemyMainScript enemyMainScript;
+
+    private void Start()
+    {
+        enemyMainScript = GetComponentInParent<EnemyMainScript>();
+    }
 
     void FixedUpdate()
     {
@@ -18,12 +24,12 @@ public class EnemyGroundScript : MonoBehaviour
         if (hit.collider == true)
         {
             isGrounded = true;
-            parent.GetComponent<EnemyMainScript>().isGrounded = true;
+            enemyMainScript.isGrounded = true;
         }
         else
         {
             isGrounded = false;
-            parent.GetComponent<EnemyMainScript>().isGrounded = false;
+            enemyMainScript.isGrounded = false;
         }
     }
 

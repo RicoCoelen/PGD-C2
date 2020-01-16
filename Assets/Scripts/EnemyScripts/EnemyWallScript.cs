@@ -12,10 +12,12 @@ public class EnemyWallScript : MonoBehaviour
     private float side;
     private bool facingRight;
     private Vector2 sideV;
+    EnemyMainScript enemyMainScript;
 
     void Start()
     {
         side = transform.position.x + wallCheckDistance;
+        enemyMainScript = GetComponentInParent<EnemyMainScript>();
     }
 
     void FixedUpdate()

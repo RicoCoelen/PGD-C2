@@ -13,6 +13,7 @@ public class TimeScript : MonoBehaviour
 
     [SerializeField] Text parTime;
     public string currentParTime = "";
+    Text text;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,8 @@ public class TimeScript : MonoBehaviour
         // Only show the Par time UI if there is a par time set
         if (!string.IsNullOrWhiteSpace(currentParTime))
         parTime.GetComponent<Text>().text = " Par Time: " + currentParTime;
+        text = GetComponent<Text>();
+
     }
 
     // Update is called once per frame
@@ -42,7 +45,7 @@ public class TimeScript : MonoBehaviour
             minutes = ((int)time / 60).ToString();
             seconds = (time % 60).ToString("f1");
 
-            gameObject.GetComponent<Text>().text = "Time: " + minutes + ":" + seconds;
+            text.text = "Time: " + minutes + ":" + seconds;
         }
     }
 }
