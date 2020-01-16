@@ -5,32 +5,38 @@ using System.Collections.Generic;
 
 public class ChainScript : MonoBehaviour
 {
+    [Header("Length")]
     public float maxDistance = 5;
     public float minDistance = 5;
-    public DistanceJoint2D chainJoint;
-    private PlayerScript playerScript;
-    public LayerMask noHookLayer;
 
-    Vector2 startingPoint;
-    public bool isFlexible;
-
-    public Vector2 direction;
-
+    [Header("Travel")]
     public float speed = 1;
     public float interfal = 2;
+
+    [Header("Climbing")]
     public float climbSpeed = 20f;
 
+    [Header("Game Objects")]
     public GameObject node;
-    public GameObject player;
-    public GameObject lastNode;
+
+    [Header("Layers")]
+    public LayerMask noHookLayer;
+    
+    [System.NonSerialized] public bool isFlexible;
+    [System.NonSerialized] public Vector2 direction;
+    [System.NonSerialized] public DistanceJoint2D chainJoint;
+    [System.NonSerialized] public GameObject lastNode;
+
+    private PlayerScript playerScript;
+    private Vector2 startingPoint;
     private int lastNodesCount;
+    private bool done = false;
+    private bool stop = false;
+    private bool soundPlayed = false;
+    private GameObject player;
+    
+    private List<GameObject> nodes;
 
-    bool done = false;
-    bool stop = false;
-
-    List<GameObject> nodes;
-
-    bool soundPlayed = false;
 
     // Use this for initialization
     void Start()
