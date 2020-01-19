@@ -143,7 +143,7 @@ public class ChainScript : MonoBehaviour
                                 nodeDistanceJoint.enabled = true;
                             }
                         }
-                        
+
                         // For the unwrapping the code compares the node position and player position and if the player y is smaller then the node y
                         // It disables the DistanceJoint2D
                         if (nodes[i].GetComponent<Rigidbody2D>().position.y > player.GetComponent<Rigidbody2D>().position.y)
