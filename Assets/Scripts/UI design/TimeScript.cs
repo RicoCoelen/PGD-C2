@@ -21,7 +21,7 @@ public class TimeScript : MonoBehaviour
     void Start()
     {
         startTime = Time.time;
-        if (PlayerPrefs.GetInt(levelName) != 0)
+        if (PlayerPrefs.GetInt(levelName) > 2)
         {
             currentParTime = PlayerPrefs.GetInt(levelName);
         }
