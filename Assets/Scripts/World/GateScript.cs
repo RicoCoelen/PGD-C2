@@ -44,7 +44,19 @@ public class GateScript : MonoBehaviour
 
             // change the text of timer in end menu
             textCurrentTime.GetComponent<Text>().text = Timer.GetComponent<TimeScript>().minutes + ":" + Timer.GetComponent<TimeScript>().seconds;
-            textParTime.GetComponent<Text>().text = Timer.GetComponent<TimeScript>().currentParTime;
+
+            int currentParTime = PlayerPrefs.GetInt(Timer.GetComponent<TimeScript>().levelName);
+
+            if (currentParTime > Timer.GetComponent<TimeScript>().time)
+            {
+                PlayerPrefs.SetInt(Timer.GetComponent<TimeScript>().levelName, (int)Timer.GetComponent<TimeScript>().time);
+                currentParTime = (int)Timer.GetComponent<TimeScript>().time;
+            }
+
+            int parMinutes = currentParTime / 60;
+            int parSeconds = currentParTime % 60;
+
+            textParTime.GetComponent<Text>().text = parMinutes + ": " + parSeconds;
 
             // show end menu and stop time
             Manager.GetComponent<GameManager>().GameWin();

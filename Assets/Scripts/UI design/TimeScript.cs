@@ -6,23 +6,30 @@ using UnityEngine.UI;
 public class TimeScript : MonoBehaviour
 {
     float startTime;
-    float time;
+    public float time;
     public string minutes;
     public string seconds;
     private bool runonce = true;
 
     [SerializeField] Text parTime;
-    public string currentParTime = "";
+    public int currentParTime = 500;
     Text text;
+
+    public string levelName;
 
     // Start is called before the first frame update
     void Start()
     {
         startTime = Time.time;
+        if (PlayerPrefs.GetInt(levelName) != 0)
+        {
+            currentParTime = PlayerPrefs.GetInt(levelName);
+        }
 
         // Only show the Par time UI if there is a par time set
-        if (!string.IsNullOrWhiteSpace(currentParTime))
-        parTime.GetComponent<Text>().text = "Par Time: " + currentParTime;
+        int parMinutes = currentParTime / 60;
+        int parSeconds = currentParTime % 60;
+        parTime.GetComponent<Text>().text = "Best Time: " + parMinutes.ToString() + ": " + parSeconds.ToString();
         text = GetComponent<Text>();
 
     }
