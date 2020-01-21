@@ -412,7 +412,7 @@ public class PlayerScript : MonoBehaviour
     public void TakeDamage(float amount)
     {
         AudioManager.PlaySound("PlayerHit");
-        lives = Mathf.Clamp(lives -= amount, 0, maxLives);
+        lives -= amount;
 
         if (throwHook.firstHook != null)
             Destroy(throwHook.firstHook);
