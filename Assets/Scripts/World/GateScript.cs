@@ -14,16 +14,16 @@ public class GateScript : MonoBehaviour
 
     public GameObject Manager;
 
-    public GameObject textKilled;
     public GameObject textKilledOutOf;
-    public GameObject textCurrentTime;
-    public GameObject textParTime;
+    public GameObject textTime;
 
     public void Start()
     {
         // get start variables, how many enemies are in the level
         Enemies = GameObject.FindGameObjectsWithTag("Enemy");
         aantalEnemies = Enemies.Length;
+
+
     }
 
     void OnTriggerStay2D(Collider2D collider)
@@ -35,16 +35,14 @@ public class GateScript : MonoBehaviour
             Enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
             // het howmany enemies are left and show it on menu
-            aantalEnemiesEnd = Enemies.Length;
-            textKilledOutOf.GetComponent<Text>().text = aantalEnemies.ToString();
-
             // calculate how many are killed and show on menu
+            aantalEnemiesEnd = Enemies.Length;
             killedEnemies = aantalEnemies - aantalEnemiesEnd;
-            textKilled.GetComponent<Text>().text = killedEnemies.ToString();
+            textKilledOutOf.GetComponent<Text>().text = ("You killed: " + killedEnemies.ToString()+ " from the " + aantalEnemies.ToString() + " possible kills");
 
-            // change the text of timer in end menu
-            textCurrentTime.GetComponent<Text>().text = Timer.GetComponent<TimeScript>().minutes + ":" + Timer.GetComponent<TimeScript>().seconds;
-
+           
+            
+            // Getting the info for the timer and par timer.
             int currentParTime = PlayerPrefs.GetInt(Timer.GetComponent<TimeScript>().levelName);
 
             if (currentParTime > Timer.GetComponent<TimeScript>().time)
@@ -56,7 +54,8 @@ public class GateScript : MonoBehaviour
             int parMinutes = currentParTime / 60;
             int parSeconds = currentParTime % 60;
 
-            textParTime.GetComponent<Text>().text = parMinutes + ": " + parSeconds;
+            // Changing the timer text.
+            textTime.GetComponent<Text>().text = "You finished in: " + Timer.GetComponent<TimeScript>().minutes + ":" + Timer.GetComponent<TimeScript>().seconds + " The record time is: " + parMinutes + ":" + parSeconds;
 
             // show end menu and stop time
             Manager.GetComponent<GameManager>().GameWin();
