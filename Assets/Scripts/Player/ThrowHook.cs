@@ -23,30 +23,33 @@ public class ThrowHook : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (Input.GetMouseButtonUp(0) && firstHook != null)
+    {   
+        if (Time.timeScale == 1)
         {
+            if (Input.GetMouseButtonUp(0) && firstHook != null)
+            {
 
-            if(firstHook.GetComponent<HookScript>().child != null)
-                firstHook.GetComponent<HookScript>().child.parent = null;
+                if (firstHook.GetComponent<HookScript>().child != null)
+                    firstHook.GetComponent<HookScript>().child.parent = null;
 
-            player.GetComponent<PlayerScript>().ChainJump();
+                player.GetComponent<PlayerScript>().ChainJump();
 
-            Destroy(firstHook);
+                Destroy(firstHook);
 
-            active = false;
-        }else if (Input.GetMouseButtonDown(0) && firstHook == null)
-        {
-            Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                active = false;
+            }
+            else if (Input.GetMouseButtonDown(0) && firstHook == null)
+            {
+                Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            firstHook = Instantiate(hook, transform.position, Quaternion.identity);
+                firstHook = Instantiate(hook, transform.position, Quaternion.identity);
 
-            firstHook.GetComponent<ChainScript>().direction = direction;
+                firstHook.GetComponent<ChainScript>().direction = direction;
 
-            firstHook.GetComponent<HookScript>().inputButton = 0;
+                firstHook.GetComponent<HookScript>().inputButton = 0;
 
-            active = true;
+                active = true;
+            }
         }
-
     }
 }

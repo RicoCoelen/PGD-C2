@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour
     // canvas or screen to hide and show buttons
     public GameObject deathPanel = null;
     public GameObject winPanel = null;
+
+    // pause menu
+    public GameObject escapePanel = null;
+    private bool pause = false;
+
     public GameObject Player;
 
     // start
@@ -30,6 +35,32 @@ public class GameManager : MonoBehaviour
             if (Player.GetComponent<PlayerScript>().lives <= 0)
             {
                 GameOver();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            switchMenu();
+        }
+    }
+
+    public void switchMenu()
+    {
+        if (escapePanel != null)
+        {
+            // flip pause
+            pause = !pause;
+
+            // check bool
+            if (pause)
+            {
+                Time.timeScale = 0;
+                escapePanel.SetActive(true);
+            }
+            else
+            {
+                Time.timeScale = 1;
+                escapePanel.SetActive(false);
             }
         }
     }
