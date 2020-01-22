@@ -35,6 +35,8 @@ public class ButtonSwitches : MonoBehaviour
 
     public void switchState() //Wordt aangeroepen wanneer de chain collision heeft met de switch
     {
+        AudioManager.PlaySound("OpenDoor");
+
         if(isOn == false)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = switchOn.GetComponent<SpriteRenderer>().sprite;

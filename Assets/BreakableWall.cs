@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class BreakableWall : MonoBehaviour
 {
-
+    public float forceDamageLimit = 1f;
     public GameObject brokenBits;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +24,11 @@ public class BreakableWall : MonoBehaviour
                 Destroy(GameObject.FindGameObjectWithTag("Hook"));
                 break;
             case "Grabable":
-                BreakWall();
-                collision.gameObject.GetComponent<BreakableScript>().Break();
+                if (collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude > forceDamageLimit)
+                {
+                    BreakWall();
+                    collision.gameObject.GetComponent<BreakableScript>().Break();
+                }
                 break;
         }
     }
@@ -32,6 +36,7 @@ public class BreakableWall : MonoBehaviour
     public void BreakWall()
     {
         GameObject brokenBox = Instantiate(brokenBits, transform.position, Quaternion.identity);
+        AudioManager.PlaySound("BreakWall");
         Destroy(this.gameObject);
         
     }

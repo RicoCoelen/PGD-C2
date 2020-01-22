@@ -450,6 +450,7 @@ MonoBehaviour:
   currentItemRigidBody: {fileID: 0}
   ItemHolder: {fileID: 1271799719}
   forceMultiplier: 35
+  torque: 100
 --- !u!82 &999628839
 AudioSource:
   m_ObjectHideFlags: 0

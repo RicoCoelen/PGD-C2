@@ -78,13 +78,6 @@ public class HookScript : MonoBehaviour
                 Destroy(hook);
                 active = false;
                 break;
-
-            case "Breakable Wall":
-                collision.gameObject.GetComponent<BreakableWall>().BreakWall();
-                Destroy(hook);
-                break;
-
-            
         }
 
     }

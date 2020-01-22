@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioClip playerJump, playerLand, playerHit, chainHit, death, enemyShot, enemyHit;
+    public static AudioClip playerJump, playerLand, playerHit, chainHit, death, enemyShot, enemyHit, doorOpen, breakWall;
     static AudioSource audioSource;
 
     // Start is called before the first frame update
@@ -17,8 +17,8 @@ public class AudioManager : MonoBehaviour
         death = Resources.Load<AudioClip>("death");
         enemyShot = Resources.Load<AudioClip>("gun_shot");
         enemyHit = Resources.Load<AudioClip>("Hit_Enemy");
-
-
+        doorOpen = Resources.Load<AudioClip>("door_open");
+        breakWall = Resources.Load<AudioClip>("break_wall");
 
         audioSource = GetComponent<AudioSource>();
     }
@@ -47,6 +47,12 @@ public class AudioManager : MonoBehaviour
                 break;
             case "EnemyHit":
                 audioSource.PlayOneShot(enemyHit);
+                break;
+            case "OpenDoor":
+                audioSource.PlayOneShot(doorOpen);
+                break;
+            case "BreakWall":
+                audioSource.PlayOneShot(breakWall);
                 break;
         }
     }

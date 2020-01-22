@@ -10,7 +10,8 @@ public class GrabbingScript : MonoBehaviour
     // item place
     public Transform ItemHolder;
     // throw force
-    public float forceMultiplier = 1;
+    public float forceMultiplier = 1f;
+    public float torque = 1f;
     // coroutine
     private IEnumerator coroutine;
 
@@ -18,7 +19,23 @@ public class GrabbingScript : MonoBehaviour
     void Update()
     {
         if (currentItem != null)
-        { 
+        {
+            if (GetComponent<ThrowHook>().firstHook != null && GetComponent<ThrowHook>().firstHook.TryGetComponent<HookScript>(out HookScript hs))
+            {
+                if (hs != null && hs.child != null)
+                {
+                    // get current item connected to chain
+                    GameObject connectedObject = hs.child.gameObject;
+
+                    // if grabable
+                    if (connectedObject != null)
+                    {
+                        connectedObject.transform.parent = null;
+                        Destroy(GetComponent<ThrowHook>().firstHook);
+                    }
+                }
+            }
+
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 ThrowItem();
@@ -116,6 +133,7 @@ public class GrabbingScript : MonoBehaviour
         {
             Vector3 mousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = (Vector2) (mousepos - currentItem.transform.position).normalized;
+            currentItemRigidBody.AddTorque(torque, 0);
             currentItemRigidBody.AddForce(direction * forceMultiplier, ForceMode2D.Impulse);
         }
 
