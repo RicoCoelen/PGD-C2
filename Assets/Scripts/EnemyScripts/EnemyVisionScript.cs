@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class EnemyVisionScript : MonoBehaviour
 {
@@ -10,12 +11,14 @@ public class EnemyVisionScript : MonoBehaviour
     public float FOV = 90;
     private GameObject PlayerGO;
     public GameObject currentTarget;
-    EnemyMainScript enemyMainScript; 
+    EnemyMainScript enemyMainScript;
+    private Color patrolColor;
 
     private void Start()
     {
         PlayerGO = GameObject.FindGameObjectWithTag("Player");
         enemyMainScript = GetComponentInParent<EnemyMainScript>();
+        patrolColor = GameObject.FindGameObjectWithTag("ReferenceColor").GetComponent<Light2D>().color;
     }
 
     void Update()
@@ -49,6 +52,16 @@ public class EnemyVisionScript : MonoBehaviour
                     
                 }
             }
+        }
+
+        // change color of visor
+        if (currentTarget == null)
+        {
+            transform.parent.GetComponentInChildren<Light2D>().color = Color.Lerp(Color.red, patrolColor, 1);
+        }
+        else
+        {
+            transform.parent.GetComponentInChildren<Light2D>().color = Color.Lerp(patrolColor, Color.red, 1);
         }
 
         // make enemy forget after while

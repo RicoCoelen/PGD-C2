@@ -122,5 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464234c0332ea2944bee1033e8afde65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  forceDamageLimit: 0
   brokenBits: {fileID: 1305656997100189880, guid: acdf67db9f5219946b1648d24caf79bd,
     type: 3}

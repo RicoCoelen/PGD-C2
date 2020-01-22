@@ -11,6 +11,7 @@ TagManager:
   - Switch
   - Breakable Wall
   - Hook
+  - ReferenceColor
   layers:
   - Default
   - TransparentFX

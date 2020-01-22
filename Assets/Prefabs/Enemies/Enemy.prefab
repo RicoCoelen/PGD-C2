@@ -46,7 +46,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 0.08018869, b: 0.08018869, a: 1}
+  m_Color: {r: 0.8018868, g: 0.7833121, b: 0.59385014, a: 1}
   m_Intensity: 1
   m_LightVolumeOpacity: 0.75
   m_ApplyToSortingLayers: 00000000
@@ -310,7 +310,7 @@ MonoBehaviour:
   - {x: -0.7538972, y: -0.41178375, z: 0}
   m_ShapePathHash: 1138282197
   m_Mesh: {fileID: 0}
-  m_InstanceId: 73738
+  m_InstanceId: 218140
 --- !u!1 &3790710829709959288
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,7 +363,7 @@ MonoBehaviour:
   isShooting: 0
   bulletPrefab: {fileID: 244638319351267649, guid: 7c305fc203d31894e96c6a81ef197df0,
     type: 3}
-  cooldownShoot: 0.5
+  cooldownShoot: 1
   shootRange: 18
   muzzleFlash: {fileID: 0}
 --- !u!1 &6031546187804549035
