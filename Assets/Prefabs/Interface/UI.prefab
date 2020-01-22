@@ -974,5 +974,5 @@ MonoBehaviour:
   minutes: 
   seconds: 
   parTime: {fileID: 7400263427039695097}
-  currentParTime: 1
+  currentParTime: 600
   levelName: 
