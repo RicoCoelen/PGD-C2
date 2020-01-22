@@ -35,7 +35,6 @@ public class NodeScript : MonoBehaviour
 
 
 
-        Debug.Log(collision.gameObject.layer);
         //als ie met tile colide
 
         if (collision.gameObject.layer == 9 && hook.GetComponent<ChainScript>().isFlexible)

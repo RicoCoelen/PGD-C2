@@ -26,10 +26,24 @@ public class TimeScript : MonoBehaviour
             currentParTime = PlayerPrefs.GetInt(levelName);
         }
 
+
         // Only show the Par time UI if there is a par time set
         int parMinutes = currentParTime / 60;
         int parSeconds = currentParTime % 60;
-        parTime.GetComponent<Text>().text = "Best Time: " + parMinutes.ToString() + ": " + parSeconds.ToString();
+
+        string min = parMinutes.ToString();
+        string sec = "";
+
+        if (parSeconds < 10)
+        {
+            sec = "0" + parSeconds.ToString();
+        } 
+        else
+        {
+            sec = parSeconds.ToString();
+        }
+
+        parTime.GetComponent<Text>().text = "Best Time: " + min + ":" + sec;
         text = GetComponent<Text>();
 
     }
@@ -50,7 +64,15 @@ public class TimeScript : MonoBehaviour
             time = Time.time - startTime;
 
             minutes = ((int)time / 60).ToString();
-            seconds = (time % 60).ToString("f1");
+
+            if ((time % 60) < 10)
+            {
+                seconds = "0" + (time % 60).ToString("f1");
+            } 
+            else
+            {
+                seconds = (time % 60).ToString("f1");
+            }
 
             text.text = "Time: " + minutes + ":" + seconds;
         }
