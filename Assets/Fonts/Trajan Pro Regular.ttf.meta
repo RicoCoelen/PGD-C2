@@ -1,21 +1,21 @@
 fileFormatVersion: 2
-guid: bb4e9c4488d4f7f4a8ffc4c2e82cd2c8
+guid: dfbce83d416e7114c88d5d9f54f28ee8
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 16
-  forceTextureCase: -2
+  fontSize: 300
+  forceTextureCase: -1
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Minecraft
+  fontName: Trajan Pro
   fontNames:
-  - Minecraft
+  - Trajan Pro
   fallbackFontReferences: []
   customCharacters: 
-  fontRenderingMode: 3
-  ascentCalculationMode: 1
-  useLegacyBoundsCalculation: 0
+  fontRenderingMode: 0
+  ascentCalculationMode: 0
+  useLegacyBoundsCalculation: 1
   shouldRoundAdvanceValue: 1
   userData: 
   assetBundleName: 

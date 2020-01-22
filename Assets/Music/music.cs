@@ -10,16 +10,7 @@ public class music : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-    }
-
-    void Update()
-    {
-        if (!audioSource.isPlaying)
-        {
-            audioSource.clip = otherClip;
-            audioSource.Play();
-            DontDestroyOnLoad(transform.gameObject);
-
-        }
+        audioSource.clip = otherClip;
+        audioSource.Play();
     }
 }
