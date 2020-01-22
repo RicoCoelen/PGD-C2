@@ -40,10 +40,15 @@ public class GateScript : MonoBehaviour
             killedEnemies = aantalEnemies - aantalEnemiesEnd;
             textKilledOutOf.GetComponent<Text>().text = ("You killed: " + killedEnemies.ToString()+ " from the " + aantalEnemies.ToString() + " possible kills");
 
-           
-            
             // Getting the info for the timer and par timer.
             int currentParTime = PlayerPrefs.GetInt(Timer.GetComponent<TimeScript>().levelName);
+
+            // Get the current time as best time if the best time is empty
+            if (currentParTime < 2)
+            {
+                currentParTime = (int)Timer.GetComponent<TimeScript>().time;
+                PlayerPrefs.SetInt(Timer.GetComponent<TimeScript>().levelName, currentParTime);
+            }
 
             if (currentParTime > Timer.GetComponent<TimeScript>().time)
             {
