@@ -17,12 +17,6 @@ public class BreakableWall : MonoBehaviour
     {
         switch (collision.gameObject.tag)
         {
-            case "Node":
-            case "Hook":
-                Debug.Log("Hook + Break");
-                BreakWall();
-                Destroy(GameObject.FindGameObjectWithTag("Hook"));
-                break;
             case "Grabable":
                 if (collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude > forceDamageLimit)
                 {

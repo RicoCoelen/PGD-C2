@@ -154,7 +154,7 @@ public class ChainScript : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.zero);
         // Maybe make a layer for everything you can actually hook
-        if (hit.collider != player.GetComponent<Collider2D>() && hit.collider != null && hit.collider.gameObject.tag != "Breakable Wall")
+        if (hit.collider != player.GetComponent<Collider2D>() && hit.collider != null)
         {
             RaycastHit2D hit2 = Physics2D.Raycast((Vector2)transform.position + (Vector2.up * 0.2f), Vector2.up, 0.1f);
             if (hit2.collider != player.GetComponent<Collider2D>() && hit2.collider != null && hit2.collider.gameObject.layer != 15 && hit2.collider.gameObject.tag != "Switch" && hit2.collider.gameObject.tag != "Breakable Wall")

@@ -12,13 +12,13 @@ public class EnemyVisionScript : MonoBehaviour
     private GameObject PlayerGO;
     public GameObject currentTarget;
     EnemyMainScript enemyMainScript;
-    private Color patrolColor;
+    //private Color patrolColor;
 
     private void Start()
     {
         PlayerGO = GameObject.FindGameObjectWithTag("Player");
         enemyMainScript = GetComponentInParent<EnemyMainScript>();
-        patrolColor = GameObject.FindGameObjectWithTag("ReferenceColor").GetComponent<Light2D>().color;
+        //patrolColor = GameObject.FindGameObjectWithTag("ReferenceColor").GetComponent<Light2D>().color;
     }
 
     void Update()
@@ -57,11 +57,12 @@ public class EnemyVisionScript : MonoBehaviour
         // change color of visor
         if (currentTarget == null)
         {
-            transform.parent.GetComponentInChildren<Light2D>().color = Color.Lerp(Color.red, patrolColor, 1);
+            //  private Color patrolColor; 
+            transform.parent.GetComponentInChildren<Light2D>().color = Color.yellow;
         }
         else
         {
-            transform.parent.GetComponentInChildren<Light2D>().color = Color.Lerp(patrolColor, Color.red, 1);
+            transform.parent.GetComponentInChildren<Light2D>().color = Color.red;
         }
 
         // make enemy forget after while

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4663001078842054898}
   - component: {fileID: 4663001078842054899}
   - component: {fileID: 7815811200419714783}
+  - component: {fileID: 5333841167891523584}
   m_Layer: 10
   m_Name: Box
   m_TagString: Grabable
@@ -145,3 +146,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   brokenPrefabs:
   - {fileID: 31705421848560148, guid: 4b0182d953f3562429013528faaa3a9c, type: 3}
+--- !u!114 &5333841167891523584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4663001078842054896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 00000000117527d6f32dff1f
+  m_ShapePath:
+  - {x: -0.845, y: -0.84, z: 0}
+  - {x: 0.845, y: -0.84, z: 0}
+  - {x: 0.845, y: 0.84, z: 0}
+  - {x: -0.845, y: 0.84, z: 0}
+  m_ShapePathHash: 0
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -899560
